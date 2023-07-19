@@ -1,5 +1,11 @@
 # 홈페이지 고객 관리 시스템
 
+<br>
+
+## 프로젝트
+
+<br>
+
 ## 실행 방법
 
 ```
@@ -9,7 +15,11 @@ npm start
 
 ```
 
+<br>
+
 ## 폴더 구조
+
+<br>
 
 ## 기술 스택
 
@@ -21,6 +31,8 @@ npm start
 | 전역 상태관리 | React Redux (Redux Toolkit) |                                                                         |
 |    스타일     |      Styled-Components      |                                                                         |
 |  코드 포매팅  |           EsLint            |                                                                         |
+
+<br>
 
 ## 팀원
 
@@ -51,6 +63,8 @@ npm start
   </tr>
 </table>
 
+<br>
+
 ## Git Commit Message Convention
 
 |   Type   |                                        설명                                        |
@@ -66,3 +80,7 @@ npm start
 |  Remove  |                        파일을 삭제하는 작업만 수행하는 경우                        |
 |   Docs   |                                      문서수정                                      |
 |   Test   |       테스트(테스트 코드 추가, 수정, 삭제, 비즈니스 로직에 변경이 없는 경우)       |
+
+<br>
+
+## 협업 방식
