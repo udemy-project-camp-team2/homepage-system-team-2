@@ -1,6 +1,6 @@
 import { combineReducers } from '@reduxjs/toolkit';
-import blockSlice from './slices/blockSlice';
+import containerSlice from './slices/containerSlice';
 
 export const rootReducer = combineReducers({
-	blocks: blockSlice,
+	containers: containerSlice,
 });
