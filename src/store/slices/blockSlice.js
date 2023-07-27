@@ -18,13 +18,23 @@ const blockSlice = createSlice({
   name: 'blocks',
   initialState,
   reducers: {
-    addBlock(state) {
+    addBlock(state, action) {
       const layoutConfig = layoutsConfig[state.selectedLayout];
       const newBlocks = Array.from({ length: layoutConfig.numRectangles }, () => ({
         id: uuidv4(),
         type: '',
       }));
-      state.blocks = [...state.blocks, ...newBlocks];
+
+      const selectedIndex = state.blocks.findIndex((block) => block.id === action.payload);
+
+      // 선택된 블록의 바로 아래에 새 블록 삽입
+      if (selectedIndex !== -1) {
+        state.blocks.splice(selectedIndex + 1, 0, ...newBlocks);
+      } else {
+        // 선택된 블록이 없는 경우, 맨 끝에 새 블록 삽입
+        state.blocks.push(...newBlocks);
+      }
+
     },
     
     removeBlock(state, action) {

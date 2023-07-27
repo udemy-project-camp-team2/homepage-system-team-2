@@ -25,6 +25,11 @@ const Block = ({ block, index }) => {
     dispatch(moveBlockUpAndDown({ index, direction: 'down' }));
   };
 
+	// 컨테이너 삭제
+	const handleDeleteBlock = () => {
+    dispatch(removeBlock(block.id));
+  };
+
 	return (
 		<StyledBlock
 			key={block.id}
@@ -32,12 +37,13 @@ const Block = ({ block, index }) => {
 			onMouseLeave={() => setShowMenu(false)}
 		>
 			{block.type ? <ContainerLayout type={block.type} /> : null}
-			{showMenu ? <QuickMenu onMoveUp={handleMoveUp} onMoveDown={handleMoveDown} /> : null}
-			<Button type={'button'} onClick={() => dispatch(addBlock(index + 1))}>
+			{showMenu ? <QuickMenu 
+				onMoveUp={handleMoveUp} 
+				onMoveDown={handleMoveDown} 
+				onDelete={handleDeleteBlock}/> : null
+			}
+			<Button type={'button'} onClick={() => dispatch(addBlock(block.id))}>
 				블록 추가
-			</Button>
-			<Button type={'button'} onClick={() => dispatch(removeBlock(block.id))}>
-				블록 삭제
 			</Button>
 			<p>id={block.id}</p>
 		</StyledBlock>
