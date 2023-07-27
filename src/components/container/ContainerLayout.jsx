@@ -1,5 +1,3 @@
-// ContainerLayout.js
-
 import PropTypes from 'prop-types';
 import CommonLayout from './CommonLayout';
 
