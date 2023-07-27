@@ -3,6 +3,7 @@ import { Fragment } from 'react';
 import { createPortal } from 'react-dom';
 import styled from 'styled-components';
 import ContainerLayout from '../container/ContainerLayout';
+import { layoutsConfig } from '../../store/slices/blockSlice';
 
 const StyledBackdrop = styled.div`
 	width: 100%;
@@ -33,15 +34,14 @@ const Overlay = ({ children }) => {
 	return <StyledOverlay>{children}</StyledOverlay>;
 };
 
-const Modal = ({ children, onClose }) => {
+const Modal = ({ onClose }) => {
   return (
     <Fragment>
       {createPortal(
         <Overlay>
-          <ContainerLayout type={'container_one'} />
-          <ContainerLayout type={'container_two'} />
-          <ContainerLayout type={'container_three'} />
-          <ContainerLayout type={'container_four'} />
+          {layoutsConfig.map((layout) => (
+            <ContainerLayout key={layout.type} type={layout.type} />
+          ))}
         </Overlay>,
         document.getElementById('modal')
       )}

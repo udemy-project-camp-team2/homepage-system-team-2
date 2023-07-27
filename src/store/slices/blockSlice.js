@@ -4,7 +4,6 @@ import { v4 as uuidv4 } from 'uuid';
 
 const initialState = {
   blocks: [],
-  selectedLayout: 0,
 };
 
 export const layoutsConfig = [
@@ -28,9 +27,6 @@ const blockSlice = createSlice({
     },
     removeBlock(state, action) {
       state.blocks = state.blocks.filter((item) => item.id !== action.payload);
-    },
-    setSelectedLayout(state, action) {
-      state.selectedLayout = action.payload;
     },
   },
 });
