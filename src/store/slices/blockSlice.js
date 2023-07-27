@@ -7,7 +7,7 @@ const initialState = {
   selectedLayout: 0,
 };
 
-const layoutsConfig = [
+export const layoutsConfig = [
   { type: 'container_one', numRectangles: 1 },
   { type: 'container_two', numRectangles: 2 },
   { type: 'container_three', numRectangles: 3 },

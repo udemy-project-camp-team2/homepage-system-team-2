@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import Button from '../components/common/Button';
-import { addBlock } from '../store/slices/blockSlice';
+import { addBlock, layoutsConfig } from '../store/slices/blockSlice';
 import Block from '../components/common/Block';
 import { useCallback, useState } from 'react';
 import Modal from '../components/common/Modal';
@@ -19,10 +19,9 @@ const EditPage = () => {
     <section>
       {showModal ? (
         <Modal onClose={closeModal}>
-          <ContainerLayout type={'container_one'} />
-          <ContainerLayout type={'container_two'} />
-          <ContainerLayout type={'container_three'} />
-          <ContainerLayout type={'container_four'} />
+          {layoutsConfig.map((layout) => (
+            <ContainerLayout key={layout.type} type={layout.type} />
+          ))}
         </Modal>
       ) : null}
       <Button type={'button'} onClick={() => setShowModal(true)}>
