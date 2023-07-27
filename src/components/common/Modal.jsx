@@ -2,6 +2,7 @@
 import { Fragment } from 'react';
 import { createPortal } from 'react-dom';
 import styled from 'styled-components';
+import ContainerLayout from '../container/ContainerLayout';
 
 const StyledBackdrop = styled.div`
 	width: 100%;
@@ -33,18 +34,23 @@ const Overlay = ({ children }) => {
 };
 
 const Modal = ({ children, onClose }) => {
-	return (
-		<Fragment>
-			{createPortal(
-				<Overlay>{children}</Overlay>,
-				document.getElementById('modal')
-			)}
-			{createPortal(
-				<Backdrop onClose={onClose} />,
-				document.getElementById('modal')
-			)}
-		</Fragment>
-	);
+  return (
+    <Fragment>
+      {createPortal(
+        <Overlay>
+          <ContainerLayout type={'container_one'} />
+          <ContainerLayout type={'container_two'} />
+          <ContainerLayout type={'container_three'} />
+          <ContainerLayout type={'container_four'} />
+        </Overlay>,
+        document.getElementById('modal')
+      )}
+      {createPortal(
+        <Backdrop onClose={onClose} />,
+        document.getElementById('modal')
+      )}
+    </Fragment>
+  );
 };
 
 export default Modal;

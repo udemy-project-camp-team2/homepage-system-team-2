@@ -7,32 +7,35 @@ import Modal from '../components/common/Modal';
 import ContainerLayout from '../components/container/ContainerLayout';
 
 const EditPage = () => {
-	const dispatch = useDispatch();
-	const blocks = useSelector((state) => state.blocks);
-	const [showModal, setShowModal] = useState(false);
+  const dispatch = useDispatch();
+  const blocks = useSelector((state) => state.blocks.blocks) || [];
+  const [showModal, setShowModal] = useState(false);
 
-	const closeModal = useCallback(() => {
-		setShowModal(false);
-	}, []);
+  const closeModal = useCallback(() => {
+    setShowModal(false);
+  }, []);
 
-	return (
-		<section>
-			{showModal ? (
-				<Modal onClose={closeModal}>
-					<ContainerLayout />
-				</Modal>
-			) : null}
-			<Button type={'button'} onClick={() => setShowModal(true)}>
-				모달
-			</Button>
-			<Button type={'button'} onClick={() => dispatch(addBlock(0))}>
-				블록 추가
-			</Button>
-			{blocks.map((block, index) => (
-				<Block key={block.id} block={block} index={index} />
-			))}
-		</section>
-	);
+  return (
+    <section>
+      {showModal ? (
+        <Modal onClose={closeModal}>
+          <ContainerLayout type={'container_one'} />
+          <ContainerLayout type={'container_two'} />
+          <ContainerLayout type={'container_three'} />
+          <ContainerLayout type={'container_four'} />
+        </Modal>
+      ) : null}
+      <Button type={'button'} onClick={() => setShowModal(true)}>
+        모달
+      </Button>
+      <Button type={'button'} onClick={() => dispatch(addBlock(0))}>
+        블록 추가
+      </Button>
+      {blocks.map((block, index) => (
+        <Block key={block.id} block={block} index={index} />
+      ))}
+    </section>
+  );
 };
 
 export default EditPage;

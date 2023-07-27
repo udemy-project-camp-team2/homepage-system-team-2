@@ -1,31 +1,34 @@
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { v4 as uuidv4 } from 'uuid';
 
 const StyledLayout = styled.div`
-	width: 60%;
-	height: 100%;
-	display: grid;
-	grid-template-columns: repeat(2, 1fr);
-	float: right;
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+	border: 1px solid #ccc;
+	padding: 20px;
 `;
 
-const CommonLayout = ({ length }) => {
-	return (
-		<StyledLayout>
-			{Array.from({ length }, () => ({ id: uuidv4(), type: '' })).map(
-				(layout) => (
-					<div style={{ border: '1px dashed #000' }} key={layout.id}>
-						레이아웃입니다.
-					</div>
-				)
-			)}
-		</StyledLayout>
-	);
+const Rectangle = styled.div`
+  border: 1px dashed #000;
+  width: 100px;
+  height: 50px;
+  margin: 5px;
+`;
+
+const CommonLayout = ({ numRectangles }) => {
+  return (
+    <StyledLayout>
+      {[...Array(numRectangles)].map((_, index) => (
+        <Rectangle key={index}>직사각형 {index + 1}</Rectangle>
+      ))}
+    </StyledLayout>
+  );
 };
 
 export default CommonLayout;
 
 CommonLayout.propTypes = {
-	length: PropTypes.number,
+  numRectangles: PropTypes.number.isRequired,
 };
