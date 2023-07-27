@@ -1,4 +1,4 @@
-/* eslint-disable react/prop-types */
+import PropTypes from 'prop-types';
 import { Fragment } from 'react';
 import { createPortal } from 'react-dom';
 import styled from 'styled-components';
@@ -14,8 +14,8 @@ const StyledBackdrop = styled.div`
 `;
 
 const StyledOverlay = styled.div`
+	padding: 1rem;
 	width: 80%;
-	height: 80%;
 	position: fixed;
 	top: 50%;
 	left: 50%;
@@ -48,3 +48,16 @@ const Modal = ({ children, onClose }) => {
 };
 
 export default Modal;
+
+Modal.propTypes = {
+	children: PropTypes.node,
+	onClose: PropTypes.func,
+};
+
+Overlay.propTypes = {
+	children: PropTypes.node,
+};
+
+Backdrop.propTypes = {
+	onClose: PropTypes.func,
+};
