@@ -1,14 +1,17 @@
 import Button from './Button';
 
-const QuickMenu = () => {
-	return (
-		<div style={{ display: 'inline-block' }}>
-			<Button type={'button'}>수정</Button>
-			<Button type={'button'}>삭제</Button>
-			<Button type={'button'}>&larr;</Button>
-			<Button type={'button'}>&rarr;</Button>
-		</div>
-	);
+// eslint-disable-next-line react/prop-types
+const QuickMenu = ({ onMoveUp, onMoveDown }) => {
+
+  return (
+    <div style={{ display: 'inline-block' }}>
+      <Button type={'button'}>수정</Button>
+      <Button type={'button'}>삭제</Button>
+      <Button type={'button'} onClick={onMoveUp}>&larr;</Button>
+      <Button type={'button'} onClick={onMoveDown}>&rarr;</Button>
+
+    </div>
+  );
 };
 
 export default QuickMenu;

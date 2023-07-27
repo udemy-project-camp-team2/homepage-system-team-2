@@ -4,6 +4,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 const initialState = {
   blocks: [],
+  selectedLayout: 0,
 };
 
 export const layoutsConfig = [
@@ -25,12 +26,29 @@ const blockSlice = createSlice({
       }));
       state.blocks = [...state.blocks, ...newBlocks];
     },
+    
     removeBlock(state, action) {
       state.blocks = state.blocks.filter((item) => item.id !== action.payload);
+    },
+
+    // 컨테이너 이동
+    moveBlockUpAndDown(state, action) {
+      const { index, direction } = action.payload;
+      const newIndex = direction === 'up' ? index - 1 : index + 1;
+
+      if (newIndex >= 0 && newIndex < state.blocks.length) {
+        const blockToMove = state.blocks[index];
+
+        // 이동할 블록을 현재 위치에서 배열에서 제거
+        state.blocks.splice(index, 1);
+
+        // 이동할 블록을 새로운 위치에서 배열에 삽입
+        state.blocks.splice(newIndex, 0, blockToMove);
+      }
     },
   },
 });
 
-export const { addBlock, removeBlock, setSelectedLayout } = blockSlice.actions;
+export const { addBlock, removeBlock, setSelectedLayout, moveBlockUpAndDown } = blockSlice.actions;
 
 export default blockSlice.reducer;
