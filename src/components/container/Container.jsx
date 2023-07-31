@@ -14,7 +14,7 @@ import ThreeMixLayout from '../models/layouts/ThreeMixLayout';
 
 const StyledContainer = styled.article`
 	padding: 1rem;
-	min-height: 30vh;
+	min-height: 50vh;
 	position: relative;
 	border: ${(props) => props.$border};
 `;
@@ -27,11 +27,18 @@ const Container = ({ container, index }) => {
 	return (
 		<StyledContainer
 			key={container.id}
-			onClick={() => dispatch(updateSelectedId(container.id))}
+			onClick={() =>
+				dispatch(
+					updateSelectedId({
+						id: container.id,
+						name: 'container',
+					})
+				)
+			}
 			// onMouseEnter={() => setShowMenu(true)}
 			// onMouseLeave={() => setShowMenu(false)}
 			$border={
-				container.id === selectedId ? '1px solid #ff0000' : '1px dashed #000'
+				container.id === selectedId ? '3px solid #ff0000' : '1px dashed #000'
 			}
 		>
 			{container.type === 'one_row_layout' ? (

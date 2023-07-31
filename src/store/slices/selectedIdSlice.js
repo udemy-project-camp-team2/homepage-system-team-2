@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-const initialState = { value: '' };
+const initialState = { value: '', name: '' };
 
 const selectedIdSlice = createSlice({
 	name: 'selectedId',
@@ -8,11 +8,14 @@ const selectedIdSlice = createSlice({
 	reducers: {
 		updateSelectedId(state, action) {
 			if (state.value === action.payload) {
-				state.value = '';
+				return { ...state, value: '', name: '' };
 			} else {
-				state.value = action.payload;
+				return {
+					...state,
+					value: action.payload.id,
+					name: action.payload.name,
+				};
 			}
-			return state;
 		},
 	},
 });

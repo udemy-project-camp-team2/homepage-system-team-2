@@ -11,7 +11,7 @@ const FourMix = styled.div`
 	grid-template-areas:
 		'a a'
 		'b c'
-		'd d ';
+		'd d';
 	gap: 1rem;
 	border: ${(props) => props.$border};
 `;

@@ -2,29 +2,36 @@ import { useCallback, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addContainer } from '../store/slices/containerSlice';
 import { updateSelectedId } from '../store/slices/selectedIdSlice';
-import Container from '../components/common/Container';
+import Container from '../components/container/Container';
 import Button from '../components/common/Button';
 import Modal from '../components/common/Modal';
 import LayoutTab from '../components/tab/LayoutTab';
+import { toggleModal } from '../store/slices/modalSlice';
 
 const EditPage = () => {
 	const dispatch = useDispatch();
 	const containers = useSelector((state) => state.containers);
-	const [showModal, setShowModal] = useState(false);
+	const isModalShown = useSelector((state) => state.modal.isShown);
+	const selectedName = useSelector((state) => state.selectedId.name);
 
 	const closeModal = useCallback(() => {
-		setShowModal(false);
-		dispatch(updateSelectedId(''));
+		dispatch(toggleModal());
+		dispatch(
+			updateSelectedId({
+				id: '',
+				name: '',
+			})
+		);
 	}, []);
 
 	return (
 		<section>
-			{showModal ? (
+			{isModalShown ? (
 				<Modal onClose={closeModal}>
-					<LayoutTab />
+					{selectedName === 'container' ? <LayoutTab /> : null}
 				</Modal>
 			) : null}
-			<Button type={'button'} onClick={() => setShowModal(true)}>
+			<Button type={'button'} onClick={() => dispatch(toggleModal())}>
 				모달
 			</Button>
 			<Button

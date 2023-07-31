@@ -1,5 +1,4 @@
 import PropTypes from 'prop-types';
-import { Fragment } from 'react';
 import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import { updateSelectedId } from '../../store/slices/selectedIdSlice';
@@ -15,16 +14,19 @@ const Block = ({ id, style }) => {
 	const dispatch = useDispatch();
 
 	return (
-		<Fragment>
-			<StyledBlock
-				id={id}
-				style={style}
-				onClick={(e) => {
-					e.stopPropagation();
-					dispatch(updateSelectedId(id));
-				}}
-			/>
-		</Fragment>
+		<StyledBlock
+			id={id}
+			style={style}
+			onClick={(e) => {
+				e.stopPropagation();
+				dispatch(
+					updateSelectedId({
+						id,
+						name: 'block',
+					})
+				);
+			}}
+		></StyledBlock>
 	);
 };
 
