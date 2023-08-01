@@ -3,6 +3,7 @@ import { Fragment } from 'react';
 import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import { updateSelectedId } from '../../store/slices/selectedIdSlice';
+import Image from '../image/Image';
 
 const StyledBlock = styled.div(({ style }) => ({
 	...style,
@@ -23,7 +24,7 @@ const Block = ({ id, style }) => {
 					e.stopPropagation();
 					dispatch(updateSelectedId(id));
 				}}
-			/>
+			><Image list={{id: 1, type: "one-row-image", circle: false}} /></StyledBlock>
 		</Fragment>
 	);
 };

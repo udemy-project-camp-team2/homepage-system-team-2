@@ -14,7 +14,10 @@ const ImageContainer = styled.div`
 `;
 
 const StyledImg = styled.img`
+  width: ${props => props.$width};
+  height: ${props => props.$height};
   display: block;
+  object-fit: fill;
 `;
 
 const Image = ({list, modal}) => {
@@ -30,7 +33,7 @@ const Image = ({list, modal}) => {
   return (
     <ImageContainer $borderRadius={list.circle ? "50%" : ""} >
       {modal ? null : <label style={{position:"absolute", cursor: "pointer"}} htmlFor="image_selector">이미지 선택<input id="image_selector" accept="image/*" style={{ display: "none"}} type="file" onChange={changeImageHandler} /></label>}
-      <StyledImg src={image || `/images/image_logo.png`} alt={`image`} />
+      <StyledImg src={image || `/images/image_logo.png`} alt={`image`} $width={modal ? "" : "100%"} $height={modal ? "" : "500px"} />
     </ImageContainer>
   );
 };

@@ -23,7 +23,6 @@ const EditPage = () => {
 		<section>
 			{showModal ? (
 				<Modal onClose={closeModal}>
-					{/* <LayoutTab /> */}
 					<Tab />
 				</Modal>
 			) : null}
