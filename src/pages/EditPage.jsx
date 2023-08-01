@@ -2,10 +2,12 @@ import { useCallback, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addContainer } from '../store/slices/containerSlice';
 import { updateSelectedId } from '../store/slices/selectedIdSlice';
-import Container from '../components/common/Container';
+import Container from '../components/container/Container';
 import Button from '../components/common/Button';
 import Modal from '../components/common/Modal';
 import LayoutTab from '../components/tab/LayoutTab';
+import ImageTab from '../components/tab/ImageTab';
+import Tab from '../components/tab/Tab';
 
 const EditPage = () => {
 	const dispatch = useDispatch();
@@ -21,7 +23,8 @@ const EditPage = () => {
 		<section>
 			{showModal ? (
 				<Modal onClose={closeModal}>
-					<LayoutTab />
+					{/* <LayoutTab /> */}
+					<Tab />
 				</Modal>
 			) : null}
 			<Button type={'button'} onClick={() => setShowModal(true)}>

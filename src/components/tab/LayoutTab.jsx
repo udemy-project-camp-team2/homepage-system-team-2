@@ -6,6 +6,7 @@ import FourRowLayout from '../models/layouts/FourRowLayout';
 import OneRowLayout from '../models/layouts/OneRowLayout';
 import ThreeMixLayout from '../models/layouts/ThreeMixLayout';
 import TwoRowLayout from '../models/layouts/TwoRowLayout';
+import { Fragment } from 'react';
 
 const StyledLayoutTab = styled.div`
 	padding: 0;
@@ -20,7 +21,7 @@ const LayoutTab = () => {
 	const selectedId = useSelector((state) => state.selectedId.value);
 
 	return (
-		<StyledLayoutTab>
+		<Fragment>
 			<OneRowLayout
 				onClick={() =>
 					dispatch(
@@ -76,7 +77,7 @@ const LayoutTab = () => {
 					)
 				}
 			/>
-		</StyledLayoutTab>
+		</Fragment>
 	);
 };
 
