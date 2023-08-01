@@ -5,10 +5,9 @@ import Block from '../../block/Block';
 
 const TwoRow = styled.div`
 	padding: ${(props) => props.$padding};
+	width: 100%;
 	height: 100%;
-	min-height: inherit;
-	display: grid;
-	grid-template-areas: 'a b';
+	display: flex;
 	gap: 1rem;
 	border: ${(props) => props.$border};
 `;
@@ -21,12 +20,11 @@ const TwoRowLayout = ({ onClick, container }) => {
 			$border={container ? 'none' : '1px dashed #000'}
 		>
 			{container ? (
-				container.blocksIds.map((item, index) => (
+				container.blocksIds.map((item) => (
 					<Block
 						id={item}
 						key={item}
 						style={{
-							gridArea: index === 0 ? 'a' : 'b',
 							border: '1px dashed teal',
 						}}
 					/>

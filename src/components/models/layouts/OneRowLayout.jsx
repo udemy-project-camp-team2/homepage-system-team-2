@@ -4,10 +4,9 @@ import Block from '../../block/Block';
 
 const OneRow = styled.div`
 	padding: ${(props) => props.$padding};
+	width: 100%;
 	height: 100%;
-	min-height: inherit;
-	display: grid;
-	grid-template-areas: 'a';
+	display: flex;
 	border: ${(props) => props.$border};
 `;
 
@@ -23,13 +22,13 @@ const OneRowLayout = ({ onClick, container }) => {
 						<Block
 							id={item}
 							key={item}
-							style={{ gridArea: 'a', border: '1px dashed teal' }}
+							style={{ border: '1px dashed teal' }}
 						/>
 				  ))
 				: [1].map((item) => (
 						<div
 							key={item}
-							style={{ gridArea: 'a', border: '1px dashed green' }}
+							style={{ border: '1px dashed green' }}
 						/>
 				  ))}
 		</OneRow>
