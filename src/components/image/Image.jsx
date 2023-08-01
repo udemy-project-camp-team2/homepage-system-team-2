@@ -1,4 +1,5 @@
 import PropTypes from "prop-types"
+import { useState } from "react";
 import styled from "styled-components";
 
 const ImageContainer = styled.div`
@@ -13,13 +14,23 @@ const ImageContainer = styled.div`
 `;
 
 const StyledImg = styled.img`
-display: block;
+  display: block;
 `;
 
-const Image = ({list}) => {
+const Image = ({list, modal}) => {
+  const [image, setImage] = useState("");
+
+  const changeImageHandler = (e) => {
+    const targetImg = e.target.files[0];
+    const reader = new FileReader();
+    reader.readAsDataURL(targetImg);
+    reader.onload = () => setImage(reader.result);
+  }
+
   return (
     <ImageContainer $borderRadius={list.circle ? "50%" : ""} >
-      <StyledImg src={`/images/image_logo.png`} alt={`image`} />
+      {modal ? null : <label style={{position:"absolute", cursor: "pointer"}} htmlFor="image_selector">이미지 선택<input id="image_selector" accept="image/*" style={{ display: "none"}} type="file" onChange={changeImageHandler} /></label>}
+      <StyledImg src={image || `/images/image_logo.png`} alt={`image`} />
     </ImageContainer>
   );
 };
@@ -27,5 +38,6 @@ const Image = ({list}) => {
 export default Image;
 
 Image.propTypes = {
-  list: PropTypes.object
+  list: PropTypes.object,
+  modal: PropTypes.bool
 }

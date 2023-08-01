@@ -14,7 +14,7 @@ const ImageTab = () => {
     <Fragment>
       {imageLists.map(list => {
         return <ImageWrapper key={list.id} $gridTemplateColumns={`repeat(${list.length}, 1fr)`}>
-          {Array.from({length: list.length}).map((_, i) => <Image key={i} list={list} />)}
+          {Array.from({length: list.length}).map((_, i) => <Image key={i} list={list} modal={true} />)}
         </ImageWrapper>
       })}
     </Fragment>
