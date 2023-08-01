@@ -3,7 +3,6 @@ import { useState } from "react";
 import styled from "styled-components";
 
 const ImageContainer = styled.div`
-  width: 100%;
   height: 100%;
   display: flex;
   justify-content: center;
@@ -14,7 +13,7 @@ const ImageContainer = styled.div`
 `;
 
 const StyledImg = styled.img`
-  width: ${props => props.$width};
+width: 100%;
   height: ${props => props.$height};
   display: block;
   object-fit: fill;
@@ -33,7 +32,7 @@ const Image = ({list, modal}) => {
   return (
     <ImageContainer $borderRadius={list.circle ? "50%" : ""} >
       {modal ? null : <label style={{position:"absolute", cursor: "pointer"}} htmlFor="image_selector">이미지 선택<input id="image_selector" accept="image/*" style={{ display: "none"}} type="file" onChange={changeImageHandler} /></label>}
-      <StyledImg src={image || `/images/image_logo.png`} alt={`image`} $width={modal ? "" : "100%"} $height={modal ? "" : "500px"} />
+      <StyledImg src={image || `/images/image_logo.png`} alt={`image`} $width={modal ? "" : "100%"} $height={modal ? "" : "inherit"} />
     </ImageContainer>
   );
 };

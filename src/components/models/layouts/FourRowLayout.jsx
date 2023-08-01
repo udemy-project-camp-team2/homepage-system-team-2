@@ -2,11 +2,11 @@ import PropTypes from 'prop-types';
 import { Fragment } from 'react';
 import styled from 'styled-components';
 import Block from '../../block/Block';
+import Image from '../../image/Image';
 
 const FourRow = styled.div`
 	padding: ${(props) => props.$padding};
 	height: 100%;
-	min-height: inherit;
 	display: grid;
 	grid-template-areas: 'a b c d';
 	gap: 1rem;

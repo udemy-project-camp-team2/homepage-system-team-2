@@ -7,6 +7,7 @@ import Image from '../image/Image';
 
 const StyledBlock = styled.div(({ style }) => ({
 	...style,
+	width: "100%",
 	dispaly: 'flex',
 	justifyContent: 'center',
 	alignItems: 'center',
@@ -24,7 +25,7 @@ const Block = ({ id, style }) => {
 					e.stopPropagation();
 					dispatch(updateSelectedId(id));
 				}}
-			><Image list={{id: 1, type: "one-row-image", circle: false}} /></StyledBlock>
+			><Image list={{id, type: "four-row-image", circle: false}} /></StyledBlock>
 		</Fragment>
 	);
 };
