@@ -1,7 +1,7 @@
-import React from "react";
+import PageManagement from "../components/page-management/PageManagement";
 
 const ManagementPage = () => {
-  return <div>This is Management Page!</div>;
+  return <PageManagement />
 };
 
 export default ManagementPage;
