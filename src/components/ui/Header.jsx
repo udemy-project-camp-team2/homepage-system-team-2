@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { styled } from 'styled-components';
 import { logout } from '../../store/slices/userSlice';
@@ -48,7 +48,7 @@ const Btns = styled.div`
     }
  `;
 
-const Header = ({children}) => {
+const Header = () => {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 	const loginState = useSelector((state) => state.user.isLoggedIn);
@@ -58,31 +58,24 @@ const Header = ({children}) => {
 		navigate('/admin');
 	}
 	return (
-		<Fragment>
-			<HeaderStyled>
-				<HeaderInner>
-				<Logo/>
-				<Btns>
-					
-				{
-					loginState ?
-					<>
-					<Btn>마이페이지</Btn>
-					<Btn onClick={handleLogout}>로그아웃</Btn>
-					</>
-					:
-					<Btn onClick={()=>{navigate('/admin')}}>로그인</Btn>
-				}					
-				</Btns>
-				</HeaderInner>
-			</HeaderStyled>
-		</Fragment>
+		<HeaderStyled>
+			<HeaderInner>
+			<Logo/>
+			<Btns>
+				
+			{
+				loginState ?
+				<>
+				<Btn>마이페이지</Btn>
+				<Btn onClick={handleLogout}>로그아웃</Btn>
+				</>
+				:
+				<Btn onClick={()=>{navigate('/admin')}}>로그인</Btn>
+			}					
+			</Btns>
+			</HeaderInner>
+		</HeaderStyled>
 		)
 };
 
 export default Header;
-
-
-Header.propTypes = {
-	children: PropTypes.node.isRequired,
-  };
