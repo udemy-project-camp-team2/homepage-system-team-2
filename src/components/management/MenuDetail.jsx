@@ -1,28 +1,22 @@
-import React, { useState } from 'react';
-import { menuLists } from '../../libs/menu-lists';
+import { useSelector, useDispatch } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronDown, faChevronRight, faGear, faTimes } from '@fortawesome/free-solid-svg-icons';
 import styled from 'styled-components';
+import { toggleMenu, deleteItem } from '../../store/menu/menuReducer';
+import { useState } from 'react';
 
 const MenuDetail = () => {
-  const [expandedMenu, setExpandedMenu] = useState(null);
-  const [currentMenuLists, setCurrentMenuLists] = useState(menuLists);
+  const expandedMenu = useSelector(state => state.menu.expandedMenu);
+  const currentMenuLists = useSelector(state => state.menu.data);
   const [selectedItem, setSelectedItem] = useState(null);
+  const dispatch = useDispatch();
 
   const handleMenuToggle = (menu) => {
-    if (expandedMenu === menu) {
-      setExpandedMenu(null);
-    } else {
-      setExpandedMenu(menu);
-    }
+    dispatch(toggleMenu(menu));
   };
 
   const handleItemDelete = (menu, title) => {
-    const updatedMenuLists = {
-      ...currentMenuLists,
-      [menu]: currentMenuLists[menu].filter((item) => item.title !== title),
-    };
-    setCurrentMenuLists(updatedMenuLists);
+    dispatch(deleteItem(menu, title));
     console.log(`${title} 삭제`);
   };
 
@@ -36,7 +30,6 @@ const MenuDetail = () => {
     });
   };
 
-  console.log('selectedItem:', selectedItem);
 
   return (
     <div>
@@ -48,7 +41,7 @@ const MenuDetail = () => {
       <div>
         <div>
           {Object.keys(currentMenuLists).map((menu) => (
-            <div key={menu}>
+            <div key={menu} className="menu-item">
               <MenuTitle onClick={() => handleMenuToggle(menu)}>
                 <FontAwesomeIcon
                   icon={expandedMenu === menu ? faChevronDown : faChevronRight}
