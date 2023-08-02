@@ -1,8 +1,12 @@
 import React, { useState } from 'react';
 import { menuLists } from '../../libs/menu-lists';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faChevronDown, faChevronRight, faGear, faTimes } from '@fortawesome/free-solid-svg-icons';
+import styled from 'styled-components';
 
 const MenuDetail = () => {
   const [expandedMenu, setExpandedMenu] = useState(null);
+  const [currentMenuLists, setCurrentMenuLists] = useState(menuLists);
 
   const handleMenuToggle = (menu) => {
     if (expandedMenu === menu) {
@@ -10,6 +14,15 @@ const MenuDetail = () => {
     } else {
       setExpandedMenu(menu);
     }
+  };
+
+  const handleItemDelete = (menu, title) => {
+    const updatedMenuLists = {
+      ...currentMenuLists,
+      [menu]: currentMenuLists[menu].filter((item) => item.title !== title),
+    };
+    setCurrentMenuLists(updatedMenuLists);
+    console.log(`${title}를 ${menu}에서 삭제했습니다.`);
   };
 
   return (
@@ -21,15 +34,27 @@ const MenuDetail = () => {
 
       <div>
         <div>
-          {Object.keys(menuLists).map((menu) => (
-            <div key={menu}>
-              <h3 onClick={() => handleMenuToggle(menu)} style={{ cursor: 'pointer' }}>
+          {Object.keys(currentMenuLists).map((menu) => (
+            <div key={menu} className="menu-item">
+              <MenuTitle onClick={() => handleMenuToggle(menu)}>
+                <FontAwesomeIcon
+                  icon={expandedMenu === menu ? faChevronDown : faChevronRight}
+                />
                 {menu}
-              </h3>
+              </MenuTitle>
               {expandedMenu === menu && (
                 <ul>
-                  {menuLists[menu].map((item) => (
-                    <li key={item.title}>{item.title}</li>
+                  {currentMenuLists[menu].map((item) => (
+                    <li key={item.title}>
+                      {item.title}
+                      <IconWrapper>
+                        <FontAwesomeIcon icon={faGear} />
+                        <FontAwesomeIcon
+                          icon={faTimes}
+                          onClick={() => handleItemDelete(menu, item.title)}
+                        />
+                      </IconWrapper>
+                    </li>
                   ))}
                 </ul>
               )}
@@ -40,5 +65,14 @@ const MenuDetail = () => {
     </div>
   );
 };
+
+const MenuTitle = styled.h3`
+  cursor: pointer;
+`;
+
+const IconWrapper = styled.span`
+  cursor: pointer;
+  margin-left: 5px;
+`;
 
 export default MenuDetail;
