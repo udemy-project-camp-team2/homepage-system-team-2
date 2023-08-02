@@ -81,7 +81,6 @@ const LoginForm = () => {
     const [email, setEmail] = useState('');
     const [pw , setPw] = useState('');
     const [error, setError] = useState(false);
-    const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
@@ -95,17 +94,16 @@ const LoginForm = () => {
 
     const handleLogin = async (e) => {
         e.preventDefault();
-        setEmail('');
-        setPw('');
         try {
             if (User.email === email && User.pw === pw) {
                 await dispatch(login({ email, pw }));
                 setError(false);
+                setEmail('');
+                setPw('');
                 navigate('/admin/management');
             } else {
-                setError(true)
+                setError(true);
             }
-            
           } catch (error) {
             error('로그인에 실패했습니다');
           }
