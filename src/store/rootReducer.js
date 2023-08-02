@@ -4,5 +4,5 @@ import userSlice from './slices/userSlice';
 
 export const rootReducer = combineReducers({
 	blocks: blockSlice,
-	user : userSlice,
+	user: userSlice,
 });
