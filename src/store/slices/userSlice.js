@@ -14,8 +14,6 @@ const userSlice = createSlice({
             state.user = action.payload;
             // 로그인 성공하면 로컬스토리지에 유저 정보를 저장
             localStorage.setItem('user', JSON.stringify(action.payload));
-            // const navigate = useNavigate();
-            // navigate('/admin/management');
         },
 
         logout : (state) => {
