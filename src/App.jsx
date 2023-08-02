@@ -3,20 +3,23 @@ import LoginPage from './pages/LoginPage';
 import ManagementPage from './pages/ManagementPage';
 import EditPage from './pages/EditPage';
 import NotFound from './pages/NotFound';
-import PrivateRoute from './components/login/PriveRoute';
+import { LoggedInRoute, LoggedOutRoute } from './components/login/PriveRoute';
 
 const App = () => {
 	return (
 		<Router>
 			<Routes>
-				<Route path={'/admin'} element={<LoginPage />} />
+				<Route
+					path={'/admin'}
+					element={<LoggedInRoute element={<LoginPage />} />}
+				/>
 				<Route
 					path={'/admin/management'}
-					element={<PrivateRoute element={<ManagementPage />} />}
+					element={<LoggedOutRoute element={<ManagementPage />} />}
 				/>
 				<Route
 					path={'/admin/edit'}
-					element={<PrivateRoute element={<EditPage />} />}
+					element={<LoggedOutRoute element={<EditPage />} />}
 				/>
 				<Route path="/*" element={<NotFound />} />
 			</Routes>
