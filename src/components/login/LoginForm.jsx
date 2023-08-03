@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { login } from '../../store/slices/userSlice';
 import { useNavigate } from 'react-router';
 import { styled } from 'styled-components';
-import { login } from '../../store/slices/userSlice';
 
 const LoginFormStyled = styled.form``;
 const Wrapper = styled.div`
