@@ -1,9 +1,14 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import {
+	BrowserRouter as Router,
+	Routes,
+	Route,
+	Navigate,
+} from 'react-router-dom';
 import Home from './pages/Home';
 import LoginPage from './pages/LoginPage';
 import ManagementPage from './pages/ManagementPage';
-import EditPage from './pages/EditPage';
 import NotFound from './pages/NotFound';
+import EditPageRoute from './pages/EditPageRoute';
 import { LoggedInRoute, LoggedOutRoute } from './components/login/PriveRoute';
 
 const App = () => {
@@ -20,10 +25,11 @@ const App = () => {
 					element={<LoggedOutRoute element={<ManagementPage />} />}
 				/>
 				<Route
-					path={'/admin/edit'}
-					element={<LoggedOutRoute element={<EditPage />} />}
+					path={'/admin/edit/:id'}
+					element={<LoggedOutRoute element={<EditPageRoute />} />}
 				/>
-				<Route path="/*" element={<NotFound />} />
+				<Route path="/404" element={<NotFound />} />
+				<Route path="*" element={<Navigate to="/404" />} />
 			</Routes>
 		</Router>
 	);
