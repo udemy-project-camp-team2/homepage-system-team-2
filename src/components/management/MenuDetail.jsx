@@ -75,8 +75,6 @@ const MenuDetail = () => {
     handleItemDetails(newItem.id, newItem.title, newItem.link);
   };
 
-  console.log(selectedItem);
-
   return (
     <div>
       <h2>메뉴 설정</h2>
