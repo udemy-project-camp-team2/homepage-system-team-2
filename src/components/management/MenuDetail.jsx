@@ -3,8 +3,9 @@ import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronDown, faChevronRight, faGear, faTimes } from '@fortawesome/free-solid-svg-icons';
-import { toggleMenu, deleteItem, updateItem, addMenuItem } from '../../store/menu/menuReducer';
+import { toggleMenu, deleteItem, updateItem, addMenuItem, updateMenuTitle } from '../../store/menu/menuReducer';
 import styled from 'styled-components';
+import MenuTitle from './MenuTitle';
 
 const MenuDetail = () => {
   const expandedMenu = useSelector(state => state.menu.expandedMenu);
@@ -19,8 +20,7 @@ const MenuDetail = () => {
 
   // 항목 삭제 처리 함수
   const handleItemDelete = (menu, id, title) => {
-    dispatch(deleteItem(menu, title, id));
-    console.log(`${title} 삭제`);
+    dispatch(deleteItem(menu, id, title));
   };
 
   // 항목 세부 정보 보기 처리 함수
@@ -75,6 +75,12 @@ const MenuDetail = () => {
     handleItemDetails(newItem.id, newItem.title, newItem.link);
   };
 
+  // 메뉴 이름 변경 처리 함수
+  const handleMenuTitleChange = (menu, updatedTitle) => {
+    console.log("Updated Title:", updatedTitle); // updatedTitle 값을 확인하기 위해 추가
+    dispatch(updateMenuTitle(menu, updatedTitle));
+  };
+
   return (
     <div>
       <h2>메뉴 설정</h2>
@@ -88,12 +94,10 @@ const MenuDetail = () => {
           {Object.keys(currentMenuLists).map((menu) => (
             <div key={menu}>
               {/* 메뉴 펼침/접기 아이콘 */}
-              <MenuTitle onClick={() => handleMenuToggle(menu)}>
-                <FontAwesomeIcon
-                  icon={expandedMenu === menu ? faChevronDown : faChevronRight}
-                />
-                {menu}
-              </MenuTitle>
+              <MenuTitles onClick={() => handleMenuToggle(menu)}>
+                <FontAwesomeIcon icon={expandedMenu === menu ? faChevronDown : faChevronRight} />
+                <MenuTitle menu={menu} onSave={(newTitle) => handleMenuTitleChange(menu, newTitle)}  />
+              </MenuTitles>
               {expandedMenu === menu && (
                 <ul>
                   {currentMenuLists[menu]?.map((item) => (
@@ -142,8 +146,15 @@ const MenuDetail = () => {
   );
 };
 
-const MenuTitle = styled.h3`
+const MenuTitles = styled.h3`
   cursor: pointer;
+  display: flex;
+  align-items: center;
+
+    // 화살표 아이콘에 스타일을 추가합니다.
+  svg {
+    margin-right: 5px;
+  }
 `;
 
 const ItemTitle = styled.span`
