@@ -13,12 +13,7 @@ import FourMixLayout from '../models/layouts/FourMixlayout';
 import ThreeMixLayout from '../models/layouts/ThreeMixLayout';
 
 const StyledContainer = styled.article`
-<<<<<<< HEAD
-	padding: 1rem;
-	min-height: 50vh;
-=======
 	height: 40vh;
->>>>>>> edit-test
 	position: relative;
 	border: ${(props) => props.$border};
 `;
