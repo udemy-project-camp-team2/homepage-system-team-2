@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import styled from 'styled-components';
 
 // eslint-disable-next-line react/prop-types
@@ -11,7 +11,6 @@ const MenuTitle = ({ menu, onSave,  }) => {
   };
 
   const handleSaveClick = () => {
-    console.log("New Title:", newTitle); // newTitle의 값을 확인하기 위해 추가
     onSave(newTitle);
     setEditing(false);
   };

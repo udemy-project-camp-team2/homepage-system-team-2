@@ -1,85 +1,22 @@
-import { v4 as uuidv4 } from 'uuid';
-import { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronDown, faChevronRight, faGear, faTimes } from '@fortawesome/free-solid-svg-icons';
-import { toggleMenu, deleteItem, updateItem, addMenuItem, updateMenuTitle } from '../../store/menu/menuReducer';
 import styled from 'styled-components';
 import MenuTitle from './MenuTitle';
+import useMenuToggle from '../../hooks/useMenuToggle';
+import useItemDelete from '../../hooks/useItemDelete';
+import useItemDetails from '../../hooks/useItemDetails';
+import useMenuAdd from '../../hooks/useItemDetails';
+import useMenuTitleChange from '../../hooks/useMenuTitleChange';
 
 const MenuDetail = () => {
-  const expandedMenu = useSelector(state => state.menu.expandedMenu);
+  const { expandedMenu, handleMenuToggle } = useMenuToggle();
+  const { handleItemDelete } = useItemDelete();
+  const { selectedItem, handleItemDetails, handleTitleChange, handleLinkChange, handleItemUpdate,  } = useItemDetails();
+  const { handleMenuAdd } = useMenuAdd();
+  const { handleMenuTitleChange } = useMenuTitleChange();
   const currentMenuLists = useSelector(state => state.menu.data);
-  const [selectedItem, setSelectedItem] = useState(null);
-  const dispatch = useDispatch();
-
-  // 메뉴 펼침/접기 토글 처리 함수
-  const handleMenuToggle = (menu) => {
-    dispatch(toggleMenu(menu));
-  };
-
-  // 항목 삭제 처리 함수
-  const handleItemDelete = (menu, id, title) => {
-    dispatch(deleteItem(menu, id, title));
-  };
-
-  // 항목 세부 정보 보기 처리 함수
-  const handleItemDetails = (id, title, link) => {
-    setSelectedItem((prevSelectedItem) => {
-      if (prevSelectedItem && prevSelectedItem.id === id) {
-        return { ...prevSelectedItem };
-      } else {
-        return { id, title, link };
-      }
-    });
-  };
-
-  // 항목 제목 변경 처리 함수
-  const handleTitleChange = (e) => {
-    setSelectedItem((prevSelectedItem) => ({
-      ...prevSelectedItem,
-      title: e.target.value,
-    }));
-  };
-
-  // 항목 링크 변경 처리 함수
-  const handleLinkChange = (e) => {
-    setSelectedItem((prevSelectedItem) => ({
-      ...prevSelectedItem,
-      link: e.target.value,
-    }));
-  };
-
-  // 항목 수정 확인 처리 함수
-  const handleItemUpdate = () => {
-    if (!selectedItem) return; // 수정 중인 아이템이 없으면 종료
-
-    const { id, title } = selectedItem;
-    const menu = Object.keys(currentMenuLists).find((menu) =>
-      currentMenuLists[menu].some((item) => item.id === selectedItem.id)
-    );
-
-    dispatch(updateItem(menu, id, title, selectedItem.title, selectedItem.link));
-    setSelectedItem(null);
-  };
-
-  // 메뉴 항목 추가 처리 함수
-  const handleMenuAdd = (menu) => {
-    const newItem = {
-      id: uuidv4(),
-      title: '새로운 항목',
-      link: '/new-link',
-    };
-
-    dispatch(addMenuItem(menu, newItem));
-    handleItemDetails(newItem.id, newItem.title, newItem.link);
-  };
-
-  // 메뉴 이름 변경 처리 함수
-  const handleMenuTitleChange = (menu, updatedTitle) => {
-    console.log("Updated Title:", updatedTitle); // updatedTitle 값을 확인하기 위해 추가
-    dispatch(updateMenuTitle(menu, updatedTitle));
-  };
+  
 
   return (
     <div>
