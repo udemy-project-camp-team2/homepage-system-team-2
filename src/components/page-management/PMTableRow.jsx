@@ -23,7 +23,7 @@ const PMTableRow = ({ list }) => {
 					onClick={() =>
 						dispatch(
 							toggleModal({
-								title: list.title,
+								list,
 								name: '상세',
 							})
 						)
@@ -36,6 +36,7 @@ const PMTableRow = ({ list }) => {
 					onClick={() =>
 						dispatch(
 							toggleModal({
+								title: list.title,
 								name: '복제',
 							})
 						)
