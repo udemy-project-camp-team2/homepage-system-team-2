@@ -1,29 +1,25 @@
 import PropTypes from 'prop-types';
-import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import PMTableRow from './PMTableRow';
+import Modal from '../modal/Modal';
+import PMForm from './PMForm';
 
 const PMTableBody = ({ pageLists, offset }) => {
-	const navigate = useNavigate();
+	const isOpen = useSelector((state) => state.modal.isOpen);
+	const targetList = useSelector((state) => state.modal.list);
+	const name = useSelector((state) => state.modal.name);
+
 	return (
 		<tbody>
+			{isOpen ? (
+				<Modal>
+					<PMForm name={name} targetList={targetList} />
+				</Modal>
+			) : null}
 			{pageLists.length > 0 ? (
-				pageLists.slice(offset, offset + 10).map((list) => (
-					<tr key={list.title}>
-						<td>
-							<input type="checkbox" name="checkbox" />
-						</td>
-						<td>{list.title}</td>
-						<td>{list.link}</td>
-						<td>{list.key}</td>
-						<td>{new Date().toLocaleString()}</td>
-						<td>
-							<button type="button">상세</button>
-							<button type="button">복제</button>
-							<button type="button" onClick={() => navigate('/admin/edit')}>
-								디자인
-							</button>
-						</td>
-					</tr>
-				))
+				pageLists
+					.slice(offset, offset + 10)
+					.map((list) => <PMTableRow key={list.title} list={list} />)
 			) : (
 				<tr>
 					<td>no data</td>
