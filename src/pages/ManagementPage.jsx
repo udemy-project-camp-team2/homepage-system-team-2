@@ -3,6 +3,7 @@ import { styled } from 'styled-components';
 import MenuDetail from '../components/management/MenuDetail';
 import PageManagement from '../components/page-management/PageManagement';
 import { useTab } from '../hooks/useTab';
+import { useTitle } from '../hooks/useTitle';
 
 const TabButtons = styled.button`
 	display: inline-block;
@@ -38,6 +39,7 @@ const contents = [
 
 const ManagementPage = () => {
 	const { idx, targetContent, targetAction } = useTab(0, contents);
+	useTitle(targetContent.label);
 
 	return (
 		<Fragment>
