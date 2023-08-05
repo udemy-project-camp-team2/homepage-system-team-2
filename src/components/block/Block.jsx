@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { toggleModal } from '../../store/slices/modalSlice';
 import { updateSelectedId } from '../../store/slices/selectedIdSlice';
 import { useCallback } from 'react';
+import Image from '../image/Image';
 
 const StyledBlock = styled.div(({ style }) => ({
 	...style,
@@ -39,9 +40,15 @@ const Block = ({ id, style }) => {
 				console.log(id);
 			}}
 		>
-			<b style={{ cursor: 'pointer' }} onClick={designModalHandler}>
-				디자인을 선택해주세요!
-			</b>
+			{design ? (
+				design.designIds.map((designId) => (
+					<Image key={designId} designId={designId} />
+				))
+			) : (
+				<b style={{ cursor: 'pointer' }} onClick={designModalHandler}>
+					디자인을 선택해주세요!
+				</b>
+			)}
 		</StyledBlock>
 	);
 };
