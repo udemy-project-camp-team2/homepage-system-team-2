@@ -6,6 +6,7 @@ import { faChevronDown, faChevronRight } from '@fortawesome/free-solid-svg-icons
 import MenuItem from './MenuItem';
 
 const MenuList = ({ currentMenuLists, expandedMenu, handleMenuToggle, handleMenuTitleChange, handleItemDelete, handleItemDetails, selectedItem, handleTitleChange, handleLinkChange, handleItemUpdate,  }) => {
+  
   return (
     <div>
       {Object.keys(currentMenuLists).map((menu) => (
@@ -13,7 +14,10 @@ const MenuList = ({ currentMenuLists, expandedMenu, handleMenuToggle, handleMenu
           {/* 메뉴 펼침/접기 아이콘 */}
           <MenuTitles onClick={() => handleMenuToggle(menu)}>
             <FontAwesomeIcon icon={expandedMenu === menu ? faChevronDown : faChevronRight} />
-            <MenuTitle menu={menu} onSave={(newTitle) => handleMenuTitleChange(menu, newTitle)} />
+            <MenuTitle 
+              menu={menu} 
+              onSave={(newTitle) => handleMenuTitleChange(menu, newTitle)} 
+            />
           </MenuTitles>
           {expandedMenu === menu && (
             <ul>
@@ -42,7 +46,6 @@ const MenuTitles = styled.h3`
   display: flex;
   align-items: center;
 
-  // 화살표 아이콘에 스타일을 추가합니다.
   svg {
     margin-right: 5px;
   }

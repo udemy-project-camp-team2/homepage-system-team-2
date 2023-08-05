@@ -23,7 +23,6 @@ const MenuTitle = ({ menu, onSave,  }) => {
   const handleChange = (e) => {
     setNewTitle(e.target.value);
   };
-  
 
   return (
     <TitleContainer>
@@ -42,6 +41,7 @@ const MenuTitle = ({ menu, onSave,  }) => {
     </TitleContainer>
   );
 };
+
 
 const TitleContainer = styled.div`
   display: flex;
