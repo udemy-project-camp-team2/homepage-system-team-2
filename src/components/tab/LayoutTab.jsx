@@ -6,16 +6,12 @@ import FourRowLayout from '../models/layouts/FourRowLayout';
 import OneRowLayout from '../models/layouts/OneRowLayout';
 import ThreeMixLayout from '../models/layouts/ThreeMixLayout';
 import TwoRowLayout from '../models/layouts/TwoRowLayout';
-<<<<<<< HEAD
 import Button from '../common/Button';
 import { Fragment } from 'react';
 import { toggleModal } from '../../store/slices/modalSlice';
 import { useState } from 'react';
 import CommonLayout from '../models/layouts/CommonLayout';
 import { layoutLists } from '../../libs/layout-lists';
-=======
-import { Fragment } from 'react';
->>>>>>> edit-test
 
 const StyledLayoutTab = styled.div`
 	padding: 0;
@@ -37,7 +33,6 @@ const LayoutTab = () => {
 
 	return (
 		<Fragment>
-<<<<<<< HEAD
 			<StyledLayoutTab>
 				{/* {layoutLists.map((list) => (
 					<CommonLayout
@@ -57,12 +52,6 @@ const LayoutTab = () => {
 					onClick={() =>
 						setLayoutType((prev) => ({
 							...prev,
-=======
-			<OneRowLayout
-				onClick={() =>
-					dispatch(
-						updateLayoutType({
->>>>>>> edit-test
 							id: selectedId,
 							type: 'one_row_layout',
 							length: 1,
@@ -106,7 +95,6 @@ const LayoutTab = () => {
 							id: selectedId,
 							type: 'three_row_layout',
 							length: 3,
-<<<<<<< HEAD
 						}))
 					}
 				/>
@@ -121,12 +109,6 @@ const LayoutTab = () => {
 			>
 				저장
 			</Button>
-=======
-						})
-					)
-				}
-			/>
->>>>>>> edit-test
 		</Fragment>
 	);
 };

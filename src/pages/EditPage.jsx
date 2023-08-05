@@ -6,12 +6,7 @@ import Container from '../components/container/Container';
 import Button from '../components/common/Button';
 import Modal from '../components/common/Modal';
 import LayoutTab from '../components/tab/LayoutTab';
-<<<<<<< HEAD
 import { toggleModal } from '../store/slices/modalSlice';
-=======
-import ImageTab from '../components/tab/ImageTab';
-import Tab from '../components/tab/Tab';
->>>>>>> edit-test
 
 const EditPage = () => {
 	const dispatch = useDispatch();
@@ -33,11 +28,7 @@ const EditPage = () => {
 		<section>
 			{isModalShown ? (
 				<Modal onClose={closeModal}>
-<<<<<<< HEAD
 					{selectedName === 'container' ? <LayoutTab /> : null}
-=======
-					<Tab />
->>>>>>> edit-test
 				</Modal>
 			) : null}
 			<Button type={'button'} onClick={() => dispatch(toggleModal())}>
