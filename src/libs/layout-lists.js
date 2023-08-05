@@ -13,7 +13,7 @@ export const layoutLists = [
 	},
 	{
 		id: 3,
-		type: 'four_row_layout',
+		type: 'three_row_layout',
 		length: 3,
 		src: '/images/layouts/three_row_layout.png',
 	},

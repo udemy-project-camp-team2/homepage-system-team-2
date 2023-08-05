@@ -7,6 +7,7 @@ import Modal from '../components/common/Modal';
 import { toggleModal } from '../store/slices/modalSlice';
 import { useTitle } from '../hooks/useTitle';
 import LayoutTab from '../components/tab/LayoutTab';
+import DesignTab from '../components/tab/DesignTab';
 
 const EditPage = () => {
 	useTitle('편집페이지');
@@ -27,7 +28,11 @@ const EditPage = () => {
 		<section>
 			{isModalShown ? (
 				<Modal onClose={closeModal}>
-					{modalName === 'layout' ? <LayoutTab /> : null}
+					{modalName === 'layout' ? (
+						<LayoutTab />
+					) : modalName === 'design' ? (
+						<DesignTab />
+					) : null}
 				</Modal>
 			) : null}
 			<Button

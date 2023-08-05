@@ -2,26 +2,26 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Block from '../../block/Block';
 
-const FourRow = styled.div`
+const ThreeRow = styled.div`
 	width: 100%;
 	height: 100%;
 	display: flex;
 	gap: 1rem;
 `;
 
-const FourRowLayout = ({ onClick, container }) => {
+const ThreeRowLayout = ({ onClick, container }) => {
 	return (
-		<FourRow onClick={onClick}>
+		<ThreeRow onClick={onClick}>
 			{container.blocksIds.map((item) => (
 				<Block id={item} key={item} />
 			))}
-		</FourRow>
+		</ThreeRow>
 	);
 };
 
-export default FourRowLayout;
+export default ThreeRowLayout;
 
-FourRowLayout.propTypes = {
+ThreeRowLayout.propTypes = {
 	onClick: PropTypes.func,
 	container: PropTypes.object,
 };

@@ -1,16 +1,10 @@
+import { Fragment, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { updateLayoutType } from '../../store/slices/containerSlice';
-import FourMixLayout from '../models/layouts/FourMixlayout';
-import FourRowLayout from '../models/layouts/FourRowLayout';
-import OneRowLayout from '../models/layouts/OneRowLayout';
-import ThreeMixLayout from '../models/layouts/ThreeMixLayout';
-import TwoRowLayout from '../models/layouts/TwoRowLayout';
-import Button from '../common/Button';
-import { Fragment } from 'react';
-import { useState } from 'react';
 import { toggleModal } from '../../store/slices/modalSlice';
 import { layoutLists } from '../../libs/layout-lists';
+import Button from '../common/Button';
 
 const LayoutList = styled.ul`
 	padding: 0;
@@ -39,8 +33,6 @@ const LayoutTab = () => {
 		type: '',
 		length: 0,
 	});
-
-	console.log(layoutType);
 
 	return (
 		<Fragment>

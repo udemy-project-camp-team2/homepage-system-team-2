@@ -1,15 +1,14 @@
 import PropTypes from 'prop-types';
 import { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import { addContainer } from '../../store/slices/containerSlice';
 import Button from '../common/Button';
 import QuickMenu from '../common/QuickMenu';
 import OneRowLayout from '../models/layouts/OneRowLayout';
 import TwoRowLayout from '../models/layouts/TwoRowLayout';
+import ThreeRowLayout from '../models/layouts/ThreeRowLayout';
 import FourRowLayout from '../models/layouts/FourRowLayout';
-import FourMixLayout from '../models/layouts/FourMixlayout';
-import ThreeMixLayout from '../models/layouts/ThreeMixLayout';
 import { toggleModal } from '../../store/slices/modalSlice';
 import { updateSelectedId } from '../../store/slices/selectedIdSlice';
 
@@ -36,12 +35,10 @@ const Container = ({ container, index }) => {
 				<OneRowLayout container={container} />
 			) : container.type === 'two_row_layout' ? (
 				<TwoRowLayout container={container} />
+			) : container.type === 'three_row_layout' ? (
+				<ThreeRowLayout container={container} />
 			) : container.type === 'four_row_layout' ? (
 				<FourRowLayout container={container} />
-			) : container.type === 'three_mix_layout' ? (
-				<ThreeMixLayout container={container} />
-			) : container.type === 'four_mix_layout' ? (
-				<FourMixLayout container={container} />
 			) : (
 				<b
 					style={{ cursor: 'pointer' }}

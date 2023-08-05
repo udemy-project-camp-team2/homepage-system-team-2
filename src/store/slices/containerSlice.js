@@ -48,7 +48,7 @@ const containerSlice = createSlice({
 				newState.splice(targetIndex - 1, 0, ...spliced);
 				return newState;
 			} else {
-				if (targetIndex + 1 >= newState.length) return;
+				if (targetIndex + 1 > newState.length) return;
 				newState.splice(targetIndex + 1, 0, ...spliced);
 				return newState;
 			}
