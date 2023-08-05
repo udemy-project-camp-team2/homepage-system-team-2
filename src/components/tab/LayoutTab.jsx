@@ -8,103 +8,68 @@ import ThreeMixLayout from '../models/layouts/ThreeMixLayout';
 import TwoRowLayout from '../models/layouts/TwoRowLayout';
 import Button from '../common/Button';
 import { Fragment } from 'react';
-import { toggleModal } from '../../store/slices/modalSlice';
 import { useState } from 'react';
-import CommonLayout from '../models/layouts/CommonLayout';
+import { toggleModal } from '../../store/slices/modalSlice';
 import { layoutLists } from '../../libs/layout-lists';
 
-const StyledLayoutTab = styled.div`
+const LayoutList = styled.ul`
 	padding: 0;
-	height: 80vh;
 	display: grid;
 	grid-template-columns: repeat(2, 1fr);
-	grid-template-rows: repeat(3, 1fr);
-	gap: 1rem;
+	grid-auto-rows: 200px;
+	gap: 0.5rem;
+`;
+
+const LayoutItem = styled.li`
+	border: 1px solid rgba(0, 0, 0, 0.5);
+	border-radius: 0.5rem;
+	cursor: pointer;
+`;
+
+const LayoutImg = styled.img`
+	width: 100%;
+	height: 100%;
 `;
 
 const LayoutTab = () => {
 	const dispatch = useDispatch();
-	const selectedId = useSelector((state) => state.selectedId.value);
+	const selectedId = useSelector((state) => state.selectedId.selectedId);
 	const [layoutType, setLayoutType] = useState({
 		id: '',
 		type: '',
 		length: 0,
 	});
 
+	console.log(layoutType);
+
 	return (
 		<Fragment>
-			<StyledLayoutTab>
-				{/* {layoutLists.map((list) => (
-					<CommonLayout
+			<LayoutList>
+				{layoutLists.map((list) => (
+					<LayoutItem
 						key={list.id}
-						listData={{ type: list.type, length: list.length }}
 						onClick={() =>
-							setLayoutType((prev) => ({
-								...prev,
+							setLayoutType({
 								id: selectedId,
 								type: list.type,
 								length: list.length,
-							}))
+							})
 						}
-					/>
-				))} */}
-				<OneRowLayout
-					onClick={() =>
-						setLayoutType((prev) => ({
-							...prev,
-							id: selectedId,
-							type: 'one_row_layout',
-							length: 1,
-						}))
-					}
-				/>
-				<TwoRowLayout
-					onClick={() =>
-						setLayoutType((prev) => ({
-							...prev,
-							id: selectedId,
-							type: 'two_row_layout',
-							length: 2,
-						}))
-					}
-				/>
-				<FourRowLayout
-					onClick={() =>
-						setLayoutType((prev) => ({
-							...prev,
-							id: selectedId,
-							type: 'four_row_layout',
-							length: 4,
-						}))
-					}
-				/>
-				<FourMixLayout
-					onClick={() =>
-						setLayoutType((prev) => ({
-							...prev,
-							id: selectedId,
-							type: 'four_mix_layout',
-							length: 4,
-						}))
-					}
-				/>
-				<ThreeMixLayout
-					onClick={() =>
-						setLayoutType((prev) => ({
-							...prev,
-							id: selectedId,
-							type: 'three_row_layout',
-							length: 3,
-						}))
-					}
-				/>
-			</StyledLayoutTab>
+					>
+						<LayoutImg src={list.src} alt={list.type} />
+					</LayoutItem>
+				))}
+			</LayoutList>
 			<Button
 				type="button"
 				style={{ width: '100%' }}
 				onClick={() => {
 					dispatch(updateLayoutType(layoutType));
-					dispatch(toggleModal());
+					dispatch(
+						toggleModal({
+							name: '',
+						})
+					);
 				}}
 			>
 				저장

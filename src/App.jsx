@@ -10,8 +10,13 @@ import ManagementPage from './pages/ManagementPage';
 import NotFound from './pages/NotFound';
 import EditPageRoute from './pages/EditPageRoute';
 import { LoggedInRoute, LoggedOutRoute } from './components/login/PriveRoute';
+import { useEffect } from 'react';
 
 const App = () => {
+	// id 값들을 로컬스토리지에 저장
+	useEffect(() => {
+		localStorage.setItem('url', JSON.stringify([1, 2, 3, 4, 5, 6, 7, 8]));
+	}, []);
 	return (
 		<Router>
 			<Routes>

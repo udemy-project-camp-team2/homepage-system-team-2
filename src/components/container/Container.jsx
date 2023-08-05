@@ -3,7 +3,6 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { addContainer } from '../../store/slices/containerSlice';
-import { updateSelectedId } from '../../store/slices/selectedIdSlice.js';
 import Button from '../common/Button';
 import QuickMenu from '../common/QuickMenu';
 import OneRowLayout from '../models/layouts/OneRowLayout';
@@ -11,34 +10,27 @@ import TwoRowLayout from '../models/layouts/TwoRowLayout';
 import FourRowLayout from '../models/layouts/FourRowLayout';
 import FourMixLayout from '../models/layouts/FourMixlayout';
 import ThreeMixLayout from '../models/layouts/ThreeMixLayout';
+import { toggleModal } from '../../store/slices/modalSlice';
+import { updateSelectedId } from '../../store/slices/selectedIdSlice';
 
 const StyledContainer = styled.article`
 	height: 40vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 	position: relative;
-	border: ${(props) => props.$border};
+	border: 2px dashed #000;
 `;
 
 const Container = ({ container, index }) => {
 	const dispatch = useDispatch();
-	const selectedId = useSelector((state) => state.selectedId.value);
 	const [showMenu, setShowMenu] = useState(false);
 
 	return (
 		<StyledContainer
 			key={container.id}
-			onClick={() =>
-				dispatch(
-					updateSelectedId({
-						id: container.id,
-						name: 'container',
-					})
-				)
-			}
 			// onMouseEnter={() => setShowMenu(true)}
 			// onMouseLeave={() => setShowMenu(false)}
-			$border={
-				container.id === selectedId ? '3px solid #ff0000' : '1px dashed #000'
-			}
 		>
 			{container.type === 'one_row_layout' ? (
 				<OneRowLayout container={container} />
@@ -50,7 +42,21 @@ const Container = ({ container, index }) => {
 				<ThreeMixLayout container={container} />
 			) : container.type === 'four_mix_layout' ? (
 				<FourMixLayout container={container} />
-			) : null}
+			) : (
+				<b
+					style={{ cursor: 'pointer' }}
+					onClick={() => {
+						dispatch(
+							toggleModal({
+								name: 'layout',
+							})
+						);
+						dispatch(updateSelectedId(container.id));
+					}}
+				>
+					레이아웃을 선택하세요!
+				</b>
+			)}
 			{showMenu ? <QuickMenu /> : null}
 			<Button
 				type={'button'}

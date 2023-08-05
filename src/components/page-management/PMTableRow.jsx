@@ -44,7 +44,7 @@ const PMTableRow = ({ list }) => {
 				>
 					복제
 				</button>
-				<button type="button" onClick={() => navigate('/admin/edit')}>
+				<button type="button" onClick={() => navigate('/admin/edit/1')}>
 					디자인
 				</button>
 			</td>

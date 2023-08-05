@@ -1,21 +1,14 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-const initialState = { value: '', name: '' };
+const initialState = { selectedId: '' };
 
-const selectedIdSlice = createSlice({
+export const selectedIdSlice = createSlice({
 	name: 'selectedId',
 	initialState,
 	reducers: {
 		updateSelectedId(state, action) {
-			if (state.value === action.payload) {
-				return { ...state, value: '', name: '' };
-			} else {
-				return {
-					...state,
-					value: action.payload.id,
-					name: action.payload.name,
-				};
-			}
+			state.selectedId = action.payload;
+			return state;
 		},
 	},
 });
