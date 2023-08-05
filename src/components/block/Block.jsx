@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
+import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
-import { useDispatch } from 'react-redux';
 import { toggleModal } from '../../store/slices/modalSlice';
 import { updateSelectedId } from '../../store/slices/selectedIdSlice';
 import { useCallback } from 'react';
@@ -16,6 +16,7 @@ const StyledBlock = styled.div(({ style }) => ({
 }));
 
 const Block = ({ id, style }) => {
+	const design = useSelector((state) => state.design[id]);
 	const dispatch = useDispatch();
 
 	const designModalHandler = useCallback(() => {
@@ -27,12 +28,15 @@ const Block = ({ id, style }) => {
 		dispatch(updateSelectedId(id));
 	}, [id]);
 
+	console.log(design);
+
 	return (
 		<StyledBlock
 			id={id}
 			style={style}
 			onClick={(e) => {
 				e.stopPropagation();
+				console.log(id);
 			}}
 		>
 			<b style={{ cursor: 'pointer' }} onClick={designModalHandler}>

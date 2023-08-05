@@ -1,4 +1,6 @@
+import PropTypes from 'prop-types';
 import { Fragment } from 'react';
+import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { lineLists } from '../../libs/line-lists';
 
@@ -15,11 +17,22 @@ const LineContainer = styled.div`
 	}
 `;
 
-const LineTab = () => {
+const LineTab = ({ setDesignType }) => {
+	const selectedId = useSelector((state) => state.selectedId.selectedId);
+
 	return (
 		<Fragment>
 			{lineLists.map((list) => (
-				<LineContainer key={list.id}>
+				<LineContainer
+					key={list.id}
+					onClick={() =>
+						setDesignType({
+							id: selectedId,
+							type: list.type,
+							length: list.length,
+						})
+					}
+				>
 					<img src={list.src} alt={list.type} />
 				</LineContainer>
 			))}
@@ -28,3 +41,7 @@ const LineTab = () => {
 };
 
 export default LineTab;
+
+LineTab.propTypes = {
+	setDesignType: PropTypes.func,
+};

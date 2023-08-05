@@ -1,4 +1,6 @@
+import PropTypes from 'prop-types';
 import { Fragment } from 'react';
+import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { imageLists } from '../../libs/image-lists';
 
@@ -15,12 +17,23 @@ const ImageWrapper = styled.div`
 	}
 `;
 
-const ImageTab = () => {
+const ImageTab = ({ setDesignType }) => {
+	const selectedId = useSelector((state) => state.selectedId.selectedId);
+
 	return (
 		<Fragment>
 			{imageLists.map((list) => {
 				return (
-					<ImageWrapper key={list.id}>
+					<ImageWrapper
+						key={list.id}
+						onClick={() =>
+							setDesignType({
+								id: selectedId,
+								type: list.type,
+								length: list.length,
+							})
+						}
+					>
 						<img src={list.src} alt={list.type} />
 					</ImageWrapper>
 				);
@@ -30,3 +43,7 @@ const ImageTab = () => {
 };
 
 export default ImageTab;
+
+ImageTab.propTypes = {
+	setDesignType: PropTypes.func,
+};

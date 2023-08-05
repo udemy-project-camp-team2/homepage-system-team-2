@@ -1,8 +1,11 @@
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import ImageTab from './ImageTab';
 import LineTab from './LineTab';
 import Button from '../common/Button';
+import { addDesign } from '../../store/slices/designSlice';
+import { toggleModal } from '../../store/slices/modalSlice';
 
 const designLists = [
 	{ id: 0, label: '구분선', element: <LineTab /> },
@@ -36,6 +39,13 @@ const TabContentItem = styled.li`
 
 const DesignTab = () => {
 	const [currentTab, setCurrentTab] = useState(0);
+	const dispatch = useDispatch();
+	const [designType, setDesignType] = useState({
+		id: '',
+		type: '',
+		length: 0,
+	});
+
 	return (
 		<TabWrapper>
 			<TabTitleList>
@@ -52,6 +62,11 @@ const DesignTab = () => {
 				<Button
 					type={'button'}
 					style={{ width: '100%', position: 'absolute', bottom: 0 }}
+					onClick={() => {
+						if (designType.type === '') return;
+						dispatch(addDesign(designType));
+						dispatch(toggleModal({ name: '' }));
+					}}
 				>
 					저장
 				</Button>
@@ -62,7 +77,12 @@ const DesignTab = () => {
 						key={list.id}
 						$display={currentTab === index ? 'block' : 'none'}
 					>
-						{list.element}
+						{list.label === '이미지' && (
+							<ImageTab setDesignType={setDesignType} />
+						)}
+						{list.label === '구분선' && (
+							<LineTab setDesignType={setDesignType} />
+						)}
 					</TabContentItem>
 				))}
 			</TabContentList>
