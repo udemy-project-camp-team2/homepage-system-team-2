@@ -7,4 +7,5 @@ export const rootReducer = combineReducers({
 	blocks: blockSlice,
 	user: userSlice,
 	modal: modalSlice,
+  menu: menuReducer,
 });
