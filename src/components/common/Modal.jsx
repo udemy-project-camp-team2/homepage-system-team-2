@@ -33,7 +33,7 @@ const Overlay = ({ children }) => {
 	return <StyledOverlay>{children}</StyledOverlay>;
 };
 
-const Modal = ({ children, onClose }) => {
+const Modal = ({ onClose }) => {
   return (
     <Fragment>
       {createPortal(

@@ -1,6 +1,6 @@
 import { Fragment } from 'react';
 import { styled } from 'styled-components';
-import MenuDetail from '../components/management/MenuDetail';
+import MenuDetail from '../components/menu-management/MenuDetail';
 import PageManagement from '../components/page-management/PageManagement';
 import { useTab } from '../hooks/useTab';
 import { useTitle } from '../hooks/useTitle';
