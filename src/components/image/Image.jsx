@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 
 const ImageContainer = styled.div(({ $styles }) => ({
+	margin: '0 0.5rem',
 	width: '100%',
 	height: '100%',
 	display: 'flex',
