@@ -2,19 +2,22 @@ export const lineLists = [
 	{
 		id: 1,
 		type: 'simple-line',
-		style: 'solid',
+		// style: 'solid',
 		src: '/images/lines/simple_line.png',
+		length: 1,
 	},
 	{
 		id: 2,
 		type: 'dashed-line',
-		style: 'dashed',
+		// style: 'dashed',
 		src: '/images/lines/dashed_line.png',
+		length: 1,
 	},
 	{
 		id: 3,
 		type: 'dotted-line',
-		style: 'dotted',
+		// style: 'dotted',
 		src: '/images/lines/dotted_line.png',
+		length: 1,
 	},
 ];

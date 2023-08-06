@@ -17,6 +17,16 @@ const designSlice = createSlice({
 				id,
 				type,
 				designIds: newDesignIds,
+				styles: {},
+			};
+
+			return newState;
+		},
+
+		updateDesignStyles(state, action) {
+			const newState = { ...state };
+			newState[action.payload.id]['styles'][action.payload.designId] = {
+				...action.payload.designStyles,
 			};
 
 			return newState;

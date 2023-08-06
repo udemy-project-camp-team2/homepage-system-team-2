@@ -5,6 +5,7 @@ import { toggleModal } from '../../store/slices/modalSlice';
 import { updateSelectedId } from '../../store/slices/selectedIdSlice';
 import { useCallback } from 'react';
 import Image from '../image/Image';
+import Line from '../line/Line';
 
 const StyledBlock = styled.div(({ style }) => ({
 	...style,
@@ -29,21 +30,22 @@ const Block = ({ id, style }) => {
 		dispatch(updateSelectedId(id));
 	}, [id]);
 
-	console.log(design);
-
 	return (
 		<StyledBlock
 			id={id}
-			style={style}
 			onClick={(e) => {
 				e.stopPropagation();
 				console.log(id);
 			}}
 		>
 			{design ? (
-				design.designIds.map((designId) => (
-					<Image key={designId} designId={designId} />
-				))
+				design.designIds.map((designId) => {
+					if (design.type.includes('image')) {
+						return <Image key={designId} designId={designId} />;
+					} else if (design.type.includes('line')) {
+						return <Line key={designId} borderType={design.type} />;
+					}
+				})
 			) : (
 				<b style={{ cursor: 'pointer' }} onClick={designModalHandler}>
 					디자인을 선택해주세요!

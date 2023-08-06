@@ -1,27 +1,33 @@
 import PropTypes from 'prop-types';
 import { useState } from 'react';
+import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 
-const ImageContainer = styled.div`
-	width: 100%;
-	height: 100%;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	place-self: center;
-	background-color: #ececec;
-	border-radius: ${(props) => props.$borderRadius};
-`;
+const ImageContainer = styled.div(({ $styles }) => ({
+	width: '100%',
+	height: '100%',
+	display: 'flex',
+	justifyContent: 'center',
+	alignItems: 'center',
+	placeself: 'center',
+	backgroundColor: '#ececec',
+	...$styles,
+}));
 
-const StyledImg = styled.img`
-	width: 100%;
-	height: 100%;
-	display: block;
-`;
+const StyledImg = styled.img(({ $styles }) => ({
+	width: '100%',
+	height: '100%',
+	display: 'block',
+	...$styles,
+}));
 
 const Image = ({ designId }) => {
 	const [image, setImage] = useState('');
 	const [isOver, setIsOver] = useState(false);
+	const selectedId = useSelector((state) => state.selectedId.selectedId);
+	// const designStyles = useSelector(
+	// 	(state) => state.design[selectedId]['styles'][designId]
+	// );
 
 	const changeImageHandler = (e) => {
 		const targetImg = e.target.files[0];
@@ -34,6 +40,12 @@ const Image = ({ designId }) => {
 		<ImageContainer
 			onMouseEnter={() => setIsOver(true)}
 			onMouseLeave={() => setIsOver(false)}
+			$styles={{
+				width: '100px',
+				height: '100px',
+				borderRadius: '50%',
+				border: '1px solid black',
+			}}
 		>
 			{isOver ? (
 				<label
@@ -52,7 +64,7 @@ const Image = ({ designId }) => {
 			) : null}
 			<StyledImg
 				id={designId}
-				src={image || `/images/image_logo.png`}
+				src={image || `/images/logos/woongjin.jpg`}
 				alt={`image`}
 			/>
 		</ImageContainer>
