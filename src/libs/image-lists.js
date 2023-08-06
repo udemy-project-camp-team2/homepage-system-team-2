@@ -15,7 +15,7 @@ export const imageLists = [
 	},
 	{
 		id: 3,
-		type: 'four_rect_image',
+		type: 'four_circle_image',
 		circle: true,
 		length: 4,
 		src: '/images/images/image_circle4.png',

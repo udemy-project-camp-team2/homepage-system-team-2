@@ -41,7 +41,13 @@ const Block = ({ id, style }) => {
 			{design ? (
 				design.designIds.map((designId) => {
 					if (design.type.includes('image')) {
-						return <Image key={designId} designId={designId} />;
+						return (
+							<Image
+								key={designId}
+								designId={designId}
+								borderType={design.type}
+							/>
+						);
 					} else if (design.type.includes('line')) {
 						return <Line key={designId} borderType={design.type} />;
 					}

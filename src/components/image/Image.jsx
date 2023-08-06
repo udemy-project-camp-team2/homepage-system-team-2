@@ -21,10 +21,10 @@ const StyledImg = styled.img(({ $styles }) => ({
 	...$styles,
 }));
 
-const Image = ({ designId }) => {
+const Image = ({ designId, borderType }) => {
 	const [image, setImage] = useState('');
 	const [isOver, setIsOver] = useState(false);
-	const selectedId = useSelector((state) => state.selectedId.selectedId);
+	// const selectedId = useSelector((state) => state.selectedId.selectedId);
 	// const designStyles = useSelector(
 	// 	(state) => state.design[selectedId]['styles'][designId]
 	// );
@@ -40,12 +40,16 @@ const Image = ({ designId }) => {
 		<ImageContainer
 			onMouseEnter={() => setIsOver(true)}
 			onMouseLeave={() => setIsOver(false)}
-			$styles={{
-				width: '100px',
-				height: '100px',
-				borderRadius: '50%',
-				border: '1px solid black',
-			}}
+			$styles={
+				borderType.includes('circle')
+					? {
+							width: '100px',
+							height: '100px',
+							borderRadius: '50%',
+							border: '1px solid black',
+					  }
+					: {}
+			}
 		>
 			{isOver ? (
 				<label
@@ -66,6 +70,16 @@ const Image = ({ designId }) => {
 				id={designId}
 				src={image || `/images/logos/woongjin.jpg`}
 				alt={`image`}
+				$styles={
+					borderType.includes('circle')
+						? {
+								width: '100px',
+								height: '100px',
+								borderRadius: '50%',
+								border: '1px solid black',
+						  }
+						: {}
+				}
 			/>
 		</ImageContainer>
 	);
@@ -75,5 +89,5 @@ export default Image;
 
 Image.propTypes = {
 	designId: PropTypes.string,
-	list: PropTypes.object,
+	borderType: PropTypes.string,
 };
