@@ -1,40 +1,58 @@
+import { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { addContainer } from '../store/slices/containerSlice';
+import Container from '../components/container/Container';
 import Button from '../components/common/Button';
-import { addBlock, layoutsConfig } from '../store/slices/blockSlice';
-import Block from '../components/common/Block';
-import { useCallback, useState } from 'react';
 import Modal from '../components/common/Modal';
-import ContainerLayout from '../components/container/ContainerLayout';
+import { toggleModal } from '../store/slices/modalSlice';
+import { useTitle } from '../hooks/useTitle';
+import LayoutTab from '../components/tab/LayoutTab';
+import DesignTab from '../components/tab/DesignTab';
 
 const EditPage = () => {
-  const dispatch = useDispatch();
-  const blocks = useSelector((state) => state.blocks.blocks) || [];
-  const [showModal, setShowModal] = useState(false);
+	useTitle('편집페이지');
+	const dispatch = useDispatch();
+	const containers = useSelector((state) => state.containers);
+	const isModalShown = useSelector((state) => state.modal.isOpen);
+	const modalName = useSelector((state) => state.modal.name);
 
-  const closeModal = useCallback(() => {
-    setShowModal(false);
-  }, []);
+	const closeModal = useCallback(() => {
+		dispatch(
+			toggleModal({
+				name: '',
+			})
+		);
+	}, []);
 
-  return (
-    <section>
-      {showModal ? (
-        <Modal onClose={closeModal}>
-          {layoutsConfig.map((layout) => (
-            <ContainerLayout key={layout.type} type={layout.type} />
-          ))}
-        </Modal>
-      ) : null}
-      <Button type={'button'} onClick={() => setShowModal(true)}>
-        모달
-      </Button>
-      <Button type={'button'} onClick={() => dispatch(addBlock(0))}>
-        블록 추가
-      </Button>
-      {blocks.map((block, index) => (
-        <Block key={block.id} block={block} index={index} />
-      ))}
-    </section>
-  );
+	return (
+		<section>
+			{isModalShown ? (
+				<Modal onClose={closeModal}>
+					{modalName === 'layout' ? (
+						<LayoutTab />
+					) : modalName === 'design' ? (
+						<DesignTab />
+					) : null}
+				</Modal>
+			) : null}
+			<Button
+				type={'button'}
+				onClick={() => dispatch(addContainer(0))}
+				style={{
+					position: 'absolute',
+					left: '50%',
+					top: '.7rem',
+					transform: 'translateX(-50%)',
+					zIndex: 2,
+				}}
+			>
+				컨테이너 추가
+			</Button>
+			{containers.map((container, index) => (
+				<Container key={container.id} container={container} index={index} />
+			))}
+		</section>
+	);
 };
 
 export default EditPage;

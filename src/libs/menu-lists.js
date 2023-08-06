@@ -12,7 +12,7 @@ export const menuLists = {
 			title: '내게 맞는 북클럽 찾기',
 			link: '/book-club',
 		},
-		{	
+		{
 			id: uuidv4(),
 			title: '웅진북클럽 전집',
 			link: '/book-club',
@@ -29,7 +29,7 @@ export const menuLists = {
 		},
 	],
 	'웅진스마트올': [
-		{	
+		{
 			id: uuidv4(),
 			title: '웅진스마트올 소개 쿠키',
 			link: '/smart-all',

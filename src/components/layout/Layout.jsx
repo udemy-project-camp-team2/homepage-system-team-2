@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { Fragment } from 'react';
 import Header from '../ui/Header';
 import Footer from '../ui/Footer';
@@ -13,3 +14,7 @@ const Layout = ({ children }) => {
 };
 
 export default Layout;
+
+Layout.propTypes = {
+	children: PropTypes.node,
+};

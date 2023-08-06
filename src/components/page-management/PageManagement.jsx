@@ -1,6 +1,6 @@
 import { useState, useCallback, useMemo } from 'react';
+import { useSelector } from 'react-redux';
 import { useDebounce } from '../../hooks/useDebounce';
-import { menuLists } from '../../libs/menu-lists';
 import PMTable from './PMTable';
 import PMTableHead from './PMTableHead';
 import PMTableBody from './PMTableBody';
@@ -12,6 +12,7 @@ const PageManagement = () => {
 	const debouncedValue = useDebounce(search, 500);
 	const [currentPage, setCurrentPage] = useState(1);
 	const offset = (currentPage - 1) * 10;
+	const currentMenuLists = useSelector((state) => state.menu.data);
 
 	const changeInputHandler = useCallback((e) => {
 		setSearch(e.target.value);
@@ -30,7 +31,7 @@ const PageManagement = () => {
 	}, []);
 
 	const pageLists = useMemo(() => {
-		return Object.entries(menuLists)
+		return Object.entries(currentMenuLists)
 			.map(([key, value]) => {
 				value.forEach((item) => (item['key'] = key));
 				return value;
