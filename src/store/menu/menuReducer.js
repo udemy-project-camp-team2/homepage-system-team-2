@@ -118,10 +118,9 @@ const menuReducer = (state = initialState, action) => {
 
       case 'UPDATE_MENU_TITLE':
         if (!state.data || !state.data[action.menu]) {
-        // state.data가 없거나 action.menu에 해당하는 프로퍼티가 없으면 초기 상태를 그대로 반환합니다.
         return state;
       }
-      // action.menu에 해당하는 메뉴 이름을 action.newTitle로 변경하고 상태를 업데이트합니다.
+      // action.menu에 해당하는 메뉴 이름을 action.newTitle로 변경, 상태 업데이트
         return {
           ...state,
           data: {
