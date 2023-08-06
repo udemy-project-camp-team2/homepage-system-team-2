@@ -33,14 +33,18 @@ const PageManagement = () => {
 	const pageLists = useMemo(() => {
 		return Object.entries(currentMenuLists)
 			.map(([key, value]) => {
-				value.forEach((item) => (item['key'] = key));
-				return value;
+				const newValue = value.map((item) => ({ ...item, key: key }));
+				// value.forEach((item) => (item['key'] = key));
+				// return value;
+				return newValue;
 			})
 			.reduce((acc, cur) => acc.concat(cur))
 			.filter((item) =>
 				item.title.toLowerCase().includes(debouncedValue.toLowerCase())
 			);
 	}, [debouncedValue]);
+
+	console.log(pageLists);
 
 	return (
 		<section>

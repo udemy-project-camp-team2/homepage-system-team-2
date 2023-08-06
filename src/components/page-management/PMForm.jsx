@@ -6,7 +6,7 @@ const PMForm = ({ name, targetList }) => {
 			<input type="text" />
 			<input
 				type="text"
-				value={name === '상세' ? targetList.link : ''}
+				value={name === '상세' ? '' : ''}
 				onChange={(e) => console.log(e.target.value)}
 				readOnly={name === '상세' ? true : false}
 				disabled={name === '상세' ? true : false}
