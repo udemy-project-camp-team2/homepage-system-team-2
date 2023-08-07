@@ -19,7 +19,7 @@ export const useCarousel = (images) => {
 				}
 			});
 
-		const timer = setTimeout(callback, 2000);
+		const timer = setTimeout(callback, 5000);
 
 		return () => {
 			clearTimeout(timer);
@@ -51,9 +51,13 @@ export const useCarousel = (images) => {
 		[currentIndex]
 	);
 
+	const toggleCarouselHandler = useCallback(() => {
+		setIsPaused((prev) => !prev);
+	}, []);
+
 	return {
 		currentIndex,
-		setIsPaused,
+		toggleCarouselHandler,
 		carouselHandler,
 	};
 };
