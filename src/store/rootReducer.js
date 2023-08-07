@@ -11,8 +11,8 @@ export const rootReducer = combineReducers({
 	containers: containerSlice,
 	modal: modalSlice,
 	user: userSlice,
-	// menu: menuReducer,
-	menu: menuSlice,
+	menu: menuReducer,
+	// menu: menuSlice,
 	selectedId: selectedIdSlice,
 	design: designSlice,
 });

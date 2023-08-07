@@ -12,6 +12,11 @@ const MenuManagementInput = ({ values }) => {
 	const submitHandler = (e) => {
 		e.preventDefault();
 
+		if (inputRef.current.value === '') {
+			alert(`Please enter any words`);
+			return;
+		}
+
 		if (!isOpen) {
 			// 메뉴 추가
 			dispatch(addMenu({ key: inputRef.current.value }));

@@ -12,8 +12,8 @@ const PageManagement = () => {
 	const debouncedValue = useDebounce(search, 500);
 	const [currentPage, setCurrentPage] = useState(1);
 	const offset = (currentPage - 1) * 10;
-	// const currentMenuLists = useSelector((state) => state.menu.data);
-	const lists = useSelector((state) => state.menu);
+	const currentMenuLists = useSelector((state) => state.menu.data);
+	// const lists = useSelector((state) => state.menu);
 	const changeInputHandler = useCallback((e) => {
 		setSearch(e.target.value);
 	}, []);
@@ -31,7 +31,7 @@ const PageManagement = () => {
 	}, []);
 
 	const pageLists = useMemo(() => {
-		return Object.entries(lists)
+		return Object.entries(currentMenuLists)
 			.map(([key, value]) => {
 				const newValue = value.map((item) => ({ ...item, key: key }));
 				// value.forEach((item) => (item['key'] = key));
@@ -43,8 +43,6 @@ const PageManagement = () => {
 				item.title.toLowerCase().includes(debouncedValue.toLowerCase())
 			);
 	}, [debouncedValue]);
-
-	console.log(pageLists);
 
 	return (
 		<section>

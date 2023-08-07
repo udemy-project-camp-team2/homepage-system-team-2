@@ -2,7 +2,7 @@ import { useState } from 'react';
 import styled from 'styled-components';
 
 // eslint-disable-next-line react/prop-types
-const MenuTitle = ({ menu, onSave }) => {
+const MenuTitle = ({ onMenu, menu, onSave }) => {
 	const [editing, setEditing] = useState(false);
 	const [newTitle, setNewTitle] = useState(menu);
 
@@ -34,7 +34,7 @@ const MenuTitle = ({ menu, onSave }) => {
 				</>
 			) : (
 				<>
-					<Title>{newTitle}</Title>
+					<Title onClick={onMenu}>{newTitle}</Title>
 					<EditButton onClick={handleEditClick}>수정</EditButton>
 				</>
 			)}
