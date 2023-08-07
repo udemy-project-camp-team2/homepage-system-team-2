@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-const initialState = { name: '', isOpen: false };
+const initialState = { name: '', list: {}, isOpen: false };
 
 const modalSlice = createSlice({
 	name: 'modal',
@@ -9,6 +9,7 @@ const modalSlice = createSlice({
 		toggleModal(state, action) {
 			return (state = {
 				...state,
+				list: { ...action.payload.list },
 				name: action.payload.name,
 				isOpen: !state.isOpen,
 			});

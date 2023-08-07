@@ -15,6 +15,19 @@ const StyledBackdrop = styled.div`
 	z-index: 10;
 `;
 
+const ModalCloseBtn = styled.button`
+	position: absolute;
+	right: 0;
+	background-color: transparent;
+	border: none;
+	outline: none;
+	transition: background-color 0.2s linear;
+	cursor: pointer;
+	&:hover {
+		background-color: #fff;
+	}
+`;
+
 const StyledOverlay = styled.div`
 	width: 200px;
 	height: 200px;
@@ -24,19 +37,6 @@ const StyledOverlay = styled.div`
 	background-color: ${(props) => props.theme.colors.orange};
 	transform: translate(-50%, -50%);
 	z-index: 50;
-
-	button {
-		position: absolute;
-		right: 0;
-		background-color: transparent;
-		border: none;
-		outline: none;
-		transition: background-color 0.2s linear;
-		cursor: pointer;
-		&:hover {
-			background-color: #fff;
-		}
-	}
 `;
 
 const Backdrop = () => {
@@ -58,7 +58,7 @@ const Overlay = ({ children }) => {
 	const dispatch = useDispatch();
 	return (
 		<StyledOverlay>
-			<button
+			<ModalCloseBtn
 				type="button"
 				onClick={() =>
 					dispatch(
@@ -69,7 +69,7 @@ const Overlay = ({ children }) => {
 				}
 			>
 				❌
-			</button>
+			</ModalCloseBtn>
 			{children}
 		</StyledOverlay>
 	);
