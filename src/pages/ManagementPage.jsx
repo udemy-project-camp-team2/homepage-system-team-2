@@ -4,6 +4,7 @@ import MenuDetail from '../components/menu-management/MenuDetail';
 import PageManagement from '../components/page-management/PageManagement';
 import { useTab } from '../hooks/useTab';
 import { useTitle } from '../hooks/useTitle';
+// import MenuManagement from '../components/menu/MenuManagement';
 
 const TabButtons = styled.button`
 	display: inline-block;
