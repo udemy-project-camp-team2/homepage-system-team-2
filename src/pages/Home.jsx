@@ -4,6 +4,7 @@ import Logo from '../components/common/Logo';
 import styled, { css } from 'styled-components';
 import { menuLists } from '../libs/menu-lists';
 import HomeCarousel from '../components/home/HomeCarousel';
+import { useSelector } from 'react-redux';
 
 const Header = styled.header`
 	width: 1170px;
@@ -12,10 +13,13 @@ const Header = styled.header`
 
 const Home = () => {
 	const [openMenu, setOpenMenu] = useState(null);
+	const lists = useSelector((state) => state.menu);
 
 	const handleMenuClick = (menu) => {
 		setOpenMenu(openMenu === menu ? null : menu);
 	};
+
+	console.log(lists);
 
 	return (
 		<Fragment>
@@ -23,9 +27,8 @@ const Home = () => {
 				<Logo />
 			</Header>
 			<Link to="/admin">Admin</Link>
-
 			<Wrapper>
-				{Object.keys(menuLists).map((menuName) => (
+				{Object.keys(lists).map((menuName) => (
 					<DropdownContainer
 						key={menuName}
 						onMouseEnter={() => handleMenuClick(menuName)}
@@ -34,7 +37,7 @@ const Home = () => {
 						<DropdownButton> {menuName} </DropdownButton>
 						<Menu isDropped={openMenu === menuName}>
 							<Ul>
-								{menuLists[menuName].map((menuItem) => (
+								{lists[menuName].map((menuItem) => (
 									<Li key={menuItem.id}>
 										<LinkWrapper href={menuItem.link}>
 											{menuItem.title}

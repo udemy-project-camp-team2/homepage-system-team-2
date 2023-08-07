@@ -14,6 +14,8 @@ const MenuManagement = () => {
 		<MenuManagementList key={list} title={list} lists={lists[list]} />
 	));
 
+	console.log(lists);
+
 	return (
 		<section>
 			<MenuManagementInput values={keys} />

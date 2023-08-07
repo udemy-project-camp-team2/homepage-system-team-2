@@ -1,10 +1,11 @@
 import { Fragment } from 'react';
 import { styled } from 'styled-components';
-import MenuDetail from '../components/menu-management/MenuDetail';
+// import MenuDetail from '../components/menu-management/MenuDetail';
 import PageManagement from '../components/page-management/PageManagement';
 import { useTab } from '../hooks/useTab';
 import { useTitle } from '../hooks/useTitle';
-// import MenuManagement from '../components/menu/MenuManagement';
+import MenuManagement from '../components/menu/MenuManagement';
+import { Link } from 'react-router-dom';
 
 const TabButtons = styled.button`
 	display: inline-block;
@@ -30,7 +31,7 @@ const TabButtons = styled.button`
 const contents = [
 	{
 		label: '메뉴 관리',
-		content: MenuDetail,
+		content: MenuManagement,
 	},
 	{
 		label: '페이지 관리',
@@ -44,6 +45,7 @@ const ManagementPage = () => {
 
 	return (
 		<Fragment>
+			<Link to="/">Home</Link>
 			{contents.map((content, index) => (
 				<TabButtons
 					key={content.label}
