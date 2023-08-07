@@ -87,7 +87,17 @@ const menuReducer = (state = initialState, action) => {
         data: {
           ...state.data,
           [action.menu]: state.data[action.menu].map((item) =>
-            item.id === action.id ? { ...item, title: action.newTitle, link: action.newLink } : item
+            item.id === action.id ? { 
+              ...item, 
+              title: 
+                action.newTitle !== item.title && 
+                !state.data[action.menu].some(existingItem => existingItem.title === action.newTitle) 
+                  ? action.newTitle : item.title,
+              link: 
+                action.newLink !== item.link && 
+                !state.data[action.menu].some(existingItem => existingItem.link === action.newLink) 
+                  ? action.newLink : item.link
+            } : item
           ),
         },
       };
@@ -95,9 +105,6 @@ const menuReducer = (state = initialState, action) => {
     case 'ADD_MENU_ITEM':
       // 메뉴 항목 추가 액션 처리
       if (!state.data[action.menu]) {
-        // 해당 메뉴가 기존에 없으면 아무것도 변경하지 않음
-        // return state;
-
         // 새로운 MenuList 추가
         return {
           ...state,
@@ -108,34 +115,40 @@ const menuReducer = (state = initialState, action) => {
         };
       }
       // 해당 메뉴가 기존에 있으면 기존 데이터에 항목을 추가
-      return {
-        ...state,
-        data: {
-          ...state.data,
-          [action.menu]: [...state.data[action.menu], action.newItem],
-        },
-      };
-
-      case 'UPDATE_MENU_TITLE':
-        if (!state.data || !state.data[action.menu]) {
-        return state;
-      }
-      // action.menu에 해당하는 메뉴 이름을 action.newTitle로 변경, 상태 업데이트
+      if (!state.data[action.menu].some(item => 
+        item.title === action.newItem.title || item.link === action.newItem.link
+      )) {
         return {
           ...state,
           data: {
             ...state.data,
-            [action.menu]: state.data[action.menu].map(item => {
-              if (item.id === action.menu) { 
-                return {
-                  ...item,
-                  title: action.newTitle,
-                };
-              }
-              return item;
-            }),
+            [action.menu]: [...state.data[action.menu], action.newItem],
           },
         };
+      }
+      // 중복이 있는 경우 기존 state 반환
+      return state;
+
+    case 'UPDATE_MENU_TITLE':
+      if (!state.data || !state.data[action.menu]) {
+        return state;
+      }
+      // action.menu에 해당하는 메뉴 이름을 action.newTitle로 변경, 상태 업데이트
+      return {
+        ...state,
+        data: {
+          ...state.data,
+          [action.menu]: state.data[action.menu].map(item => {
+            if (item.id === action.menu) { 
+              return {
+                ...item,
+                title: action.newTitle,
+              };
+            }
+            return item;
+          }),
+        },
+      };
 
     default:
       return state;

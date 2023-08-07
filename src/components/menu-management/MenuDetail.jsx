@@ -7,6 +7,7 @@ import useItemDelete from '../../hooks/useItemDelete';
 import useItemDetails from '../../hooks/useItemDetails';
 import useMenuTitleChange from '../../hooks/useMenuTitleChange';
 import MenuList from './MenuList';
+import { useState } from 'react';
 
 
 const MenuDetail = () => {
@@ -16,18 +17,23 @@ const MenuDetail = () => {
   const { handleMenuTitleChange } = useMenuTitleChange();
   const currentMenuLists = useSelector(state => state.menu.data);
   const dispatch = useDispatch();
-  
+
+  const [itemCount, setItemCount] = useState(1);
+
   // 메뉴 항목 추가 처리 함수
   const handleMenuAdd = (menu) => {
     const newItem = {
       id: uuidv4(),
-      title: '새로운 항목',
-      link: '/new-link',
+      title: `새로운 항목 ${itemCount}`,
+      link: `/new-link/${itemCount}`,
     };
 
     dispatch(addMenuItem(menu, newItem));
     handleItemDetails(newItem.id, newItem.title, newItem.link);
+
+    setItemCount(itemCount + 1);
   };
+
 
   return (
     <div>
