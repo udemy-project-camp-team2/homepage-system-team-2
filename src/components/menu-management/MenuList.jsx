@@ -25,11 +25,15 @@ const MenuList = ({
 			{Object.keys(currentMenuLists).map((menu) => (
 				<div key={menu}>
 					{/* 메뉴 펼침/접기 아이콘 */}
-					<MenuTitles onClick={() => handleMenuToggle(menu)}>
+					<MenuTitles>
 						<FontAwesomeIcon
 							icon={expandedMenu === menu ? faChevronDown : faChevronRight}
+							onClick={() => handleMenuToggle(menu)}
 						/>
 						<MenuTitle
+							onMenu={() => {
+								handleMenuToggle(menu);
+							}}
 							menu={menu}
 							onSave={(newTitle) => handleMenuTitleChange(menu, newTitle)}
 						/>

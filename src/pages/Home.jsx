@@ -1,8 +1,10 @@
-import { Fragment, useState } from "react";
+import { Fragment, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Logo from '../components/common/Logo';
 import styled, { css } from 'styled-components';
 import { menuLists } from '../libs/menu-lists';
+import HomeCarousel from '../components/home/HomeCarousel';
+import { useSelector } from 'react-redux';
 
 const Header = styled.header`
 	width: 1170px;
@@ -10,13 +12,14 @@ const Header = styled.header`
 `;
 
 const Home = () => {
-
 	const [openMenu, setOpenMenu] = useState(null);
+	const lists = useSelector((state) => state.menu);
 
-  const handleMenuClick = (menu) => {
-    setOpenMenu(openMenu === menu ? null : menu);
-  };
+	const handleMenuClick = (menu) => {
+		setOpenMenu(openMenu === menu ? null : menu);
+	};
 
+	console.log(lists);
 
 	return (
 		<Fragment>
@@ -24,27 +27,29 @@ const Home = () => {
 				<Logo />
 			</Header>
 			<Link to="/admin">Admin</Link>
-			
 			<Wrapper>
-      {Object.keys(menuLists).map((menuName) => (
-        <DropdownContainer key={menuName} 
+				{Object.keys(lists).map((menuName) => (
+					<DropdownContainer
+						key={menuName}
 						onMouseEnter={() => handleMenuClick(menuName)}
-						onMouseLeave={() => handleMenuClick(null)}>
-          <DropdownButton> {menuName} </DropdownButton>
-          <Menu isDropped={openMenu === menuName}>
-            <Ul>
-              {menuLists[menuName].map((menuItem) => (
-                <Li key={menuItem.id}>
-                  <LinkWrapper href={menuItem.link}>{menuItem.title}</LinkWrapper>
-                </Li>
-              ))}
-            </Ul>
-          </Menu>
-        </DropdownContainer>
-      ))}
-    </Wrapper>
-
-
+						onMouseLeave={() => handleMenuClick(null)}
+					>
+						<DropdownButton> {menuName} </DropdownButton>
+						<Menu isDropped={openMenu === menuName}>
+							<Ul>
+								{lists[menuName].map((menuItem) => (
+									<Li key={menuItem.id}>
+										<LinkWrapper href={menuItem.link}>
+											{menuItem.title}
+										</LinkWrapper>
+									</Li>
+								))}
+							</Ul>
+						</Menu>
+					</DropdownContainer>
+				))}
+			</Wrapper>
+			<HomeCarousel />
 		</Fragment>
 	);
 };
@@ -64,14 +69,14 @@ const Wrapper = styled.div`
 
 const DropdownContainer = styled.div`
 	flex: 1;
-  position: relative;
-  text-align: center;
+	position: relative;
+	text-align: center;
 	width: 33%;
 	padding: 20px 0;
 `;
 
 const DropdownButton = styled.div`
-  cursor: pointer;
+	cursor: pointer;
 `;
 
 const Menu = styled.div`
@@ -89,38 +94,38 @@ const Menu = styled.div`
   transition: opacity 0.4s ease, transform 0.4s ease, visibility 0.4s;
   z-index: 9;
 
-  ${({ isDropped }) =>
-    isDropped &&
-    css`
-      opacity: 1;
-      visibility: visible;
-      transform: translate(-50%, 0);
-      left: 50%;
-    `};
+	${({ isDropped }) =>
+		isDropped &&
+		css`
+			opacity: 1;
+			visibility: visible;
+			transform: translate(-50%, 0);
+			left: 50%;
+		`};
 `;
 
 const Ul = styled.ul`
-  & > li {
-    margin-bottom: 10px;
-  }
+	& > li {
+		margin-bottom: 10px;
+	}
 
-  & > li:first-of-type {
-    margin-top: 10px;
-  }
+	& > li:first-of-type {
+		margin-top: 10px;
+	}
 
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
+	list-style-type: none;
+	padding: 0;
+	margin: 0;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: center;
 `;
 
 const Li = styled.li``;
 
 const LinkWrapper = styled.a`
-  font-size: 16px;
-  text-decoration: none;
-  color: #000;
+	font-size: 16px;
+	text-decoration: none;
+	color: #000;
 `;
