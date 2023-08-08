@@ -1,45 +1,55 @@
-import React, { lazy, Suspense, useCallback, useState } from 'react';
+import { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addContainer } from '../store/slices/containerSlice';
 import Container from '../components/container/Container';
 import Button from '../components/common/Button';
-import Block from '../components/common/Block';
-import Skeleton from '../components/skeleton/skeleton';
-import { addBlock, layoutsConfig } from '../store/slices/blockSlice';
-
-const Modal = lazy(() => import('../components/common/Modal'));
-const ContainerLayout = lazy(() =>
-	import('../components/container/ContainerLayout')
-);
+import Modal from '../components/common/Modal';
+import { toggleModal } from '../store/slices/modalSlice';
+import { useTitle } from '../hooks/useTitle';
+import LayoutTab from '../components/tab/LayoutTab';
+import DesignTab from '../components/tab/DesignTab';
 
 const EditPage = () => {
+	useTitle('편집페이지');
 	const dispatch = useDispatch();
-	const blocks = useSelector((state) => state.blocks.blocks) || [];
-	const [showModal, setShowModal] = useState(false);
+	const containers = useSelector((state) => state.containers);
+	const isModalShown = useSelector((state) => state.modal.isOpen);
+	const modalName = useSelector((state) => state.modal.name);
 
 	const closeModal = useCallback(() => {
-		setShowModal(false);
+		dispatch(
+			toggleModal({
+				name: '',
+			})
+		);
 	}, []);
 
 	return (
 		<section>
-			{showModal ? (
-				<Suspense fallback={<Skeleton />}>
-					<Modal onClose={closeModal}>
-						{layoutsConfig.map((layout) => (
-							<ContainerLayout key={layout.type} type={layout.type} />
-						))}
-					</Modal>
-				</Suspense>
+			{isModalShown ? (
+				<Modal onClose={closeModal}>
+					{modalName === 'layout' ? (
+						<LayoutTab />
+					) : modalName === 'design' ? (
+						<DesignTab />
+					) : null}
+				</Modal>
 			) : null}
-			<Button type={'button'} onClick={() => setShowModal(true)}>
-				모달
+			<Button
+				type={'button'}
+				onClick={() => dispatch(addContainer(0))}
+				style={{
+					position: 'absolute',
+					left: '50%',
+					top: '.7rem',
+					transform: 'translateX(-50%)',
+					zIndex: 2,
+				}}
+			>
+				컨테이너 추가
 			</Button>
-			<Button type={'button'} onClick={() => dispatch(addBlock(0))}>
-				블록 추가
-			</Button>
-			{blocks.map((block, index) => (
-				<Block key={block.id} block={block} index={index} />
+			{containers.map((container, index) => (
+				<Container key={container.id} container={container} index={index} />
 			))}
 		</section>
 	);
