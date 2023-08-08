@@ -1,9 +1,7 @@
 import { Fragment, useState } from 'react';
-import { Fragment, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Logo from '../components/common/Logo';
 import styled, { css } from 'styled-components';
-import { menuLists } from '../libs/menu-lists';
 import HomeCarousel from '../components/home/HomeCarousel';
 import { useSelector } from 'react-redux';
 
