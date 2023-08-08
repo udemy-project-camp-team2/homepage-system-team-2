@@ -83,7 +83,7 @@ const Menu = styled.div`
   background: #fff;
   position: absolute;
   left: 50%;
-	top: 68px;
+	top: 67px;
   width: 100%;
   text-align: center;
   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
