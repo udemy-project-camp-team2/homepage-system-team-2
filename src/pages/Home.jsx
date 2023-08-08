@@ -59,7 +59,6 @@ const Wrapper = styled.div`
   color: white;
   font-size: 19px;
   background: ${(props) => props.theme.colors.orange};
-  height: 50px;
   font-weight: bold;
 `;
 
@@ -68,6 +67,7 @@ const DropdownContainer = styled.div`
   position: relative;
   text-align: center;
 	width: 33%;
+	padding: 20px 0;
 `;
 
 const DropdownButton = styled.div`
@@ -77,8 +77,8 @@ const DropdownButton = styled.div`
 const Menu = styled.div`
   background: #fff;
   position: absolute;
-  top: 52px;
   left: 50%;
+	top: 68px;
   width: 100%;
   text-align: center;
   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
