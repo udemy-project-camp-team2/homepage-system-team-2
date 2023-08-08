@@ -73,5 +73,5 @@ export default memo(MenuManagementList);
 
 MenuManagementList.propTypes = {
 	title: PropTypes.string,
-	lists: PropTypes.object,
+	lists: PropTypes.array,
 };
