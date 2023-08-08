@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types';
+import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import styled, { css } from 'styled-components';
 
@@ -67,9 +68,13 @@ const LinkWrapper = styled.a`
 	color: #000;
 `;
 
-
-const HomeNavigationDetail = ({ menuName, openMenu, handleMenuClick }) => {
+const HomeNavigationDetail = ({ menuName }) => {
 	const lists = useSelector((state) => state.menu);
+	const [openMenu, setOpenMenu] = useState(null);
+
+	const handleMenuClick = (menu) => {
+		setOpenMenu(openMenu === menu ? null : menu);
+	};
 
 	return (
 		<DropdownContainer
@@ -93,10 +98,7 @@ const HomeNavigationDetail = ({ menuName, openMenu, handleMenuClick }) => {
 };
 
 HomeNavigationDetail.propTypes = {
-  menuName: PropTypes.string,
-  openMenu: PropTypes.string,
-  handleMenuClick: PropTypes.func,
+  menuName: PropTypes.string.isRequired,
 };
 
 export default HomeNavigationDetail;
-

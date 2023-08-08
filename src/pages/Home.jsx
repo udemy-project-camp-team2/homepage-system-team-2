@@ -1,5 +1,4 @@
 import { Fragment } from 'react';
-import { Link } from 'react-router-dom';
 import Logo from '../components/common/Logo';
 import styled from 'styled-components';
 import HomeCarousel from '../components/home/HomeCarousel';
@@ -17,7 +16,6 @@ const Home = () => {
 			<Header>
 				<Logo />
 			</Header>
-			<Link to="/admin">Admin</Link>
 			<HomeNavigation />
 			<HomeCarousel />
 		</Fragment>
