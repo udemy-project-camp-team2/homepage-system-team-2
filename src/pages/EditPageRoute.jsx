@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useParams, Navigate } from 'react-router';
 import EditPage from './EditPage';
 
