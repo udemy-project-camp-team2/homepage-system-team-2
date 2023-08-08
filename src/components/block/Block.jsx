@@ -6,6 +6,7 @@ import { updateSelectedId } from '../../store/slices/selectedIdSlice';
 import { useCallback } from 'react';
 import Image from '../image/Image';
 import Line from '../line/Line';
+import List from '../list/List';
 
 const StyledBlock = styled.div(({ style }) => ({
 	...style,
@@ -15,6 +16,7 @@ const StyledBlock = styled.div(({ style }) => ({
 	justifyContent: 'center',
 	alignItems: 'center',
 	border: '1px solid teal',
+	padding: '25px',
 }));
 
 const Block = ({ id, style }) => {
@@ -50,6 +52,14 @@ const Block = ({ id, style }) => {
 						);
 					} else if (design.type.includes('line')) {
 						return <Line key={designId} borderType={design.type} />;
+					} else if (design.type.includes('list')) {
+						return (
+							<List
+								key={designId}
+								designId={designId}
+								borderType={design.type}
+							/>
+						);
 					}
 				})
 			) : (

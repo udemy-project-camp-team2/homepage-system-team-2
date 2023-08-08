@@ -13,7 +13,7 @@ import { toggleModal } from '../../store/slices/modalSlice';
 import { updateSelectedId } from '../../store/slices/selectedIdSlice';
 
 const StyledContainer = styled.article`
-	height: 20vh;
+	min-height: 20vh;
 	display: flex;
 	justify-content: center;
 	align-items: center;
