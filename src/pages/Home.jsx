@@ -1,4 +1,5 @@
 import { Fragment, useState } from 'react';
+import { Fragment, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Logo from '../components/common/Logo';
 import styled, { css } from 'styled-components';
@@ -69,6 +70,8 @@ const Wrapper = styled.div`
 
 const DropdownContainer = styled.div`
 	flex: 1;
+	position: relative;
+	text-align: center;
 	position: relative;
 	text-align: center;
 	width: 33%;
