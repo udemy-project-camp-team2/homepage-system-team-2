@@ -62,7 +62,7 @@ const Header = () => {
 				<Btns>
 					{loginState ? (
 						<>
-							<Btn>마이페이지</Btn>
+							<Btn onClick={() => navigate('/admin/management')}>설정</Btn>
 							<Btn onClick={handleLogout}>로그아웃</Btn>
 						</>
 					) : (

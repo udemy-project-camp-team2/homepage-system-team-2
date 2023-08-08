@@ -39,8 +39,8 @@ const MenuManagementInput = ({ values }) => {
 
 	return (
 		<article>
-			<form onSubmit={submitHandler}>
-				<input ref={inputRef} type="text" />
+			<form onSubmit={submitHandler} style={{ display: 'flex' }}>
+				<input ref={inputRef} type="text" style={{ flexGrow: 1 }} />
 				<button type="submit">작성</button>
 				<button type="button" onClick={() => setIsOpen((prev) => !prev)}>
 					리스트 작성

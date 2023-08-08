@@ -1,18 +1,32 @@
-import { Fragment } from 'react';
 import { styled } from 'styled-components';
-// import MenuDetail from '../components/menu-management/MenuDetail';
+import MenuManagement from '../components/menu/MenuManagement';
 import PageManagement from '../components/page-management/PageManagement';
 import { useTab } from '../hooks/useTab';
 import { useTitle } from '../hooks/useTitle';
-import MenuManagement from '../components/menu/MenuManagement';
-import { Link } from 'react-router-dom';
+
+const ManagementLayout = styled.div`
+	height: 100vh;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+`;
+
+const ManagementWrapper = styled.article`
+	width: max-content;
+	background-color: ${(props) => props.theme.colors.gray.lighter};
+`;
 
 const TabButtons = styled.button`
+	padding: 0.5rem 0;
+	width: 15rem;
 	display: inline-block;
 	color: ${(props) =>
 		props.$fontColor ? '#fff' : props.theme.colors.gray.darker};
 	background-color: ${(props) =>
 		props.$bgColor ? props.theme.colors.orange : 'transparent'};
+	font-size: 1.3rem;
+	box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
 	border: none;
 	outline: none;
 	cursor: pointer;
@@ -44,21 +58,22 @@ const ManagementPage = () => {
 	useTitle(targetContent.label);
 
 	return (
-		<Fragment>
-			<Link to="/">Home</Link>
-			{contents.map((content, index) => (
-				<TabButtons
-					key={content.label}
-					type="button"
-					$fontColor={index === idx}
-					$bgColor={index === idx}
-					onClick={() => targetAction(index)}
-				>
-					{content.label}
-				</TabButtons>
-			))}
-			<targetContent.content />
-		</Fragment>
+		<ManagementLayout>
+			<ManagementWrapper>
+				{contents.map((content, index) => (
+					<TabButtons
+						key={content.label}
+						type="button"
+						$fontColor={index === idx}
+						$bgColor={index === idx}
+						onClick={() => targetAction(index)}
+					>
+						{content.label}
+					</TabButtons>
+				))}
+				<targetContent.content />
+			</ManagementWrapper>
+		</ManagementLayout>
 	);
 };
 

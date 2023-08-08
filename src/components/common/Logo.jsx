@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';
 
 const StyledLogo = styled.h1`
 	display: inline-block;
@@ -9,7 +10,8 @@ const StyledLogo = styled.h1`
 `;
 
 const Logo = () => {
-	return <StyledLogo />;
+	const navigate = useNavigate();
+	return <StyledLogo onClick={() => navigate('/')} />;
 };
 
 export default Logo;

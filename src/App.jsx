@@ -6,6 +6,7 @@ import {
 	Navigate,
 } from 'react-router-dom';
 import Skeleton from './components/skeleton/skeleton';
+import Layout from './components/layout/Layout';
 
 const Home = lazy(() => import('./pages/Home'));
 const MainPage = lazy(() => import('./pages/MainPage'));
@@ -28,24 +29,26 @@ const App = () => {
 	return (
 		<Router>
 			<Suspense fallback={<Skeleton />}>
-				<Routes>
-					<Route path="/" element={<Home />} />
-					<Route path="/:id" element={<MainPage />} />
-					<Route
-						path={'/admin'}
-						element={<LoggedInRoute element={<LoginPage />} />}
-					/>
-					<Route
-						path={'/admin/management'}
-						element={<LoggedOutRoute element={<ManagementPage />} />}
-					/>
-					<Route
-						path={'/admin/edit/:id'}
-						element={<LoggedOutRoute element={<EditPageRoute />} />}
-					/>
-					<Route path="/404" element={<NotFound />} />
-					<Route path="*" element={<Navigate to="/404" />} />
-				</Routes>
+				<Layout>
+					<Routes>
+						<Route path="/" element={<Home />} />
+						<Route path="/:id" element={<MainPage />} />
+						<Route
+							path={'/admin'}
+							element={<LoggedInRoute element={<LoginPage />} />}
+						/>
+						<Route
+							path={'/admin/management'}
+							element={<LoggedOutRoute element={<ManagementPage />} />}
+						/>
+						<Route
+							path={'/admin/edit/:id'}
+							element={<LoggedOutRoute element={<EditPageRoute />} />}
+						/>
+						<Route path="/404" element={<NotFound />} />
+						<Route path="*" element={<Navigate to="/404" />} />
+					</Routes>
+				</Layout>
 			</Suspense>
 		</Router>
 	);

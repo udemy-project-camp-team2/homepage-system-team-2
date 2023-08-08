@@ -14,13 +14,11 @@ const MenuManagement = () => {
 		<MenuManagementList key={list} title={list} lists={lists[list]} />
 	));
 
-	console.log(lists);
-
 	return (
-		<section>
+		<article>
 			<MenuManagementInput values={keys} />
 			{detail}
-		</section>
+		</article>
 	);
 };
 
