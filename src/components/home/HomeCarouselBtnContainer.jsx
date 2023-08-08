@@ -1,5 +1,11 @@
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+	faChevronRight,
+	faChevronLeft,
+	faPause,
+} from '@fortawesome/free-solid-svg-icons';
 
 const ButtonContainer = styled.div`
 	position: absolute;
@@ -8,6 +14,20 @@ const ButtonContainer = styled.div`
 	display: flex;
 	justify-content: space-between;
 	transform: translateY(-50%);
+
+	svg {
+		margin: 0 1rem;
+		font-size: 2rem;
+		color: #fff;
+		cursor: pointer;
+		pointer-events: none;
+	}
+
+	button {
+		background-color: transparent;
+		border: none;
+		outline: none;
+	}
 `;
 
 const HomeCarouselBtnContainer = ({
@@ -16,12 +36,14 @@ const HomeCarouselBtnContainer = ({
 }) => {
 	return (
 		<ButtonContainer>
-			<button type="button" name="prev" onClick={carouselHandler}>
-				Left
+			<button name="prev" onClick={carouselHandler}>
+				<FontAwesomeIcon icon={faChevronLeft} />
 			</button>
-			<button onClick={toggleCarouselHandler}>중지</button>
-			<button type="button" name="next" onClick={carouselHandler}>
-				Right
+			<button type="button" onClick={toggleCarouselHandler}>
+				<FontAwesomeIcon icon={faPause} />
+			</button>
+			<button name="next" onClick={carouselHandler}>
+				<FontAwesomeIcon icon={faChevronRight} />
 			</button>
 		</ButtonContainer>
 	);

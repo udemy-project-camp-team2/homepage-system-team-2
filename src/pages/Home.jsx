@@ -1,10 +1,8 @@
 import { Fragment, useState } from 'react';
-import { Link } from 'react-router-dom';
-import Logo from '../components/common/Logo';
-import styled, { css } from 'styled-components';
-import { menuLists } from '../libs/menu-lists';
-import HomeCarousel from '../components/home/HomeCarousel';
 import { useSelector } from 'react-redux';
+import styled, { css } from 'styled-components';
+import Logo from '../components/common/Logo';
+import HomeCarousel from '../components/home/HomeCarousel';
 
 const Header = styled.header`
 	width: 1170px;
@@ -12,21 +10,17 @@ const Header = styled.header`
 `;
 
 const Home = () => {
-	const [openMenu, setOpenMenu] = useState(null);
 	const lists = useSelector((state) => state.menu);
+	const [openMenu, setOpenMenu] = useState(null);
 
 	const handleMenuClick = (menu) => {
 		setOpenMenu(openMenu === menu ? null : menu);
 	};
-
-	console.log(lists);
-
 	return (
 		<Fragment>
 			<Header>
 				<Logo />
 			</Header>
-			<Link to="/admin">Admin</Link>
 			<Wrapper>
 				{Object.keys(lists).map((menuName) => (
 					<DropdownContainer
@@ -49,6 +43,7 @@ const Home = () => {
 					</DropdownContainer>
 				))}
 			</Wrapper>
+
 			<HomeCarousel />
 		</Fragment>
 	);

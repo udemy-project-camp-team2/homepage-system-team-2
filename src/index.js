@@ -14,11 +14,11 @@ if (userFormLocalStorage) {
 
 const root = createRoot(document.getElementById('root'));
 root.render(
-	<StrictMode>
-		<StyledProvider>
-			<Provider store={store}>
-				<App />
-			</Provider>
-		</StyledProvider>
-	</StrictMode>
+	// <StrictMode>
+	<StyledProvider>
+		<Provider store={store}>
+			<App />
+		</Provider>
+	</StyledProvider>
+	// </StrictMode>
 );

@@ -5,7 +5,7 @@ export const useCarousel = (images) => {
 	const [currentIndex, setCurrentIndex] = useState(0);
 
 	useEffect(() => {
-		const callback = () =>
+		const callback = () => {
 			setCurrentIndex((prev) => {
 				if (isPaused) {
 					return prev;
@@ -18,13 +18,14 @@ export const useCarousel = (images) => {
 					return prev + 1;
 				}
 			});
+		};
 
 		const timer = setTimeout(callback, 5000);
 
 		return () => {
 			clearTimeout(timer);
 		};
-	}, [currentIndex, isPaused]);
+	}, [currentIndex]);
 
 	const carouselHandler = useCallback(
 		(e) => {
@@ -48,7 +49,7 @@ export const useCarousel = (images) => {
 				setCurrentIndex((prev) => prev + 1);
 			}
 		},
-		[currentIndex]
+		[currentIndex, isPaused]
 	);
 
 	const toggleCarouselHandler = useCallback(() => {
