@@ -1,12 +1,12 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
-import ImageTab from './ImageTab';
-import LineTab from './LineTab';
 import Button from '../common/Button';
+import LineTab from './LineTab';
+import ImageTab from './ImageTab';
+import TextTab from './TextTab';
 import { addDesign } from '../../store/slices/designSlice';
 import { toggleModal } from '../../store/slices/modalSlice';
-import TextTab from './TextTab';
 
 const designLists = [
 	{ id: 0, label: '구분선' },
@@ -78,11 +78,11 @@ const DesignTab = () => {
 						key={list.id}
 						$display={currentTab === index ? 'block' : 'none'}
 					>
-						{list.label === '이미지' && (
-							<ImageTab setDesignType={setDesignType} />
-						)}
 						{list.label === '구분선' && (
 							<LineTab setDesignType={setDesignType} />
+						)}
+						{list.label === '이미지' && (
+							<ImageTab setDesignType={setDesignType} />
 						)}
 						{list.label === '텍스트' && <TextTab />}
 					</TabContentItem>

@@ -29,11 +29,14 @@ const Menu = styled.div`
 	opacity: 0;
 	visibility: hidden;
 	transform: translate(-50%, -20px);
-	transition: opacity 0.4s ease, transform 0.4s ease, visibility 0.4s;
+	transition:
+		opacity 0.4s ease,
+		transform 0.4s ease,
+		visibility 0.4s;
 	z-index: 9;
 
-	${({ isDropped }) =>
-		isDropped &&
+	${({ $isDropped }) =>
+		$isDropped &&
 		css`
 			opacity: 1;
 			visibility: visible;
@@ -82,13 +85,11 @@ const HomeNavigationDetail = ({ menuName }) => {
 			onMouseLeave={() => handleMenuClick(null)}
 		>
 			<DropdownButton> {menuName} </DropdownButton>
-			<Menu isDropped={openMenu === menuName}>
+			<Menu $isDropped={openMenu === menuName}>
 				<Ul>
 					{lists[menuName].map((menuItem) => (
 						<Li key={menuItem.id}>
-							<LinkWrapper href={menuItem.link}>
-								{menuItem.title}
-							</LinkWrapper>
+							<LinkWrapper href={menuItem.link}>{menuItem.title}</LinkWrapper>
 						</Li>
 					))}
 				</Ul>
@@ -98,7 +99,7 @@ const HomeNavigationDetail = ({ menuName }) => {
 };
 
 HomeNavigationDetail.propTypes = {
-  menuName: PropTypes.string.isRequired,
+	menuName: PropTypes.string.isRequired,
 };
 
 export default HomeNavigationDetail;
