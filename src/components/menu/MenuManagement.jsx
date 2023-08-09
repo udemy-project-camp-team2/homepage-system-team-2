@@ -24,8 +24,8 @@ const MenuText = styled.div`
 `;
 
 const MenuListWrapper = styled.div`
-	margin-top: 20px;
-  background-color: #f3f3f3;
+	margin: 20px 0 80px 0;
+	background-color: #f3f3f3;
   padding: 2rem 2.5rem;
   border-radius: 4px;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
