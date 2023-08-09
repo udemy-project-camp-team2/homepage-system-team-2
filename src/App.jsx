@@ -13,6 +13,7 @@ const MainPage = lazy(() => import('./pages/MainPage'));
 const LoginPage = lazy(() => import('./pages/LoginPage'));
 const ManagementPage = lazy(() => import('./pages/ManagementPage'));
 const EditPageRoute = lazy(() => import('./pages/EditPageRoute'));
+const EditPage = lazy(() => import('./pages/EditPage'));
 const NotFound = lazy(() => import('./pages/NotFound'));
 const LoggedInRoute = lazy(() =>
 	import('./components/login/PriveRoute').then((module) => ({
@@ -43,7 +44,7 @@ const App = () => {
 						/>
 						<Route
 							path={'/admin/edit/:id'}
-							element={<LoggedOutRoute element={<EditPageRoute />} />}
+							element={<LoggedOutRoute element={<EditPage />} />}
 						/>
 						<Route path="/404" element={<NotFound />} />
 						<Route path="*" element={<Navigate to="/404" />} />

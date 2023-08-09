@@ -16,15 +16,10 @@ const PMTableBody = ({ pageLists, offset }) => {
 					<PMForm name={name} targetList={targetList} />
 				</Modal>
 			) : null}
-			{pageLists.length > 0 ? (
+			{pageLists.length > 0 &&
 				pageLists
 					.slice(offset, offset + 10)
-					.map((list) => <PMTableRow key={list.title} list={list} />)
-			) : (
-				<tr>
-					<td>no data</td>
-				</tr>
-			)}
+					.map((list) => <PMTableRow key={list.title} list={list} />)}
 		</tbody>
 	);
 };

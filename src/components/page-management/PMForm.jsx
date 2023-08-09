@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { useRef, useState } from 'react';
+import { useRef } from 'react';
 import { useDispatch } from 'react-redux';
 import { toggleModal } from '../../store/slices/modalSlice';
 
