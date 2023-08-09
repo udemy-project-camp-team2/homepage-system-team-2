@@ -25,13 +25,13 @@ const EditPage = () => {
 	}, []);
 
 	return (
-		<section>
+		<section style={{ paddingTop: '27px', borderBottom: '2px dashed #000' }}>
 			{isModalShown ? (
 				<Modal onClose={closeModal}>
 					{modalName === 'layout' ? (
-						<LayoutTab />
+						<LayoutTab onClose={closeModal} />
 					) : modalName === 'design' ? (
-						<DesignTab />
+						<DesignTab onClose={closeModal} />
 					) : null}
 				</Modal>
 			) : null}
@@ -41,12 +41,23 @@ const EditPage = () => {
 				style={{
 					position: 'absolute',
 					left: '50%',
-					top: '.7rem',
+					top: '0',
 					transform: 'translateX(-50%)',
 					zIndex: 2,
+					background: '#565656',
+					borderRadius: '42px',
+					width: '206px',
+					lineHeight: '54px',
+					textAlign: 'center',
+					fontSize: '18px',
+					fontWeight: '300',
+					color: '#fff',
+					padding: '0',
+					height: '54px',
+					cursor: 'pointer',
 				}}
 			>
-				컨테이너 추가
+				+ 여기에 블록 추가
 			</Button>
 			{containers.map((container, index) => (
 				<Container key={container.id} container={container} index={index} />

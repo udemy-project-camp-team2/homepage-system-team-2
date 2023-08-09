@@ -10,6 +10,7 @@ const TwoRow = styled.div`
 	display: flex;
 	gap: 1rem;
 	border: ${(props) => props.$border};
+	align-items: center;
 `;
 
 const TwoRowLayout = ({ onClick, container }) => {

@@ -7,6 +7,7 @@ const OneRow = styled.div`
 	height: 100%;
 	display: flex;
 	gap: 1rem;
+	align-items: center;
 `;
 
 const OneRowLayout = ({ onClick, container }) => {

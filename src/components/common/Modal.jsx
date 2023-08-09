@@ -14,7 +14,6 @@ const StyledBackdrop = styled.div`
 `;
 
 const StyledOverlay = styled.div`
-	padding: 1rem;
 	width: 80%;
 	position: fixed;
 	top: 50%;
@@ -22,6 +21,8 @@ const StyledOverlay = styled.div`
 	transform: translate(-50%, -50%);
 	z-index: 10;
 	background-color: #fff;
+	border-radius: 20px;
+	overflow: hidden;
 `;
 
 const Backdrop = ({ onClose }) => {

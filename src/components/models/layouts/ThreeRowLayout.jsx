@@ -7,6 +7,7 @@ const ThreeRow = styled.div`
 	height: 100%;
 	display: flex;
 	gap: 1rem;
+	align-items: center;
 `;
 
 const ThreeRowLayout = ({ onClick, container }) => {

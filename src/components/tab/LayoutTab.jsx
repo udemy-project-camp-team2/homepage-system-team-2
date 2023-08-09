@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { Fragment, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
@@ -8,6 +9,7 @@ import Button from '../common/Button';
 
 const LayoutList = styled.ul`
 	padding: 0;
+	margin: 0;
 	display: grid;
 	grid-template-columns: repeat(2, 1fr);
 	grid-auto-rows: 200px;
@@ -25,7 +27,38 @@ const LayoutImg = styled.img`
 	height: 100%;
 `;
 
-const LayoutTab = () => {
+const ModalHeader = styled.div`
+	padding: 0 62px;
+	display: flex;
+	height: 80px;
+	align-items: center;
+	justify-content: center;
+	background: ${(props) => props.theme.colors.orange};
+`;
+
+const HeadTitle = styled.h1`
+	margin-right: auto;
+	font-size: 20px;
+	color: #fff;
+`;
+
+const BtnClose = styled.button`
+	margin-left: auto;
+	text-indent: -9999px;
+	width: 27px;
+	height: 27px;
+	background: url(/images/icons/ico_modal_close.png) 0 0 no-repeat;
+	border: none;
+	cursor: pointer;
+`;
+
+const ModalContainer = styled.div`
+	padding: 60px;
+	background: #f3f3f3;
+	overflow: hidden;
+`;
+
+const LayoutTab = ({ onClose }) => {
 	const dispatch = useDispatch();
 	const selectedId = useSelector((state) => state.selectedId.selectedId);
 	const [layoutType, setLayoutType] = useState({
@@ -36,38 +69,64 @@ const LayoutTab = () => {
 
 	return (
 		<Fragment>
-			<LayoutList>
-				{layoutLists.map((list) => (
-					<LayoutItem
-						key={list.id}
-						onClick={() =>
-							setLayoutType({
-								id: selectedId,
-								type: list.type,
-								length: list.length,
+			<ModalHeader>
+				<HeadTitle>블록 레이아웃 추가</HeadTitle>
+				<BtnClose
+					onClick={() => {
+						onClose();
+					}}
+				>
+					닫기
+				</BtnClose>
+			</ModalHeader>
+			<ModalContainer>
+				<LayoutList>
+					{layoutLists.map((list) => (
+						<LayoutItem
+							key={list.id}
+							onClick={() =>
+								setLayoutType({
+									id: selectedId,
+									type: list.type,
+									length: list.length,
+								})
+							}
+						>
+							<LayoutImg src={list.src} alt={list.type} />
+						</LayoutItem>
+					))}
+				</LayoutList>
+				<Button
+					type="button"
+					style={{
+						width: '100px',
+						borderRadius: '10px',
+						background: '#565656',
+						color: '#fff',
+						border: 'none',
+						lineHeight: '30px',
+						fontSize: '15px',
+						flat: 'right',
+						marginTop: '20px',
+					}}
+					onClick={() => {
+						dispatch(updateLayoutType(layoutType));
+						dispatch(
+							toggleModal({
+								name: '',
 							})
-						}
-					>
-						<LayoutImg src={list.src} alt={list.type} />
-					</LayoutItem>
-				))}
-			</LayoutList>
-			<Button
-				type="button"
-				style={{ width: '100%' }}
-				onClick={() => {
-					dispatch(updateLayoutType(layoutType));
-					dispatch(
-						toggleModal({
-							name: '',
-						})
-					);
-				}}
-			>
-				저장
-			</Button>
+						);
+					}}
+				>
+					저장
+				</Button>
+			</ModalContainer>
 		</Fragment>
 	);
 };
 
 export default LayoutTab;
+
+LayoutTab.propTypes = {
+	onClose: PropTypes.func,
+};

@@ -15,9 +15,19 @@ const StyledBlock = styled.div(({ style }) => ({
 	display: 'flex',
 	justifyContent: 'center',
 	alignItems: 'center',
-	border: '1px solid teal',
+	border: '2px dashed #000',
 	padding: '25px',
+	background: '#fff',
 }));
+
+const DesignSelectIcon = styled.b`
+	cursor: pointer;
+	padding-top: 48px;
+	background: url(/images/icons/ico_design_select.png) center 0 no-repeat;
+	font-weight: 400;
+	font-size: 20px;
+	color: #989898;
+`;
 
 const Block = ({ id, style }) => {
 	const design = useSelector((state) => state.design[id]);
@@ -63,9 +73,12 @@ const Block = ({ id, style }) => {
 					}
 				})
 			) : (
-				<b style={{ cursor: 'pointer' }} onClick={designModalHandler}>
+				<DesignSelectIcon
+					style={{ cursor: 'pointer' }}
+					onClick={designModalHandler}
+				>
 					디자인을 선택해주세요!
-				</b>
+				</DesignSelectIcon>
 			)}
 		</StyledBlock>
 	);

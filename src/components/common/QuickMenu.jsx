@@ -6,34 +6,46 @@ import {
 	updateLayoutType,
 	updateOrderOfContainers,
 } from '../../store/slices/containerSlice';
-import Button from './Button';
+import StyledButton from './EditButton';
 
 const StyledQuickMenu = styled.div`
 	position: absolute;
-	top: 0;
-	right: 0;
+	top: 30px;
+	right: 0px;
+	background: #565656;
+	border-radius: 42px;
+	height: 54px;
+	width: 236px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 5px;
 `;
 
 const QuickMenu = ({ containerId }) => {
 	const dispatch = useDispatch();
 	return (
 		<StyledQuickMenu>
-			<Button type="button">수정</Button>
-			<Button
+			<StyledButton
 				type="button"
-				onClick={() => dispatch(removeContainer(containerId))}
+				style={{
+					background: 'url(/images/icons/ico_edit.png) 0 0 no-repeat',
+				}}
 			>
-				삭제
-			</Button>
-			<Button
+				수정
+			</StyledButton>
+			<StyledButton
 				type="button"
 				onClick={() =>
 					dispatch(updateLayoutType({ id: containerId, type: '', length: 0 }))
 				}
+				style={{
+					background: 'url(/images/icons/ico_ellips.png) 0 0 no-repeat',
+				}}
 			>
 				레이아웃 삭제
-			</Button>
-			<Button
+			</StyledButton>
+			<StyledButton
 				type="button"
 				name="container_up"
 				onClick={(e) =>
@@ -41,10 +53,13 @@ const QuickMenu = ({ containerId }) => {
 						updateOrderOfContainers({ id: containerId, name: e.target.name })
 					)
 				}
+				style={{
+					background: 'url(/images/icons/ico_arrow_up.png) 0 0 no-repeat',
+				}}
 			>
 				위
-			</Button>
-			<Button
+			</StyledButton>
+			<StyledButton
 				type="button"
 				name="container_down"
 				onClick={(e) =>
@@ -52,9 +67,21 @@ const QuickMenu = ({ containerId }) => {
 						updateOrderOfContainers({ id: containerId, name: e.target.name })
 					)
 				}
+				style={{
+					background: 'url(/images/icons/ico_arrow_down.png) 0 0 no-repeat',
+				}}
 			>
 				아래
-			</Button>
+			</StyledButton>
+			<StyledButton
+				type="button"
+				onClick={() => dispatch(removeContainer(containerId))}
+				style={{
+					background: 'url(/images/icons/ico_delete.png) 0 0 no-repeat',
+				}}
+			>
+				삭제
+			</StyledButton>
 		</StyledQuickMenu>
 	);
 };

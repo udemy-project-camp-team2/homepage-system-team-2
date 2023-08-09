@@ -5,9 +5,6 @@ import styled from 'styled-components';
 import { imageLists } from '../../libs/image-lists';
 
 const ImageWrapper = styled.div`
-	margin: 0 auto;
-	margin-bottom: 1rem;
-	width: 50%;
 	height: 150px;
 	border: 1px solid rgba(0, 0, 0, 0.5);
 	border-radius: 0.5rem;
