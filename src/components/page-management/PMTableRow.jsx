@@ -19,6 +19,12 @@ const MenuDetailBtns = styled.button`
 	border-radius: 0.3rem;
 	outline: none;
 	cursor: pointer;
+
+	&:not(:nth-of-type(3)) {
+		border: 1px solid ${(props) => props.theme.colors.gray.darker};
+		background-color: #fff;
+		color: ${(props) => props.theme.colors.gray.darker};
+	}
 `;
 
 const PMTableRow = ({ list }) => {
@@ -36,7 +42,7 @@ const PMTableRow = ({ list }) => {
 			<Td>{list.key}</Td>
 			<Td>{new Date().toLocaleString()}</Td>
 			<Td>
-				<MenuDetailBtns
+				{/* <MenuDetailBtns
 					type="button"
 					onClick={() =>
 						dispatch(
@@ -48,14 +54,14 @@ const PMTableRow = ({ list }) => {
 					}
 				>
 					상세
-				</MenuDetailBtns>
+				</MenuDetailBtns> */}
 				<MenuDetailBtns
 					type="button"
 					onClick={() =>
 						dispatch(
 							toggleModal({
-								title: list.title,
 								name: '복제',
+								list,
 							})
 						)
 					}

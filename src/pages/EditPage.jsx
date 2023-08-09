@@ -26,8 +26,6 @@ const EditPage = () => {
 		);
 	}, []);
 
-	console.log(id);
-
 	return (
 		<section>
 			{isModalShown ? (

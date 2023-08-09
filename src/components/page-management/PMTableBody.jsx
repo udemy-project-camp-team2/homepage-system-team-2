@@ -7,13 +7,12 @@ import PMForm from './PMForm';
 const PMTableBody = ({ pageLists, offset }) => {
 	const isOpen = useSelector((state) => state.modal.isOpen);
 	const targetList = useSelector((state) => state.modal.list);
-	const name = useSelector((state) => state.modal.name);
 
 	return (
 		<tbody>
 			{isOpen ? (
 				<Modal>
-					<PMForm name={name} targetList={targetList} />
+					<PMForm targetList={targetList} />
 				</Modal>
 			) : null}
 			{pageLists.length > 0 &&
