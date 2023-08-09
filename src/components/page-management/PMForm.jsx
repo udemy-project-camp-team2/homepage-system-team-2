@@ -22,15 +22,16 @@ const PMForm = ({ targetList }) => {
 				</button>
 				<button
 					type="button"
-					onClick={() =>
+					onClick={() => {
 						dispatch(
 							duplicateList({
 								duplicatedKey: targetList.key,
 								newTitle: titleRef.current.value,
 								newLink: linkRef.current.value,
 							})
-						)
-					}
+						);
+						dispatch(toggleModal({ name: '' }));
+					}}
 				>
 					저장
 				</button>

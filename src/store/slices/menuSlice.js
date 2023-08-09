@@ -151,7 +151,7 @@ const menuSlice = createSlice({
 				return;
 			}
 
-			if (newList.length === 0 || newLink.length === 0) {
+			if (newTitle.length === 0 || newLink.length === 0) {
 				alert(`한 글자라도 입력하셔야 합니다!`);
 				return;
 			}

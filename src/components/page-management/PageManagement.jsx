@@ -12,7 +12,6 @@ const PageManagement = () => {
 	const debouncedValue = useDebounce(search, 500);
 	const [currentPage, setCurrentPage] = useState(1);
 	const offset = (currentPage - 1) * 10;
-	// const currentMenuLists = useSelector((state) => state.menu.data);
 	const lists = useSelector((state) => state.menu);
 	const changeInputHandler = useCallback((e) => {
 		setSearch(e.target.value);
@@ -40,7 +39,7 @@ const PageManagement = () => {
 			.filter((item) =>
 				item.title.toLowerCase().includes(debouncedValue.toLowerCase())
 			);
-	}, [debouncedValue]);
+	}, [debouncedValue, lists]);
 
 	return (
 		<section>

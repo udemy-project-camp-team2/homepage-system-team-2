@@ -42,19 +42,6 @@ const PMTableRow = ({ list }) => {
 			<Td>{list.key}</Td>
 			<Td>{new Date().toLocaleString()}</Td>
 			<Td>
-				{/* <MenuDetailBtns
-					type="button"
-					onClick={() =>
-						dispatch(
-							toggleModal({
-								list,
-								name: '상세',
-							})
-						)
-					}
-				>
-					상세
-				</MenuDetailBtns> */}
 				<MenuDetailBtns
 					type="button"
 					onClick={() =>
