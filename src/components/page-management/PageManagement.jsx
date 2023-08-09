@@ -43,7 +43,7 @@ const PageManagement = () => {
 	}, [debouncedValue]);
 
 	return (
-		<section>
+		<section style={{marginBottom: '50px'}}>
 			<PMSearch value={search} onChange={changeInputHandler} />
 			<PMTable>
 				<PMTableHead />

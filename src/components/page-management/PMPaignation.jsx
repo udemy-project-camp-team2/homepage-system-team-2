@@ -1,5 +1,22 @@
 import PropTypes from 'prop-types';
-import { Fragment, memo } from 'react';
+import { memo } from 'react';
+import { styled } from 'styled-components';
+
+const PaignationContainer = styled.div`
+	display: flex;
+	justify-content: flex-end;
+	align-items: center; 
+`;
+
+const PaginationButton = styled.button`
+	padding: 0 .8rem;
+	height: 2rem;
+	border:1px solid ${(props) => props.active ? props.theme.colors.orange : props.theme.colors.gray.lighter};
+  background-color: ${props => props.active ? props.theme.colors.orange : 'white'};
+  color: ${props => props.active ? 'white' : 'black'};
+  cursor: ${props => props.disabled ? 'not-allowed' : 'pointer'};
+`;
+
 
 const PMPaignation = ({
 	length,
@@ -9,29 +26,34 @@ const PMPaignation = ({
 }) => {
 	const maxPage = Math.ceil(length / 10);
 	return (
-		<Fragment>
-			<button
+		<PaignationContainer>
+			<PaginationButton
 				disabled={currentPage === 1}
 				type="button"
 				name="prev"
 				onClick={changePageHandler}
 			>
-				&larr;
-			</button>
+				이전
+			</PaginationButton>
 			{Array.from({ length: maxPage }, (_, i) => i + 1).map((item) => (
-				<button key={item} type="button" onClick={() => setCurrentPage(item)}>
+				<PaginationButton 
+					key={item} 
+					type="button" 
+					onClick={() => setCurrentPage(item)}
+					active={item === currentPage}
+				>
 					{item}
-				</button>
+				</PaginationButton>
 			))}
-			<button
+			<PaginationButton
 				disabled={currentPage >= maxPage}
 				type="button"
 				name="next"
 				onClick={changePageHandler}
 			>
-				&rarr;
-			</button>
-		</Fragment>
+				다음
+			</PaginationButton>
+		</PaignationContainer>
 	);
 };
 

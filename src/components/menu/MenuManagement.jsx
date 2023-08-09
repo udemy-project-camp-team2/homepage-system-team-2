@@ -7,7 +7,6 @@ import { styled } from 'styled-components';
 const MenuWrapper = styled.article`
 	display: flex;
 	justify-content: space-between;
-	align-items: center;
 `;
 
 const MenuText = styled.div`

@@ -29,12 +29,11 @@ const ModalCloseBtn = styled.button`
 `;
 
 const StyledOverlay = styled.div`
-	width: 200px;
-	height: 200px;
+	width: 614px;
+	height: 316px;
 	position: fixed;
 	top: 50%;
 	left: 50%;
-	background-color: ${(props) => props.theme.colors.orange};
 	transform: translate(-50%, -50%);
 	z-index: 50;
 `;
@@ -68,7 +67,6 @@ const Overlay = ({ children }) => {
 					)
 				}
 			>
-				❌
 			</ModalCloseBtn>
 			{children}
 		</StyledOverlay>
