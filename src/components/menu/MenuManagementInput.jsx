@@ -34,13 +34,16 @@ const Button = styled.button`
 
 const ToggleButton = styled.button`
 	padding: 0.5rem 1rem;
-	border: 1px solid ${(props) =>
-		props.isOpen ? props.theme.colors.orange : props.theme.colors.gray.lighter};
+	border: 1px solid
+		${(props) =>
+			props.$isOpen
+				? props.theme.colors.orange
+				: props.theme.colors.gray.lighter};
 	border-radius: 0 4px 4px 0;
 	background-color: #fff;
 	color: #000;
 	cursor: pointer;
-	transition: border-color 0.3s ease-in-out; 
+	transition: border-color 0.3s ease-in-out;
 `;
 
 const Select = styled.select`
@@ -55,7 +58,6 @@ const Option = styled.option`
 	background-color: ${(props) => props.theme.colors.orange};
 	color: #fff;
 `;
-
 
 const MenuManagementInput = ({ values }) => {
 	const [isOpen, setIsOpen] = useState(false);
@@ -107,7 +109,7 @@ const MenuManagementInput = ({ values }) => {
 				<Button type="submit">작성</Button>
 				<ToggleButton
 					type="button"
-					isOpen={isOpen}
+					$isOpen={isOpen}
 					onClick={() => setIsOpen((prev) => !prev)}
 				>
 					리스트 작성
