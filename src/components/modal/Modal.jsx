@@ -29,12 +29,10 @@ const ModalCloseBtn = styled.button`
 `;
 
 const StyledOverlay = styled.div`
-	width: 200px;
-	height: 200px;
 	position: fixed;
 	top: 50%;
 	left: 50%;
-	background-color: ${(props) => props.theme.colors.orange};
+	background-color: #fff;
 	transform: translate(-50%, -50%);
 	z-index: 50;
 `;
