@@ -7,6 +7,7 @@ import {
 	updateOrderOfContainers,
 } from '../../store/slices/containerSlice';
 import Button from './Button';
+import { memo } from 'react';
 
 const StyledQuickMenu = styled.div`
 	position: absolute;
@@ -59,7 +60,7 @@ const QuickMenu = ({ containerId }) => {
 	);
 };
 
-export default QuickMenu;
+export default memo(QuickMenu);
 
 QuickMenu.propTypes = {
 	containerId: PropTypes.string,

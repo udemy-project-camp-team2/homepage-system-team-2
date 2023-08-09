@@ -55,6 +55,7 @@ const Header = () => {
 		dispatch(logout());
 		navigate('/admin');
 	};
+
 	return (
 		<HeaderStyled>
 			<HeaderInner>

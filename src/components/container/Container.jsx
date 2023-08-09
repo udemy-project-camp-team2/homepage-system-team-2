@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { useState } from 'react';
+import { useState, memo } from 'react';
 import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import { addContainer } from '../../store/slices/containerSlice';
@@ -75,7 +75,7 @@ const Container = ({ container, index }) => {
 	);
 };
 
-export default Container;
+export default memo(Container);
 
 Container.propTypes = {
 	container: PropTypes.object,
