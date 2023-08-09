@@ -5,22 +5,28 @@ import { useTab } from '../hooks/useTab';
 import { useTitle } from '../hooks/useTitle';
 
 const ManagementLayout = styled.div`
-	height: 100vh;
 	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
+  width: 100%;
+  justify-content: center;
 `;
 
 const ManagementWrapper = styled.article`
-	width: max-content;
-	background-color: ${(props) => props.theme.colors.gray.lighter};
+	width: 1220px;
 `;
 
-const TabButtons = styled.button`
-	padding: 0.5rem 0;
-	width: 15rem;
-	display: inline-block;
+const TabButtonsWrapper = styled.div`
+	display: flex;
+	justify-content: center;
+  align-items: center;
+	border: 1px solid;
+	border-color: ${(props) => props.theme.colors.gray.lighter};
+	border-radius: 10px;
+	margin-bottom: 30px;
+`;
+
+const TabButton = styled.button`
+	padding: 1rem 0;
+	flex: 1;
 	color: ${(props) =>
 		props.$fontColor ? '#fff' : props.theme.colors.gray.darker};
 	background-color: ${(props) =>
@@ -30,16 +36,8 @@ const TabButtons = styled.button`
 	border: none;
 	outline: none;
 	cursor: pointer;
-
-	&:nth-of-type(1) {
-		border-top-left-radius: 0.5rem;
-		border-bottom-left-radius: 0.5rem;
-	}
-
-	&:nth-of-type(2) {
-		border-top-right-radius: 0.5rem;
-		border-bottom-right-radius: 0.5rem;
-	}
+	border-radius: ${(props) =>
+		props.$isFirst ? '10px 0 0 10px' : props.$isLast ? '0 10px 10px 0' : '0'};
 `;
 
 const contents = [
@@ -60,17 +58,21 @@ const ManagementPage = () => {
 	return (
 		<ManagementLayout>
 			<ManagementWrapper>
-				{contents.map((content, index) => (
-					<TabButtons
-						key={content.label}
-						type="button"
-						$fontColor={index === idx}
-						$bgColor={index === idx}
-						onClick={() => targetAction(index)}
-					>
-						{content.label}
-					</TabButtons>
-				))}
+				<TabButtonsWrapper>
+					{contents.map((content, index) => (
+						<TabButton
+							key={content.label}
+							type="button"
+							$fontColor={index === idx}
+							$bgColor={index === idx}
+							$isFirst={index === 0}
+							$isLast={index === contents.length - 1}
+							onClick={() => targetAction(index)}
+						>
+							{content.label}
+						</TabButton>
+					))}
+				</TabButtonsWrapper>
 				<targetContent.content />
 			</ManagementWrapper>
 		</ManagementLayout>
