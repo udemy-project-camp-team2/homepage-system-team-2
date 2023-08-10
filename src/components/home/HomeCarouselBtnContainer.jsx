@@ -19,7 +19,6 @@ const ButtonContainer = styled.div`
 		margin: 0 1rem;
 		font-size: 2rem;
 		color: #fff;
-		cursor: pointer;
 		pointer-events: none;
 	}
 
@@ -27,6 +26,7 @@ const ButtonContainer = styled.div`
 		background-color: transparent;
 		border: none;
 		outline: none;
+		cursor: pointer;
 	}
 `;
 

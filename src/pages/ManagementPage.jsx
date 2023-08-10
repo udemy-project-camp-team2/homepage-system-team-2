@@ -1,3 +1,5 @@
+import { useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import { styled } from 'styled-components';
 import MenuManagement from '../components/menu/MenuManagement';
 import PageManagement from '../components/page-management/PageManagement';
@@ -6,8 +8,8 @@ import { useTitle } from '../hooks/useTitle';
 
 const ManagementLayout = styled.div`
 	display: flex;
-  width: 100%;
-  justify-content: center;
+	width: 100%;
+	justify-content: center;
 `;
 
 const ManagementWrapper = styled.article`
@@ -17,7 +19,7 @@ const ManagementWrapper = styled.article`
 const TabButtonsWrapper = styled.div`
 	display: flex;
 	justify-content: center;
-  align-items: center;
+	align-items: center;
 	border: 1px solid;
 	border-color: ${(props) => props.theme.colors.gray.lighter};
 	border-radius: 10px;
@@ -52,8 +54,13 @@ const contents = [
 ];
 
 const ManagementPage = () => {
+	const lists = useSelector((state) => state.menu);
 	const { idx, targetContent, targetAction } = useTab(0, contents);
 	useTitle(targetContent.label);
+
+	useEffect(() => {
+		localStorage.setItem('menus', JSON.stringify(lists));
+	}, [lists]);
 
 	return (
 		<ManagementLayout>

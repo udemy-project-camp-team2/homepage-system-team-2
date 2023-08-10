@@ -1,4 +1,5 @@
 import { useCallback } from 'react';
+import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { addContainer } from '../store/slices/containerSlice';
 import Container from '../components/container/Container';
@@ -11,6 +12,7 @@ import DesignTab from '../components/tab/DesignTab';
 
 const EditPage = () => {
 	useTitle('편집페이지');
+	const { id } = useParams();
 	const dispatch = useDispatch();
 	const containers = useSelector((state) => state.containers);
 	const isModalShown = useSelector((state) => state.modal.isOpen);

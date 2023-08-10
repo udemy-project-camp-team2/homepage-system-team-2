@@ -2,7 +2,9 @@ import PropTypes from 'prop-types';
 import { memo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
+import { styled } from 'styled-components';
 import { toggleModal } from '../../store/slices/modalSlice';
+<<<<<<< HEAD
 import { styled } from 'styled-components';
 
 const CheckboxContainer = styled.td`
@@ -46,6 +48,29 @@ const DesignButton = styled.button`
 	font-weight: bold;
 	color: #fff;
 	cursor: pointer;
+=======
+
+const Td = styled.td`
+	padding: 1rem 0;
+	border-bottom: 1px solid ${(props) => props.theme.colors.gray.darker};
+	text-align: center;
+`;
+
+const MenuDetailBtns = styled.button`
+	margin: 0 0.2rem;
+	background-color: ${(props) => props.theme.colors.orange};
+	color: #fff;
+	border: none;
+	border-radius: 0.3rem;
+	outline: none;
+	cursor: pointer;
+
+	&:not(:nth-of-type(3)) {
+		border: 1px solid ${(props) => props.theme.colors.gray.darker};
+		background-color: #fff;
+		color: ${(props) => props.theme.colors.gray.darker};
+	}
+>>>>>>> 8a7880309b9cbbe73308183c302b07c8b1e3f7af
 `;
 
 const PMTableRow = ({ list }) => {
@@ -55,6 +80,7 @@ const PMTableRow = ({ list }) => {
 
 	return (
 		<tr>
+<<<<<<< HEAD
 			<CheckboxContainer>
 				<CheckboxInput type="checkbox" name="checkbox" />
 			</CheckboxContainer>
@@ -68,10 +94,22 @@ const PMTableRow = ({ list }) => {
 			<td>{new Date().toLocaleString()}</td>
 			<td>
 				<ManagementButton
+=======
+			<Td>
+				<input type="checkbox" name="checkbox" />
+			</Td>
+			<Td>{list.title}</Td>
+			<Td>{list.link}</Td>
+			<Td>{list.key}</Td>
+			<Td>{new Date().toLocaleString()}</Td>
+			<Td>
+				<MenuDetailBtns
+>>>>>>> 8a7880309b9cbbe73308183c302b07c8b1e3f7af
 					type="button"
 					onClick={() =>
 						dispatch(
 							toggleModal({
+<<<<<<< HEAD
 								list,
 								name: '상세',
 							})
@@ -86,18 +124,32 @@ const PMTableRow = ({ list }) => {
 						dispatch(
 							toggleModal({
 								title: list.title,
+=======
+>>>>>>> 8a7880309b9cbbe73308183c302b07c8b1e3f7af
 								name: '복제',
+								list,
 							})
 						)
 					}
 				>
 					복제
+<<<<<<< HEAD
 				</ManagementButton>
 				<DesignButton	
 					type="button" onClick={() => navigate('/admin/edit/1')}>
 					디자인
 				</DesignButton>
 			</td>
+=======
+				</MenuDetailBtns>
+				<MenuDetailBtns
+					type="button"
+					onClick={() => navigate(`/admin/edit${list.link}`)}
+				>
+					디자인
+				</MenuDetailBtns>
+			</Td>
+>>>>>>> 8a7880309b9cbbe73308183c302b07c8b1e3f7af
 		</tr>
 	);
 };

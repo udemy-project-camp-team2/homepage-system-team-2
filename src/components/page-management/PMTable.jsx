@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import { styled } from 'styled-components';
 
+<<<<<<< HEAD
 const TableContainer = styled.div`
 	display: flex;
 	align-items: center;
@@ -38,6 +39,17 @@ const PMTable = ({ children }) => {
 			<PageTable>{children}</PageTable>
 		</TableContainer>
 	);
+=======
+const PageManagementTable = styled.table`
+	margin: 2rem 0;
+	width: 100%;
+	border-top: 1px solid ${(props) => props.theme.colors.gray.darker};
+	border-collapse: collapse;
+`;
+
+const PMTable = ({ children }) => {
+	return <PageManagementTable>{children}</PageManagementTable>;
+>>>>>>> 8a7880309b9cbbe73308183c302b07c8b1e3f7af
 };
 
 export default PMTable;

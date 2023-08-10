@@ -4,42 +4,42 @@ import { faGear, faTimes } from '@fortawesome/free-solid-svg-icons';
 import { memo, useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { updateList, deleteList } from '../../store/slices/menuSlice';
-import styled from 'styled-components'; 
+import styled from 'styled-components';
 
 const ListItem = styled.li`
-  background-color: #fff;
-  border: 1px solid ${(props) => props.theme.colors.gray.lighter};
-  border-radius: 4px;
-  padding: 1rem 1.3rem;
-  margin-bottom: 0.5rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+	background-color: #fff;
+	border: 1px solid ${(props) => props.theme.colors.gray.lighter};
+	border-radius: 4px;
+	padding: 1rem 1.3rem;
+	margin-bottom: 0.5rem;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
 `;
 
 const ItemTitle = styled.span`
-  flex-grow: 1;
+	flex-grow: 1;
 `;
 
 const ActionButton = styled.button`
-  margin-left: .6rem;
-  background-color: transparent;
+	margin-left: 0.6rem;
+	background-color: transparent;
 	color: ${(props) => props.theme.colors.gray.darker};
-  border: none;
-  cursor: pointer;
+	border: none;
+	cursor: pointer;
 
-  &:hover {
-    color: ${(props) => props.theme.colors.orange};
-  }
+	&:hover {
+		color: ${(props) => props.theme.colors.orange};
+	}
 `;
 
 const DetailWrapper = styled.div`
 	margin-top: -10px;
 	background-color: #fff;
-  border: 1px solid ${(props) => props.theme.colors.gray.lighter};
-  border-radius: 0 0 4px 4px;
-  padding: 1rem 1.3rem;
-  margin-bottom: 0.5rem;
+	border: 1px solid ${(props) => props.theme.colors.gray.lighter};
+	border-radius: 0 0 4px 4px;
+	padding: 1rem 1.3rem;
+	margin-bottom: 0.5rem;
 `;
 
 const DetailItem = styled.div`
@@ -53,7 +53,7 @@ const DetailItem = styled.div`
 
 const TitleInput = styled.input`
 	flex-grow: 2;
-	padding: .8rem 1.3rem;
+	padding: 0.8rem 1.3rem;
 	border: none;
 	border-radius: 10px;
 	background-color: #f3f3f3;
@@ -61,7 +61,7 @@ const TitleInput = styled.input`
 
 const LinkInput = styled.input`
 	flex-grow: 2;
-	padding: .8rem 1.3rem;
+	padding: 0.8rem 1.3rem;
 	margin-right: 1.5rem;
 	border: none;
 	border-radius: 10px;
@@ -77,8 +77,8 @@ const CompleteButton = styled.button`
 
 	&:hover {
 		color: #fff;
-    background-color: ${(props) => props.theme.colors.orange};
-  }
+		background-color: ${(props) => props.theme.colors.orange};
+	}
 `;
 
 const CancelButton = styled.button`
@@ -90,8 +90,8 @@ const CancelButton = styled.button`
 
 	&:hover {
 		color: #fff;
-    background-color: ${(props) => props.theme.colors.orange};
-  }
+		background-color: ${(props) => props.theme.colors.orange};
+	}
 `;
 
 const MenuManagementItem = ({ list, targetKey }) => {
@@ -109,14 +109,21 @@ const MenuManagementItem = ({ list, targetKey }) => {
 				newLink: linkRef.current.value || list.link,
 			})
 		);
+
+		setIsDetailOpen(false);
+		titleRef.current.value = '';
+		linkRef.current.value = '';
 	};
 
 	return (
 		<>
 			<ListItem>
 				<ItemTitle>{list.title}</ItemTitle>
-				<ActionButton type="button" onClick={() => setIsDetailOpen((prev) => !prev)}>
-					<FontAwesomeIcon icon={faGear} size='2x'/>
+				<ActionButton
+					type="button"
+					onClick={() => setIsDetailOpen((prev) => !prev)}
+				>
+					<FontAwesomeIcon icon={faGear} size="2x" />
 				</ActionButton>
 				<ActionButton
 					type="button"
@@ -128,8 +135,8 @@ const MenuManagementItem = ({ list, targetKey }) => {
 							})
 						)
 					}
-				>	
-					<FontAwesomeIcon icon={faTimes} size='2x'/>
+				>
+					<FontAwesomeIcon icon={faTimes} size="2x" />
 				</ActionButton>
 			</ListItem>
 			{isDetailOpen ? (

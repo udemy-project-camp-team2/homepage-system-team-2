@@ -5,6 +5,7 @@ import Button from '../common/Button';
 import LineTab from './LineTab';
 import ImageTab from './ImageTab';
 import TextTab from './TextTab';
+import ListTab from './ListTab';
 import { addDesign } from '../../store/slices/designSlice';
 import { toggleModal } from '../../store/slices/modalSlice';
 
@@ -12,6 +13,7 @@ const designLists = [
 	{ id: 0, label: '구분선' },
 	{ id: 1, label: '이미지' },
 	{ id: 2, label: '텍스트' },
+	{ id: 3, label: '목록' },
 ];
 
 const TabWrapper = styled.div`
@@ -84,7 +86,10 @@ const DesignTab = () => {
 						{list.label === '이미지' && (
 							<ImageTab setDesignType={setDesignType} />
 						)}
-						{list.label === '텍스트' && <TextTab />}
+						{list.label === '텍스트' && (
+							<TextTab setDesignType={setDesignType} />
+						)}
+						{list.label === '목록' && <ListTab setDesignType={setDesignType} />}
 					</TabContentItem>
 				))}
 			</TabContentList>

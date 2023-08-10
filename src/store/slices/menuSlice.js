@@ -1,8 +1,11 @@
+/* eslint-disable no-useless-escape */
 import { createSlice } from '@reduxjs/toolkit';
 import { v4 as uuidv4 } from 'uuid';
 import { menuLists } from '../../libs/menu-lists';
 
-const initialState = menuLists;
+const initialState = localStorage.getItem('menus')
+	? JSON.parse(localStorage.getItem('menus'))
+	: menuLists;
 
 const menuSlice = createSlice({
 	name: 'menu',
@@ -43,7 +46,7 @@ const menuSlice = createSlice({
 			const newList = {
 				id: uuidv4(),
 				title: listTitle,
-				link: '/new-link',
+				link: uuidv4(),
 			};
 
 			newState[key] = newState[key].concat(newList);
@@ -73,10 +76,21 @@ const menuSlice = createSlice({
 
 			const newState = { ...state };
 
-			const isExistingTitle = newState[key].some((el) => el.title === newTitle);
+			const isExistingTitle = newState[key]
+				.filter((el) => el.title !== newTitle)
+				.some((el) => el.title === newTitle);
 
 			if (isExistingTitle) {
 				alert(`Already Existing Title`);
+				return;
+			}
+
+			const isExistingLink = newState[key]
+				.filter((el) => el.link !== newLink)
+				.some((el) => el.link === newLink);
+
+			if (isExistingLink) {
+				alert(`Already Existing Link!`);
 				return;
 			}
 
@@ -106,6 +120,52 @@ const menuSlice = createSlice({
 
 			return newState;
 		},
+
+		duplicateList(state, action) {
+			const { duplicatedKey, newTitle, newLink } = action.payload;
+
+			const newState = { ...state };
+
+			const isExistingTitle = newState[duplicatedKey].some(
+				(el) => el.title === newTitle
+			);
+
+			if (isExistingTitle) {
+				alert(`Already Existing Title`);
+				return;
+			}
+
+			const isExistingLink = newState[duplicatedKey].some(
+				(el) => el.link === newLink
+			);
+
+			if (isExistingLink) {
+				alert(`Already Existing Link`);
+				return;
+			}
+
+			let reg = /^[a-z0-9_-]{2,10}$/;
+
+			if (reg.test(newLink)) {
+				alert(`특수문자는 제외해주시길 바랍니다!`);
+				return;
+			}
+
+			if (newTitle.length === 0 || newLink.length === 0) {
+				alert(`한 글자라도 입력하셔야 합니다!`);
+				return;
+			}
+
+			const newList = {
+				id: uuidv4(),
+				title: newTitle,
+				link: `/${newLink}`,
+			};
+
+			newState[duplicatedKey] = newState[duplicatedKey].concat(newList);
+
+			return newState;
+		},
 	},
 });
 
@@ -116,6 +176,7 @@ export const {
 	updateList,
 	deleteMenu,
 	deleteList,
+	duplicateList,
 } = menuSlice.actions;
 
 export default menuSlice.reducer;
