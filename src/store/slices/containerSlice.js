@@ -1,7 +1,13 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { v4 as uuidv4 } from 'uuid';
 
-const initialState = [];
+console.log(window.location.pathname.slice('/').at(-1));
+
+const storedValue = localStorage.getItem(
+	window.location.pathname.slice('/').at(-1)
+);
+
+const initialState = storedValue ? JSON.parse(storedValue) : [];
 
 const containerSlice = createSlice({
 	name: 'containers',

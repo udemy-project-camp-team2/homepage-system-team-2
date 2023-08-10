@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { useState, memo } from 'react';
+import { useState, memo, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import { addContainer } from '../../store/slices/containerSlice';
