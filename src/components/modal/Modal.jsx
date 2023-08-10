@@ -29,8 +29,6 @@ const ModalCloseBtn = styled.button`
 `;
 
 const StyledOverlay = styled.div`
-	width: 614px;
-	height: 316px;
 	position: fixed;
 	top: 50%;
 	left: 50%;
