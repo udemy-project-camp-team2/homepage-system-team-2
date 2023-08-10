@@ -51,6 +51,7 @@ const Btn = styled.button`
 	&:nth-of-type(1) {
 		background-color: ${(props) => props.theme.colors.gray.darker};
 	}
+
 	&:nth-of-type(2) {
 		background-color: ${(props) => props.theme.colors.orange};
 	}
