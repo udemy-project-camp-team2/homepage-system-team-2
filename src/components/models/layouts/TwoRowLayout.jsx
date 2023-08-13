@@ -4,21 +4,15 @@ import styled from 'styled-components';
 import Block from '../../block/Block';
 
 const TwoRow = styled.div`
-	padding: ${(props) => props.$padding};
 	width: 100%;
-	height: 100%;
+	min-height: inherit;
 	display: flex;
 	gap: 1rem;
-	border: ${(props) => props.$border};
 `;
 
 const TwoRowLayout = ({ onClick, container }) => {
 	return (
-		<TwoRow
-			onClick={onClick}
-			$padding={container ? 0 : '1rem'}
-			$border={container ? 'none' : '1px dashed #000'}
-		>
+		<TwoRow onClick={onClick}>
 			{container ? (
 				container.blocksIds.map((item) => (
 					<Block

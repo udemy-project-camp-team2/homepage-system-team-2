@@ -3,14 +3,14 @@ import { useState, memo } from 'react';
 import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import { addContainer } from '../../store/slices/containerSlice';
+import { toggleModal } from '../../store/slices/modalSlice';
+import { updateSelectedId } from '../../store/slices/selectedIdSlice';
 import Button from '../common/Button';
 import QuickMenu from '../common/QuickMenu';
 import OneRowLayout from '../models/layouts/OneRowLayout';
 import TwoRowLayout from '../models/layouts/TwoRowLayout';
 import ThreeRowLayout from '../models/layouts/ThreeRowLayout';
 import FourRowLayout from '../models/layouts/FourRowLayout';
-import { toggleModal } from '../../store/slices/modalSlice';
-import { updateSelectedId } from '../../store/slices/selectedIdSlice';
 
 const StyledContainer = styled.article`
 	min-height: 20vh;
@@ -23,14 +23,10 @@ const StyledContainer = styled.article`
 
 const Container = ({ container, index }) => {
 	const dispatch = useDispatch();
-	const [showMenu, setShowMenu] = useState(false);
+	const [showMenu] = useState(false);
 
 	return (
-		<StyledContainer
-			key={container.id}
-			// onMouseEnter={() => setShowMenu(true)}
-			// onMouseLeave={() => setShowMenu(false)}
-		>
+		<StyledContainer key={container.id}>
 			{container.type === 'one_row_layout' ? (
 				<OneRowLayout container={container} />
 			) : container.type === 'two_row_layout' ? (
