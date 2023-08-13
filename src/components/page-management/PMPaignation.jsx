@@ -44,6 +44,7 @@ const PMPaignation = ({
 }) => {
 	const maxPage = Math.ceil(length / 10);
 	return (
+
 		<PaginationContainer>
 			<PaginationArrowBtns
 				disabled={currentPage === 1}

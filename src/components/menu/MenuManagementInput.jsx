@@ -5,18 +5,18 @@ import { addList, addMenu } from '../../store/slices/menuSlice';
 
 import styled from 'styled-components';
 
-const InputWrapper = styled.article`
-	display: flex;
-	align-items: center;
-`;
 
 const InputForm = styled.form`
 	display: flex;
 `;
 
+const InputWrapper = styled.article`
+	display: flex;
+  height: 40px;
+`;
+
 const Input = styled.input`
-	flex-grow: 1;
-	width: 25vh;
+	width: 15rem;
 	padding: 0.5rem;
 	border: 1px solid ${(props) => props.theme.colors.orange};
 	border-radius: 4px;

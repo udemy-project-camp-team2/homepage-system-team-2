@@ -2,10 +2,10 @@ import PropTypes from 'prop-types';
 import { styled } from 'styled-components';
 
 const PageManagementSearchInput = styled.input`
-	padding: 0 1rem;
+	padding: 0.8rem;
 	margin: 0 auto;
 	width: 60%;
-	height: 2rem;
+	height: 2.8rem;
 	display: block;
 	border: none;
 	border-radius: 0.5rem;
@@ -25,6 +25,7 @@ const PMSearch = ({ value, onChange }) => {
 			value={value}
 			onChange={onChange}
 			autoComplete="off"
+			placeholder="Search"
 		/>
 	);
 };
