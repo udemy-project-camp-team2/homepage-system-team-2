@@ -11,12 +11,11 @@ import List from '../list/List';
 const StyledBlock = styled.div(({ style }) => ({
 	...style,
 	width: '100%',
-	height: '100%',
+	minHeight: 'inherit',
 	display: 'flex',
 	justifyContent: 'center',
 	alignItems: 'center',
 	border: '1px solid teal',
-	padding: '25px',
 }));
 
 const Block = ({ id, style }) => {

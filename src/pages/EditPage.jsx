@@ -11,7 +11,6 @@ import LayoutTab from '../components/tab/LayoutTab';
 import DesignTab from '../components/tab/DesignTab';
 
 const EditPage = () => {
-	useTitle('편집페이지');
 	const { id } = useParams();
 	const dispatch = useDispatch();
 	const containers = useSelector((state) => state.containers);
@@ -30,6 +29,8 @@ const EditPage = () => {
 		localStorage.setItem(id, JSON.stringify(containers));
 	}, [containers]);
 
+	useTitle(id);
+
 	return (
 		<section>
 			{isModalShown ? (
@@ -47,7 +48,7 @@ const EditPage = () => {
 				style={{
 					position: 'absolute',
 					left: '50%',
-					top: '.7rem',
+					top: '6rem',
 					transform: 'translateX(-50%)',
 					zIndex: 2,
 				}}

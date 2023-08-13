@@ -32,7 +32,6 @@ const StyledOverlay = styled.div`
 	position: fixed;
 	top: 50%;
 	left: 50%;
-	background-color: #fff;
 	transform: translate(-50%, -50%);
 	z-index: 50;
 `;
@@ -66,7 +65,6 @@ const Overlay = ({ children }) => {
 					)
 				}
 			>
-				❌
 			</ModalCloseBtn>
 			{children}
 		</StyledOverlay>
