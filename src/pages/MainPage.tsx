@@ -1,8 +1,6 @@
-import { useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useSelector } from '../store/hooks';
 
 const MainPage = () => {
-	const { id } = useParams();
 	const containers = useSelector((state) => state.containers);
 
 	return (

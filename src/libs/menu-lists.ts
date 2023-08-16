@@ -1,6 +1,14 @@
 import { v4 as uuidv4 } from 'uuid';
 
-export const menuLists = {
+export interface MenuListsType {
+	[key: string]: {
+		id: string;
+		title: string;
+		link: string;
+	}[];
+}
+
+export const menuLists: MenuListsType = {
 	'웅진북클럽': [
 		{
 			id: uuidv4(),

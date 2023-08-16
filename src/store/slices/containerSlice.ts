@@ -1,19 +1,25 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { v4 as uuidv4 } from 'uuid';
 
-console.log(window.location.pathname.slice('/').at(-1));
+type ContainerType = {
+	id: string;
+	type: string;
+	blocksIds: string[];
+};
+
+type InitialType = ContainerType[];
 
 const storedValue = localStorage.getItem(
-	window.location.pathname.slice('/').at(-1)
+	(window.location.pathname as any).slice('/').at(-1)
 );
 
-const initialState = storedValue ? JSON.parse(storedValue) : [];
+const initialState: InitialType = storedValue ? JSON.parse(storedValue) : [];
 
 const containerSlice = createSlice({
 	name: 'containers',
 	initialState,
 	reducers: {
-		addContainer(state, action) {
+		addContainer(state, action: PayloadAction<number>) {
 			const newContainer = {
 				id: uuidv4(),
 				type: '',
@@ -23,11 +29,14 @@ const containerSlice = createSlice({
 			newArray.splice(action.payload, 0, newContainer);
 			return newArray;
 		},
-		removeContainer(state, action) {
+		removeContainer(state, action: PayloadAction<string>) {
 			const filteredArray = state.filter((item) => item.id !== action.payload);
 			return filteredArray;
 		},
-		updateLayoutType(state, action) {
+		updateLayoutType(
+			state,
+			action: PayloadAction<{ id: string; type: string; length: number }>
+		) {
 			const newState = [...state];
 			const newBlocksIds = Array.from({ length: action.payload.length }, () =>
 				uuidv4()
@@ -43,7 +52,10 @@ const containerSlice = createSlice({
 			);
 			return updatedState;
 		},
-		updateOrderOfContainers(state, action) {
+		updateOrderOfContainers(
+			state,
+			action: PayloadAction<{ id: string; name: string }>
+		) {
 			const newState = [...state];
 			const targetIndex = newState.findIndex(
 				(item) => item.id === action.payload.id

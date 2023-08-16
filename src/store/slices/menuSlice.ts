@@ -1,17 +1,18 @@
-/* eslint-disable no-useless-escape */
-import { createSlice } from '@reduxjs/toolkit';
+import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { v4 as uuidv4 } from 'uuid';
-import { menuLists } from '../../libs/menu-lists';
+import { MenuListsType, menuLists } from '../../libs/menu-lists';
 
-const initialState = localStorage.getItem('menus')
-	? JSON.parse(localStorage.getItem('menus'))
+type InitialType = MenuListsType;
+
+const initialState: InitialType = localStorage.getItem('menus')
+	? JSON.parse(localStorage.getItem('menus') as string)
 	: menuLists;
 
 const menuSlice = createSlice({
 	name: 'menu',
 	initialState,
 	reducers: {
-		addMenu(state, action) {
+		addMenu(state, action: PayloadAction<{ key: string }>) {
 			const { key } = action.payload;
 
 			const newState = { ...state };
@@ -29,7 +30,7 @@ const menuSlice = createSlice({
 
 			return newState;
 		},
-		addList(state, action) {
+		addList(state, action: PayloadAction<{ key: string; listTitle: string }>) {
 			const { key, listTitle } = action.payload;
 
 			const newState = { ...state };
@@ -53,7 +54,7 @@ const menuSlice = createSlice({
 
 			return newState;
 		},
-		updateMenu(state, action) {
+		updateMenu(state, action: PayloadAction<{ key: string; newKey: string }>) {
 			const { key, newKey } = action.payload;
 			const newState = [state];
 
@@ -71,7 +72,15 @@ const menuSlice = createSlice({
 			return res[0];
 		},
 
-		updateList(state, action) {
+		updateList(
+			state,
+			action: PayloadAction<{
+				id: string;
+				key: string;
+				newTitle: string;
+				newLink: string;
+			}>
+		) {
 			const { key, id, newTitle, newLink } = action.payload;
 
 			const newState = { ...state };
@@ -101,7 +110,7 @@ const menuSlice = createSlice({
 			return newState;
 		},
 
-		deleteMenu(state, action) {
+		deleteMenu(state, action: PayloadAction<{ key: string }>) {
 			const { key } = action.payload;
 
 			const newState = { ...state };
@@ -111,7 +120,7 @@ const menuSlice = createSlice({
 			return newState;
 		},
 
-		deleteList(state, action) {
+		deleteList(state, action: PayloadAction<{ id: string; key: string }>) {
 			const { key, id } = action.payload;
 
 			const newState = { ...state };
@@ -121,7 +130,14 @@ const menuSlice = createSlice({
 			return newState;
 		},
 
-		duplicateList(state, action) {
+		duplicateList(
+			state,
+			action: PayloadAction<{
+				newLink: string;
+				duplicatedKey: string;
+				newTitle: string;
+			}>
+		) {
 			const { duplicatedKey, newTitle, newLink } = action.payload;
 
 			const newState = { ...state };

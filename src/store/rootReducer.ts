@@ -14,3 +14,5 @@ export const rootReducer = combineReducers({
 	selectedId: selectedIdSlice,
 	design: designSlice,
 });
+
+export type RootState = ReturnType<typeof rootReducer>;

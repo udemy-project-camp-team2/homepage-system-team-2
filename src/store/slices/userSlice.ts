@@ -1,6 +1,11 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
-const initialState = {
+type InitialType = {
+	isLoggedIn: boolean;
+	user: string | null;
+};
+
+const initialState: InitialType = {
 	isLoggedIn: false,
 	user: null,
 };
@@ -9,7 +14,7 @@ const userSlice = createSlice({
 	name: 'user',
 	initialState,
 	reducers: {
-		login: (state, action) => {
+		login: (state, action: PayloadAction<string>) => {
 			state.isLoggedIn = true;
 			state.user = action.payload;
 			// 로그인 성공하면 로컬스토리지에 유저 정보를 저장

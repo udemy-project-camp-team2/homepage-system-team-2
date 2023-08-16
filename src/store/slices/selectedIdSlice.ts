@@ -1,12 +1,16 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
-const initialState = { selectedId: '' };
+type InitialType = {
+	selectedId: string;
+};
+
+const initialState: InitialType = { selectedId: '' };
 
 export const selectedIdSlice = createSlice({
 	name: 'selectedId',
 	initialState,
 	reducers: {
-		updateSelectedId(state, action) {
+		updateSelectedId(state, action: PayloadAction<string>) {
 			state.selectedId = action.payload;
 			return state;
 		},

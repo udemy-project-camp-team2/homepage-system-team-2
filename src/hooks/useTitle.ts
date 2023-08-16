@@ -1,11 +1,13 @@
 import { useEffect } from 'react';
 
-export const useTitle = (mainTitle, subTitle) => {
+export const useTitle = (mainTitle: string, subTitle?: string) => {
 	useEffect(() => {
 		document.title = mainTitle;
 
 		return () => {
-			document.title = subTitle;
+			if (subTitle) {
+				document.title = subTitle;
+			}
 		};
 	}, [mainTitle]);
 };
