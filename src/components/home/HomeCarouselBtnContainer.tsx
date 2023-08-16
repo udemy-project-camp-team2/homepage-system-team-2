@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
@@ -6,6 +5,11 @@ import {
 	faChevronLeft,
 	faPause,
 } from '@fortawesome/free-solid-svg-icons';
+
+interface HomeCarouselBtnContainerProps {
+	carouselHandler: (e: any) => void;
+	toggleCarouselHandler: () => void;
+}
 
 const ButtonContainer = styled.div`
 	position: absolute;
@@ -33,7 +37,7 @@ const ButtonContainer = styled.div`
 const HomeCarouselBtnContainer = ({
 	carouselHandler,
 	toggleCarouselHandler,
-}) => {
+}: HomeCarouselBtnContainerProps) => {
 	return (
 		<ButtonContainer>
 			<button name="prev" onClick={carouselHandler}>
@@ -50,8 +54,3 @@ const HomeCarouselBtnContainer = ({
 };
 
 export default HomeCarouselBtnContainer;
-
-HomeCarouselBtnContainer.propTypes = {
-	carouselHandler: PropTypes.func,
-	toggleCarouselHandler: PropTypes.func,
-};

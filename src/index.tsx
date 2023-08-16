@@ -6,12 +6,12 @@ import store from './store';
 import { login } from './store/slices/userSlice';
 
 // 로컬 스토리지에서 유저정보를 불러와 스토어에 저장
-const userFormLocalStorage = JSON.parse(localStorage.getItem('user'));
+const userFormLocalStorage = JSON.parse(localStorage.getItem('user') as any);
 if (userFormLocalStorage) {
 	store.dispatch(login(userFormLocalStorage));
 }
 
-const root = createRoot(document.getElementById('root'));
+const root = createRoot(document.getElementById('root') as HTMLElement);
 root.render(
 	<StyledProvider>
 		<Provider store={store}>

@@ -1,6 +1,6 @@
 import { Fragment, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
+import { useDispatch, useSelector } from '../../store/hooks';
 import { updateLayoutType } from '../../store/slices/containerSlice';
 import { toggleModal } from '../../store/slices/modalSlice';
 import { layoutLists } from '../../libs/layout-lists';

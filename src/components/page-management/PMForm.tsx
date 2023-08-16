@@ -1,9 +1,17 @@
-import PropTypes from 'prop-types';
 import { useRef } from 'react';
-import { useDispatch } from 'react-redux';
 import { styled } from 'styled-components';
+import { useDispatch } from '../../store/hooks';
 import { toggleModal } from '../../store/slices/modalSlice';
 import { duplicateList } from '../../store/slices/menuSlice';
+
+interface PMFormProps {
+	targetList: {
+		key: string;
+		id: string;
+		title: string;
+		link: string;
+	};
+}
 
 const StyledPMForm = styled.div`
 	width: 30rem;
@@ -23,8 +31,8 @@ const InputContaier = styled.div`
 
 const PMInput = styled.input`
 	width: 100%;
-	padding: 1rem .8rem;
-	margin-bottom: .8rem;
+	padding: 1rem 0.8rem;
+	margin-bottom: 0.8rem;
 	background-color: ${(props) => props.theme.colors.gray.lighter};
 	border: none;
 	border-radius: 10px;
@@ -69,16 +77,15 @@ const Btn = styled.button`
 	}
 `;
 
-
 const ModalContainer = styled.div`
 	background-color: #fff;
 	padding: 1rem;
 	border-radius: 10px 10px 0 0;
-`
+`;
 
-const PMForm = ({ targetList }) => {
-	const titleRef = useRef('');
-	const linkRef = useRef('');
+const PMForm = ({ targetList }: PMFormProps) => {
+	const titleRef = useRef<HTMLInputElement | null>(null);
+	const linkRef = useRef<HTMLInputElement | null>(null);
 	const dispatch = useDispatch();
 
 	return (
@@ -110,8 +117,8 @@ const PMForm = ({ targetList }) => {
 						dispatch(
 							duplicateList({
 								duplicatedKey: targetList.key,
-								newTitle: titleRef.current.value,
-								newLink: linkRef.current.value,
+								newTitle: (titleRef.current as HTMLInputElement).value,
+								newLink: (linkRef.current as HTMLInputElement).value,
 							})
 						);
 						dispatch(toggleModal({ name: '' }));
@@ -125,8 +132,3 @@ const PMForm = ({ targetList }) => {
 };
 
 export default PMForm;
-
-PMForm.propTypes = {
-	name: PropTypes.string,
-	targetList: PropTypes.object,
-};

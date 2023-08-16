@@ -1,8 +1,8 @@
 import { useMemo } from 'react';
-import { useSelector } from 'react-redux';
+import { styled } from 'styled-components';
+import { useSelector } from '../../store/hooks';
 import MenuManagementList from './MenuManagementList';
 import MenuManagementInput from './MenuManagementInput';
-import { styled } from 'styled-components';
 
 const MenuWrapper = styled.article`
 	display: flex;

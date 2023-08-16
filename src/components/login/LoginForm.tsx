@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch } from '../../store/hooks';
 import { login } from '../../store/slices/userSlice';
 import { useNavigate } from 'react-router';
 import { styled } from 'styled-components';
@@ -43,7 +43,7 @@ const Require = styled.span`
 const Userbtns = styled.div`
 	display: flex;
 `;
-const Btn = styled.div`
+const Btn = styled.div<{ $left?: string; $right?: string }>`
 	margin-left: ${(props) => props.$left || 'unset'};
 	margin-right: ${(props) => props.$right || 'unset'};
 	color: ${(props) => props.theme.colors.gray.darker};
@@ -77,15 +77,15 @@ const LoginForm = () => {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 
-	const handleEmail = (e) => {
+	const handleEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
 		setEmail(e.target.value);
 	};
 
-	const handlePw = (e) => {
+	const handlePw = (e: React.ChangeEvent<HTMLInputElement>) => {
 		setPw(e.target.value);
 	};
 
-	const handleLogin = (e) => {
+	const handleLogin = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 		if (User.email === email && User.pw === pw) {
 			dispatch(login({ email, pw }));

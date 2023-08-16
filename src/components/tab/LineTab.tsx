@@ -1,8 +1,13 @@
-import PropTypes from 'prop-types';
-import { Fragment } from 'react';
-import { useSelector } from 'react-redux';
+import { Fragment, Dispatch, SetStateAction } from 'react';
 import styled from 'styled-components';
+import { useSelector } from '../../store/hooks';
 import { lineLists } from '../../libs/line-lists';
+
+interface LineTabProps {
+	setDesignType: Dispatch<
+		SetStateAction<{ id: string; type: string; length: number }>
+	>;
+}
 
 const LineContainer = styled.div`
 	margin: 0 auto;
@@ -19,7 +24,7 @@ const LineContainer = styled.div`
 	}
 `;
 
-const LineTab = ({ setDesignType }) => {
+const LineTab = ({ setDesignType }: LineTabProps) => {
 	const selectedId = useSelector((state) => state.selectedId.selectedId);
 
 	return (
@@ -43,7 +48,3 @@ const LineTab = ({ setDesignType }) => {
 };
 
 export default LineTab;
-
-LineTab.propTypes = {
-	setDesignType: PropTypes.func,
-};

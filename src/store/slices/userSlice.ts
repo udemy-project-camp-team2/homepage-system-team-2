@@ -2,7 +2,7 @@ import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
 type InitialType = {
 	isLoggedIn: boolean;
-	user: string | null;
+	user: { email: string; pw: string } | null;
 };
 
 const initialState: InitialType = {
@@ -14,7 +14,7 @@ const userSlice = createSlice({
 	name: 'user',
 	initialState,
 	reducers: {
-		login: (state, action: PayloadAction<string>) => {
+		login: (state, action: PayloadAction<{ email: string; pw: string }>) => {
 			state.isLoggedIn = true;
 			state.user = action.payload;
 			// 로그인 성공하면 로컬스토리지에 유저 정보를 저장

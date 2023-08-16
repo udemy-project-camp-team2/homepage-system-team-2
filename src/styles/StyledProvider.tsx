@@ -1,9 +1,12 @@
-import PropTypes from 'prop-types';
 import { ThemeProvider } from 'styled-components';
 import GlobalStyle from './GlobalStyle';
 import { theme } from './theme';
 
-const StyledProvider = ({ children }) => {
+interface StyledProviderProps {
+	children: React.ReactNode;
+}
+
+const StyledProvider = ({ children }: StyledProviderProps) => {
 	return (
 		<ThemeProvider theme={theme}>
 			<GlobalStyle />
@@ -13,7 +16,3 @@ const StyledProvider = ({ children }) => {
 };
 
 export default StyledProvider;
-
-StyledProvider.propTypes = {
-	children: PropTypes.node,
-};

@@ -1,12 +1,13 @@
-import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-const StyledButton = styled.button(({ style }) => ({
+interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {}
+
+const StyledButton = styled.button<{ style: any }>(({ style }) => ({
 	...style,
 	zIndex: 2,
 }));
 
-const Button = ({ type, children, onClick, style, name }) => {
+const Button = ({ type, children, onClick, style, name }: ButtonProps) => {
 	return (
 		<StyledButton type={type} onClick={onClick} style={style} name={name}>
 			{children}
@@ -15,11 +16,3 @@ const Button = ({ type, children, onClick, style, name }) => {
 };
 
 export default Button;
-
-Button.propTypes = {
-	type: PropTypes.string,
-	children: PropTypes.node.isRequired,
-	onClick: PropTypes.func,
-	style: PropTypes.object,
-	name: PropTypes.string,
-};

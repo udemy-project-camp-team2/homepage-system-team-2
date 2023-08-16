@@ -1,5 +1,9 @@
-import PropTypes from 'prop-types';
+import type { ReactNode } from 'react';
 import { styled } from 'styled-components';
+
+interface PMTableProps {
+	children: ReactNode;
+}
 
 const PageManagementTable = styled.table`
 	margin: 2rem 0;
@@ -8,12 +12,8 @@ const PageManagementTable = styled.table`
 	border-collapse: collapse;
 `;
 
-const PMTable = ({ children }) => {
+const PMTable = ({ children }: PMTableProps) => {
 	return <PageManagementTable>{children}</PageManagementTable>;
 };
 
 export default PMTable;
-
-PMTable.propTypes = {
-	children: PropTypes.node,
-};

@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
+import { useDispatch } from '../../store/hooks';
 import Button from '../common/Button';
 import LineTab from './LineTab';
 import ImageTab from './ImageTab';
@@ -25,7 +25,10 @@ const TabTitleList = styled.ul`
 	position: relative;
 `;
 
-const TabTitleItem = styled.li`
+const TabTitleItem = styled.li<{
+	$color: string;
+	$fontWeight: string | number;
+}>`
 	width: max-content;
 	color: ${(props) => props.$color};
 	font-weight: ${(props) => props.$fontWeight};
@@ -36,7 +39,7 @@ const TabContentList = styled.ul`
 	width: 100%;
 `;
 
-const TabContentItem = styled.li`
+const TabContentItem = styled.li<{ $display: string }>`
 	display: ${(props) => props.$display};
 `;
 

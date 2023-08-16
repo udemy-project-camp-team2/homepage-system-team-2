@@ -1,12 +1,15 @@
-import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-const StyledHr = styled.hr`
+interface LineProps {
+	borderType: string;
+}
+
+const StyledHr = styled.hr<{ $borderLine: string }>`
 	width: 100%;
 	border: 5px ${(props) => props.$borderLine} #000;
 `;
 
-const Line = ({ borderType }) => {
+const Line = ({ borderType }: LineProps) => {
 	switch (borderType) {
 		case 'solid-line':
 			return <StyledHr $borderLine={'solid'} />;
@@ -20,7 +23,3 @@ const Line = ({ borderType }) => {
 };
 
 export default Line;
-
-Line.propTypes = {
-	borderType: PropTypes.string,
-};

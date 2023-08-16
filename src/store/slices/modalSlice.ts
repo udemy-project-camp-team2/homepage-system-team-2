@@ -2,7 +2,7 @@ import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
 type InitialType = {
 	name: string;
-	list: {};
+	list: any;
 	isOpen: boolean;
 };
 

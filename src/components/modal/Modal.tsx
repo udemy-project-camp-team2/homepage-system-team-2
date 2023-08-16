@@ -1,8 +1,7 @@
-import PropTypes from 'prop-types';
-import { Fragment } from 'react';
+import { Fragment, ReactNode } from 'react';
 import { createPortal } from 'react-dom';
-import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
+import { useDispatch } from '../../store/hooks';
 import { toggleModal } from '../../store/slices/modalSlice';
 
 const StyledBackdrop = styled.div`
@@ -51,7 +50,7 @@ const Backdrop = () => {
 	);
 };
 
-const Overlay = ({ children }) => {
+const Overlay = ({ children }: { children: ReactNode }) => {
 	const dispatch = useDispatch();
 	return (
 		<StyledOverlay>
@@ -64,16 +63,15 @@ const Overlay = ({ children }) => {
 						})
 					)
 				}
-			>
-			</ModalCloseBtn>
+			></ModalCloseBtn>
 			{children}
 		</StyledOverlay>
 	);
 };
 
-const portalElement = document.getElementById('modal');
+const portalElement = document.getElementById('modal') as HTMLElement;
 
-const Modal = ({ children }) => {
+const Modal = ({ children }: { children: ReactNode }) => {
 	return (
 		<Fragment>
 			{createPortal(<Overlay>{children}</Overlay>, portalElement)}
@@ -83,11 +81,3 @@ const Modal = ({ children }) => {
 };
 
 export default Modal;
-
-Overlay.propTypes = {
-	children: PropTypes.node,
-};
-
-Modal.propTypes = {
-	children: PropTypes.node,
-};

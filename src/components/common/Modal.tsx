@@ -1,5 +1,4 @@
-import PropTypes from 'prop-types';
-import { Fragment } from 'react';
+import { Fragment, ReactNode } from 'react';
 import { createPortal } from 'react-dom';
 import styled from 'styled-components';
 
@@ -24,40 +23,33 @@ const StyledOverlay = styled.div`
 	background-color: #fff;
 `;
 
-const Backdrop = ({ onClose }) => {
+const Backdrop = ({ onClose }: { onClose: () => void }) => {
 	return <StyledBackdrop onClick={onClose} />;
 };
 
-const Overlay = ({ children }) => {
+const Overlay = ({ children }: { children: ReactNode }) => {
 	return <StyledOverlay>{children}</StyledOverlay>;
 };
 
-const Modal = ({ children, onClose }) => {
+const Modal = ({
+	children,
+	onClose,
+}: {
+	children: ReactNode;
+	onClose: () => void;
+}) => {
 	return (
 		<Fragment>
 			{createPortal(
 				<Overlay>{children}</Overlay>,
-				document.getElementById('modal')
+				document.getElementById('modal') as HTMLElement
 			)}
 			{createPortal(
 				<Backdrop onClose={onClose} />,
-				document.getElementById('modal')
+				document.getElementById('modal') as HTMLElement
 			)}
 		</Fragment>
 	);
 };
 
 export default Modal;
-
-Modal.propTypes = {
-	children: PropTypes.node,
-	onClose: PropTypes.func,
-};
-
-Overlay.propTypes = {
-	children: PropTypes.node,
-};
-
-Backdrop.propTypes = {
-	onClose: PropTypes.func,
-};

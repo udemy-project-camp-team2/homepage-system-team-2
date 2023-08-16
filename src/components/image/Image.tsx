@@ -1,9 +1,20 @@
-import PropTypes from 'prop-types';
 import { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector } from '../../store/hooks';
 import styled from 'styled-components';
 
-const ImageContainer = styled.div(({ $styles }) => ({
+interface ImageProps {
+	designId: string;
+	borderType: string;
+}
+
+interface StylesType {
+	width?: string;
+	height?: string;
+	border?: string;
+	borderRadius?: string;
+}
+
+const ImageContainer = styled.div<{ $styles: StylesType }>(({ $styles }) => ({
 	margin: '0 0.5rem',
 	width: '100%',
 	height: '100%',
@@ -15,14 +26,14 @@ const ImageContainer = styled.div(({ $styles }) => ({
 	...$styles,
 }));
 
-const StyledImg = styled.img(({ $styles }) => ({
+const StyledImg = styled.img<{ $styles: StylesType }>(({ $styles }) => ({
 	width: '100%',
 	height: '100%',
 	display: 'block',
 	...$styles,
 }));
 
-const Image = ({ designId, borderType }) => {
+const Image = ({ designId, borderType }: ImageProps) => {
 	const [image, setImage] = useState('');
 	const [isOver, setIsOver] = useState(false);
 	// const selectedId = useSelector((state) => state.selectedId.selectedId);
@@ -30,11 +41,17 @@ const Image = ({ designId, borderType }) => {
 	// 	(state) => state.design[selectedId]['styles'][designId]
 	// );
 
-	const changeImageHandler = (e) => {
-		const targetImg = e.target.files[0];
-		const reader = new FileReader();
-		reader.readAsDataURL(targetImg);
-		reader.onload = () => setImage(reader.result);
+	const changeImageHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+		if (e.target.files) {
+			const targetImg = e.target.files[0];
+			const reader = new FileReader();
+			reader.readAsDataURL(targetImg);
+			reader.onload = () => {
+				if (reader.result) {
+					setImage(reader.result.toString());
+				}
+			};
+		}
 	};
 
 	return (
@@ -87,8 +104,3 @@ const Image = ({ designId, borderType }) => {
 };
 
 export default Image;
-
-Image.propTypes = {
-	designId: PropTypes.string,
-	borderType: PropTypes.string,
-};

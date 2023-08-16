@@ -1,14 +1,18 @@
-import PropTypes from 'prop-types';
-import { useDispatch, useSelector } from 'react-redux';
+import { useCallback } from 'react';
 import styled from 'styled-components';
+import { useDispatch, useSelector } from '../../store/hooks';
 import { toggleModal } from '../../store/slices/modalSlice';
 import { updateSelectedId } from '../../store/slices/selectedIdSlice';
-import { useCallback } from 'react';
 import Image from '../image/Image';
 import Line from '../line/Line';
 import List from '../list/List';
 
-const StyledBlock = styled.div(({ style }) => ({
+interface BlockProps {
+	id: string;
+	style?: any;
+}
+
+const StyledBlock = styled.div<{ style: any }>(({ style }) => ({
 	...style,
 	width: '100%',
 	minHeight: 'inherit',
@@ -18,7 +22,7 @@ const StyledBlock = styled.div(({ style }) => ({
 	border: '1px solid teal',
 }));
 
-const Block = ({ id, style }) => {
+const Block = ({ id, style }: BlockProps) => {
 	const design = useSelector((state) => state.design[id]);
 	const dispatch = useDispatch();
 
@@ -34,6 +38,7 @@ const Block = ({ id, style }) => {
 	return (
 		<StyledBlock
 			id={id}
+			style={style}
 			onClick={(e) => {
 				e.stopPropagation();
 				console.log(id);
@@ -71,8 +76,3 @@ const Block = ({ id, style }) => {
 };
 
 export default Block;
-
-Block.propTypes = {
-	id: PropTypes.string,
-	style: PropTypes.object,
-};

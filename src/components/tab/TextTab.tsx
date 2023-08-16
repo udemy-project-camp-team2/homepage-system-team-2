@@ -1,8 +1,13 @@
-import PropTypes from 'prop-types';
-import { Fragment } from 'react';
-import { useSelector } from 'react-redux';
+import { Fragment, Dispatch, SetStateAction } from 'react';
 import styled from 'styled-components';
+import { useSelector } from '../../store/hooks';
 import { textLists } from '../../libs/text-lists';
+
+interface TextTabProps {
+	setDesignType: Dispatch<
+		SetStateAction<{ id: string; type: string; length: number }>
+	>;
+}
 
 const TextContainer = styled.div`
 	margin: 0 auto;
@@ -19,7 +24,7 @@ const TextContainer = styled.div`
 	}
 `;
 
-const TextTab = ({ setDesignType }) => {
+const TextTab = ({ setDesignType }: TextTabProps) => {
 	const selectedId = useSelector((state) => state.selectedId.selectedId);
 	return (
 		<Fragment>
@@ -42,7 +47,3 @@ const TextTab = ({ setDesignType }) => {
 };
 
 export default TextTab;
-
-TextTab.propTypes = {
-	setDesignType: PropTypes.func,
-};

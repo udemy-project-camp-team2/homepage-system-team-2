@@ -1,7 +1,6 @@
-import PropTypes from 'prop-types';
-import { useState, memo, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useState, memo } from 'react';
 import styled from 'styled-components';
+import { useDispatch } from '../../store/hooks';
 import { addContainer } from '../../store/slices/containerSlice';
 import { toggleModal } from '../../store/slices/modalSlice';
 import { updateSelectedId } from '../../store/slices/selectedIdSlice';
@@ -12,6 +11,15 @@ import TwoRowLayout from '../models/layouts/TwoRowLayout';
 import ThreeRowLayout from '../models/layouts/ThreeRowLayout';
 import FourRowLayout from '../models/layouts/FourRowLayout';
 
+interface ContainerProps {
+	container: {
+		id: string;
+		type: string;
+		blocksIds: string[];
+	};
+	index: number;
+}
+
 const StyledContainer = styled.article`
 	min-height: 20vh;
 	display: flex;
@@ -21,7 +29,7 @@ const StyledContainer = styled.article`
 	border: 2px dashed #000;
 `;
 
-const Container = ({ container, index }) => {
+const Container = ({ container, index }: ContainerProps) => {
 	const dispatch = useDispatch();
 	const [showMenu] = useState(false);
 
@@ -50,7 +58,7 @@ const Container = ({ container, index }) => {
 					레이아웃을 선택하세요!
 				</b>
 			)}
-			{showMenu ? <QuickMenu /> : null}
+			{showMenu ? <QuickMenu containerId={container.id} /> : null}
 			<Button
 				type={'button'}
 				onClick={(e) => {
@@ -72,8 +80,3 @@ const Container = ({ container, index }) => {
 };
 
 export default memo(Container);
-
-Container.propTypes = {
-	container: PropTypes.object,
-	index: PropTypes.number,
-};

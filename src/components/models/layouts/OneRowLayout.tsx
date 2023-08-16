@@ -1,6 +1,13 @@
-import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Block from '../../block/Block';
+
+interface OneRowLayoutProps {
+	container: {
+		id: string;
+		type: string;
+		blocksIds: string[];
+	};
+}
 
 const OneRow = styled.div`
 	width: 100%;
@@ -9,9 +16,9 @@ const OneRow = styled.div`
 	gap: 1rem;
 `;
 
-const OneRowLayout = ({ onClick, container }) => {
+const OneRowLayout = ({ container }: OneRowLayoutProps) => {
 	return (
-		<OneRow onClick={onClick}>
+		<OneRow>
 			{container.blocksIds.map((item) => (
 				<Block id={item} key={item} />
 			))}
@@ -20,8 +27,3 @@ const OneRowLayout = ({ onClick, container }) => {
 };
 
 export default OneRowLayout;
-
-OneRowLayout.propTypes = {
-	onClick: PropTypes.func,
-	container: PropTypes.object,
-};

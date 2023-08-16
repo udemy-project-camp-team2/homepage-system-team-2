@@ -1,4 +1,8 @@
-import PropTypes from 'prop-types';
+import { Fragment, memo, useRef, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { styled } from 'styled-components';
+import { deleteMenu, updateMenu } from '../../store/slices/menuSlice';
+import MenuManagementItem from './MenuManagementItem';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
 	faChevronDown,
@@ -6,11 +10,15 @@ import {
 	faGear,
 	faTimes,
 } from '@fortawesome/free-solid-svg-icons';
-import { Fragment, memo, useRef, useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { styled } from 'styled-components';
-import MenuManagementItem from './MenuManagementItem';
-import { deleteMenu, updateMenu } from '../../store/slices/menuSlice';
+
+interface MenuManagementListType {
+	title: string;
+	lists: {
+		id: string;
+		title: string;
+		link: string;
+	}[];
+}
 
 const ListInfoContainer = styled.div`
 	margin: 1rem 0;
@@ -69,10 +77,10 @@ const MenuTitleInput = styled.input`
 	border-radius: 4px;
 `;
 
-const MenuManagementList = ({ title, lists }) => {
+const MenuManagementList = ({ title, lists }: MenuManagementListType) => {
 	const [isOpen, setIsOpen] = useState(false);
 	const [isMenuEdit, setIsMenuEdit] = useState(false);
-	const menuTitleRef = useRef('');
+	const menuTitleRef = useRef<HTMLInputElement | null>(null);
 	const dispatch = useDispatch();
 
 	return (
@@ -88,7 +96,7 @@ const MenuManagementList = ({ title, lists }) => {
 									dispatch(
 										updateMenu({
 											key: title,
-											newKey: menuTitleRef.current.value,
+											newKey: (menuTitleRef.current as HTMLInputElement).value,
 										})
 									)
 								}
@@ -141,8 +149,3 @@ const MenuManagementList = ({ title, lists }) => {
 };
 
 export default memo(MenuManagementList);
-
-MenuManagementList.propTypes = {
-	title: PropTypes.string,
-	lists: PropTypes.array,
-};

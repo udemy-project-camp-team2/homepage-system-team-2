@@ -1,10 +1,18 @@
-import PropTypes from 'prop-types';
+import { memo, useRef, useState } from 'react';
+import styled from 'styled-components';
+import { useDispatch } from '../../store/hooks';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGear, faTimes } from '@fortawesome/free-solid-svg-icons';
-import { memo, useRef, useState } from 'react';
-import { useDispatch } from 'react-redux';
 import { updateList, deleteList } from '../../store/slices/menuSlice';
-import styled from 'styled-components';
+
+interface MenuManagementItemType {
+	list: {
+		id: string;
+		title: string;
+		link: string;
+	};
+	targetKey: string;
+}
 
 const ListItem = styled.li`
 	background-color: #fff;
@@ -94,10 +102,10 @@ const CancelButton = styled.button`
 	}
 `;
 
-const MenuManagementItem = ({ list, targetKey }) => {
+const MenuManagementItem = ({ list, targetKey }: MenuManagementItemType) => {
 	const [isDetailOpen, setIsDetailOpen] = useState(false);
-	const titleRef = useRef('');
-	const linkRef = useRef('');
+	const titleRef = useRef<HTMLInputElement | null>(null);
+	const linkRef = useRef<HTMLInputElement | null>(null);
 	const dispatch = useDispatch();
 
 	const updateListHandler = () => {
@@ -105,14 +113,14 @@ const MenuManagementItem = ({ list, targetKey }) => {
 			updateList({
 				key: targetKey,
 				id: list.id,
-				newTitle: titleRef.current.value || list.title,
-				newLink: linkRef.current.value || list.link,
+				newTitle: (titleRef.current as HTMLInputElement).value || list.title,
+				newLink: (linkRef.current as HTMLInputElement).value || list.link,
 			})
 		);
 
 		setIsDetailOpen(false);
-		titleRef.current.value = '';
-		linkRef.current.value = '';
+		(titleRef.current as HTMLInputElement).value = '';
+		(linkRef.current as HTMLInputElement).value = '';
 	};
 
 	return (
@@ -172,8 +180,3 @@ const MenuManagementItem = ({ list, targetKey }) => {
 };
 
 export default memo(MenuManagementItem);
-
-MenuManagementItem.propTypes = {
-	list: PropTypes.object,
-	targetKey: PropTypes.string,
-};

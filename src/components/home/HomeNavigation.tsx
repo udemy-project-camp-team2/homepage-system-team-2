@@ -1,6 +1,6 @@
-import { useSelector } from 'react-redux';
 import styled from 'styled-components';
-import HomeNavigationDetail from './HomeNavigationDetail'; 
+import { useSelector } from '../../store/hooks';
+import HomeNavigationDetail from './HomeNavigationDetail';
 
 const Wrapper = styled.div`
 	margin: 100px auto;
@@ -19,10 +19,7 @@ const HomeNavigation = () => {
 	return (
 		<Wrapper>
 			{Object.keys(lists).map((menuName) => (
-				<HomeNavigationDetail
-					key={menuName}
-					menuName={menuName}
-				/>
+				<HomeNavigationDetail key={menuName} menuName={menuName} />
 			))}
 		</Wrapper>
 	);

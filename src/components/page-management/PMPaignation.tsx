@@ -1,6 +1,12 @@
-import PropTypes from 'prop-types';
-import { memo } from 'react';
+import { memo, Dispatch, SetStateAction } from 'react';
 import { styled } from 'styled-components';
+
+interface PMPaginationProps {
+	length: number;
+	currentPage: number;
+	setCurrentPage: Dispatch<SetStateAction<number>>;
+	changePageHandler: (e: any) => void;
+}
 
 const PaginationContainer = styled.div`
 	margin: 0 auto;
@@ -41,10 +47,9 @@ const PMPaignation = ({
 	currentPage,
 	setCurrentPage,
 	changePageHandler,
-}) => {
+}: PMPaginationProps) => {
 	const maxPage = Math.ceil(length / 10);
 	return (
-
 		<PaginationContainer>
 			<PaginationArrowBtns
 				disabled={currentPage === 1}
@@ -64,7 +69,7 @@ const PMPaignation = ({
 						}
 						setCurrentPage(item);
 					}}
-					aria-current={currentPage === item ? 'page' : null}
+					aria-current={currentPage === item ? 'page' : undefined}
 				>
 					{item}
 				</PaginationNumberBtns>
@@ -82,10 +87,3 @@ const PMPaignation = ({
 };
 
 export default memo(PMPaignation);
-
-PMPaignation.propTypes = {
-	length: PropTypes.number,
-	currentPage: PropTypes.number,
-	setCurrentPage: PropTypes.func,
-	changePageHandler: PropTypes.func,
-};

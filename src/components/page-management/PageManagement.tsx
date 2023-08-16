@@ -1,5 +1,5 @@
 import { useState, useCallback, useMemo } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector } from '../../store/hooks';
 import { useDebounce } from '../../hooks/useDebounce';
 import PMTable from './PMTable';
 import PMTableHead from './PMTableHead';
@@ -10,22 +10,26 @@ import PMSearch from './PMSearch';
 const PageManagement = () => {
 	const [search, setSearch] = useState('');
 	const debouncedValue = useDebounce(search, 500);
-	const [currentPage, setCurrentPage] = useState(1);
+	const [currentPage, setCurrentPage] = useState<any>(1);
 	const offset = (currentPage - 1) * 10;
 	const lists = useSelector((state) => state.menu);
-	const changeInputHandler = useCallback((e) => {
-		setSearch(e.target.value);
-	}, []);
 
-	const changePageHandler = useCallback((e) => {
+	const changeInputHandler = useCallback(
+		(e: React.ChangeEvent<HTMLInputElement>) => {
+			setSearch(e.target.value);
+		},
+		[]
+	);
+
+	const changePageHandler = useCallback((e: any) => {
 		const { name } = e.target;
 		if (name === 'prev') {
-			setCurrentPage((prev) => {
+			setCurrentPage((prev: number) => {
 				if (prev <= 1) return;
 				return prev - 1;
 			});
 		} else if (name === 'next') {
-			setCurrentPage((prev) => prev + 1);
+			setCurrentPage((prev: number) => prev + 1);
 		}
 	}, []);
 
@@ -42,7 +46,7 @@ const PageManagement = () => {
 	}, [debouncedValue, lists]);
 
 	return (
-		<section style={{marginBottom: '50px'}}>
+		<section style={{ marginBottom: '50px' }}>
 			<PMSearch value={search} onChange={changeInputHandler} />
 			<PMTable>
 				<PMTableHead />

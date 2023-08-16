@@ -1,12 +1,18 @@
 import { useCallback, useEffect, useState } from 'react';
 
-export const useCarousel = (images) => {
+interface UseCarouselType {
+	id: number;
+	src: string;
+	alt: string;
+}
+
+export const useCarousel = (images: UseCarouselType[]) => {
 	const [isPaused, setIsPaused] = useState(false);
 	const [currentIndex, setCurrentIndex] = useState(0);
 
 	useEffect(() => {
 		const callback = () => {
-			setCurrentIndex((prev) => {
+			setCurrentIndex((prev: any) => {
 				if (isPaused) {
 					return prev;
 				}
@@ -28,7 +34,7 @@ export const useCarousel = (images) => {
 	}, [currentIndex]);
 
 	const carouselHandler = useCallback(
-		(e) => {
+		(e: any) => {
 			const { name } = e.target;
 
 			if (name === 'prev') {

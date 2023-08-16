@@ -1,6 +1,13 @@
-import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Block from '../../block/Block';
+
+interface ThreeRowLayoutProps {
+	container: {
+		id: string;
+		type: string;
+		blocksIds: string[];
+	};
+}
 
 const ThreeRow = styled.div`
 	width: 100%;
@@ -9,9 +16,9 @@ const ThreeRow = styled.div`
 	gap: 1rem;
 `;
 
-const ThreeRowLayout = ({ onClick, container }) => {
+const ThreeRowLayout = ({ container }: ThreeRowLayoutProps) => {
 	return (
-		<ThreeRow onClick={onClick}>
+		<ThreeRow>
 			{container.blocksIds.map((item) => (
 				<Block id={item} key={item} />
 			))}
@@ -20,8 +27,3 @@ const ThreeRowLayout = ({ onClick, container }) => {
 };
 
 export default ThreeRowLayout;
-
-ThreeRowLayout.propTypes = {
-	onClick: PropTypes.func,
-	container: PropTypes.object,
-};

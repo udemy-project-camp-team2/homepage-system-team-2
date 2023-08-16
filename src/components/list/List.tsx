@@ -1,9 +1,22 @@
-import PropTypes from 'prop-types';
 import { useState } from 'react';
-// import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 
-const ListContainer = styled.div(({ $styles }) => ({
+interface ListProps {
+	designId: string;
+	borderType: string;
+}
+
+interface AddedStylesType {
+	width?: string;
+	height?: string;
+	border?: string;
+	borderRadius?: string;
+	fontSize?: string;
+	fontWeight?: string;
+	color?: string;
+}
+
+const ListContainer = styled.div(() => ({
 	margin: '0 auto',
 	height: '100%',
 	display: 'flex',
@@ -11,7 +24,6 @@ const ListContainer = styled.div(({ $styles }) => ({
 	alignItems: 'center',
 	placeself: 'center',
 	backgroundColor: '#fff',
-	...$styles,
 }));
 
 const ListArticle = styled.div`
@@ -24,7 +36,7 @@ const ListArticle = styled.div`
 	flex-direction: column;
 `;
 
-const ImgSection = styled.div(({ $styles }) => ({
+const ImgSection = styled.div<{ $styles: AddedStylesType }>(({ $styles }) => ({
 	width: '100%',
 	height: '100%',
 	display: 'flex',
@@ -33,7 +45,7 @@ const ImgSection = styled.div(({ $styles }) => ({
 	...$styles,
 }));
 
-const Image = styled.img(({ $styles }) => ({
+const Image = styled.img<{ $styles: AddedStylesType }>(({ $styles }) => ({
 	width: '100%',
 	height: '100%',
 	display: 'block',
@@ -45,18 +57,18 @@ const TitleSetion = styled.div`
 	text-align: center;
 `;
 
-const TitleStyled = styled.p(({ $styles }) => ({
+const TitleStyled = styled.p<{ $styles: AddedStylesType }>(({ $styles }) => ({
 	margin: '0',
 	...$styles,
 }));
 
-const TextStyled = styled.p(({ $styles }) => ({
+const TextStyled = styled.p<{ $styles: AddedStylesType }>(({ $styles }) => ({
 	margin: '0',
 	color: '#666',
 	...$styles,
 }));
 
-const List = ({ designId, borderType }) => {
+const List = ({ designId, borderType }: ListProps) => {
 	const [image, setImage] = useState('');
 	const [isOver, setIsOver] = useState(false);
 	const [titleOn, setTitleOn] = useState(false);
@@ -64,19 +76,25 @@ const List = ({ designId, borderType }) => {
 	const [textOn, setTextOn] = useState(false);
 	const [text, setText] = useState('Text 입력');
 
-	const changeImageHandler = (e) => {
-		const targetImg = e.target.files[0];
-		const reader = new FileReader();
-		reader.readAsDataURL(targetImg);
-		reader.onload = () => setImage(reader.result);
+	const changeImageHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+		if (e.target.files) {
+			const targetImg = e.target.files[0];
+			const reader = new FileReader();
+			reader.readAsDataURL(targetImg);
+			reader.onload = () => {
+				if (reader.result) {
+					setImage(reader.result.toString());
+				}
+			};
+		}
 	};
 
-	const changeTitleHandler = (e) => {
+	const changeTitleHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const targetTitle = e.target.value;
 		setTitle(targetTitle);
 	};
 
-	const changeTextHandler = (e) => {
+	const changeTextHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const targetText = e.target.value;
 		setText(targetText);
 	};
@@ -232,8 +250,3 @@ const List = ({ designId, borderType }) => {
 };
 
 export default List;
-
-List.propTypes = {
-	designId: PropTypes.string,
-	borderType: PropTypes.string,
-};

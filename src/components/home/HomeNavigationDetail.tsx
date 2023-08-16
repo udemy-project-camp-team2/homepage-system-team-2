@@ -1,7 +1,10 @@
-import PropTypes from 'prop-types';
 import { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector } from '../../store/hooks';
 import styled, { css } from 'styled-components';
+
+interface HomeNavigationDetailProps {
+	menuName: string;
+}
 
 const DropdownContainer = styled.div`
 	flex: 1;
@@ -17,7 +20,7 @@ const DropdownButton = styled.div`
 	cursor: pointer;
 `;
 
-const Menu = styled.div`
+const Menu = styled.div<{ $isDropped: boolean }>`
 	background: #fff;
 	position: absolute;
 	left: 50%;
@@ -71,11 +74,11 @@ const LinkWrapper = styled.a`
 	color: #000;
 `;
 
-const HomeNavigationDetail = ({ menuName }) => {
+const HomeNavigationDetail = ({ menuName }: HomeNavigationDetailProps) => {
 	const lists = useSelector((state) => state.menu);
-	const [openMenu, setOpenMenu] = useState(null);
+	const [openMenu, setOpenMenu] = useState<string | null>(null);
 
-	const handleMenuClick = (menu) => {
+	const handleMenuClick = (menu: string | null) => {
 		setOpenMenu(openMenu === menu ? null : menu);
 	};
 
@@ -96,10 +99,6 @@ const HomeNavigationDetail = ({ menuName }) => {
 			</Menu>
 		</DropdownContainer>
 	);
-};
-
-HomeNavigationDetail.propTypes = {
-	menuName: PropTypes.string.isRequired,
 };
 
 export default HomeNavigationDetail;

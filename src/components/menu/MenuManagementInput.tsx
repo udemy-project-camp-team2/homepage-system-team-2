@@ -1,10 +1,11 @@
-import PropTypes from 'prop-types';
 import { memo, useRef, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import styled from 'styled-components';
+import { useDispatch } from '../../store/hooks';
 import { addList, addMenu } from '../../store/slices/menuSlice';
 
-import styled from 'styled-components';
-
+interface MenuManagementInputType {
+	values: string[];
+}
 
 const InputForm = styled.form`
 	display: flex;
@@ -12,7 +13,7 @@ const InputForm = styled.form`
 
 const InputWrapper = styled.article`
 	display: flex;
-  height: 40px;
+	height: 40px;
 `;
 
 const Input = styled.input`
@@ -32,7 +33,7 @@ const Button = styled.button`
 	cursor: pointer;
 `;
 
-const ToggleButton = styled.button`
+const ToggleButton = styled.button<{ $isOpen: boolean }>`
 	padding: 0.5rem 1rem;
 	border: 1px solid
 		${(props) =>
@@ -59,24 +60,24 @@ const Option = styled.option`
 	color: #fff;
 `;
 
-const MenuManagementInput = ({ values }) => {
+const MenuManagementInput = ({ values }: MenuManagementInputType) => {
 	const [isOpen, setIsOpen] = useState(false);
-	const inputRef = useRef('');
-	const selectRef = useRef('');
+	const inputRef = useRef<HTMLInputElement | null>(null);
+	const selectRef = useRef<HTMLSelectElement | null>(null);
 	const dispatch = useDispatch();
 
-	const submitHandler = (e) => {
+	const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 
-		if (inputRef.current.value === '') {
+		if ((inputRef.current as HTMLInputElement).value === '') {
 			alert(`Please enter any words`);
 			return;
 		}
 
 		if (!isOpen) {
 			// 메뉴 추가
-			dispatch(addMenu({ key: inputRef.current.value }));
-			inputRef.current.value = '';
+			dispatch(addMenu({ key: (inputRef.current as HTMLInputElement).value }));
+			(inputRef.current as HTMLInputElement).value = '';
 			return;
 		}
 
@@ -84,11 +85,11 @@ const MenuManagementInput = ({ values }) => {
 			// 리스트 추가
 			dispatch(
 				addList({
-					key: selectRef.current.value,
-					listTitle: inputRef.current.value,
+					key: (selectRef.current as HTMLSelectElement).value,
+					listTitle: (inputRef.current as HTMLInputElement).value,
 				})
 			);
-			inputRef.current.value = '';
+			(inputRef.current as HTMLInputElement).value = '';
 			return;
 		}
 	};
@@ -120,7 +121,3 @@ const MenuManagementInput = ({ values }) => {
 };
 
 export default memo(MenuManagementInput);
-
-MenuManagementInput.propTypes = {
-	values: PropTypes.array,
-};

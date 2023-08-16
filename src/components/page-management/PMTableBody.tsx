@@ -1,10 +1,19 @@
-import PropTypes from 'prop-types';
-import { useSelector } from 'react-redux';
+import { useSelector } from '../../store/hooks';
 import PMTableRow from './PMTableRow';
 import Modal from '../modal/Modal';
 import PMForm from './PMForm';
 
-const PMTableBody = ({ pageLists, offset }) => {
+interface PMTableBodyProps {
+	pageLists: {
+		key: string;
+		id: string;
+		title: string;
+		link: string;
+	}[];
+	offset: number;
+}
+
+const PMTableBody = ({ pageLists, offset }: PMTableBodyProps) => {
 	const isOpen = useSelector((state) => state.modal.isOpen);
 	const targetList = useSelector((state) => state.modal.list);
 
@@ -24,8 +33,3 @@ const PMTableBody = ({ pageLists, offset }) => {
 };
 
 export default PMTableBody;
-
-PMTableBody.propTypes = {
-	offset: PropTypes.number,
-	pageLists: PropTypes.array,
-};

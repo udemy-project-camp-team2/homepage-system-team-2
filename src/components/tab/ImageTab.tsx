@@ -1,8 +1,13 @@
-import PropTypes from 'prop-types';
-import { Fragment } from 'react';
-import { useSelector } from 'react-redux';
+import { Fragment, Dispatch, SetStateAction } from 'react';
 import styled from 'styled-components';
+import { useSelector } from '../../store/hooks';
 import { imageLists } from '../../libs/image-lists';
+
+interface ImageTabProps {
+	setDesignType: Dispatch<
+		SetStateAction<{ id: string; type: string; length: number }>
+	>;
+}
 
 const ImageWrapper = styled.div`
 	margin: 0 auto;
@@ -19,7 +24,7 @@ const ImageWrapper = styled.div`
 	}
 `;
 
-const ImageTab = ({ setDesignType }) => {
+const ImageTab = ({ setDesignType }: ImageTabProps) => {
 	const selectedId = useSelector((state) => state.selectedId.selectedId);
 
 	return (
@@ -45,7 +50,3 @@ const ImageTab = ({ setDesignType }) => {
 };
 
 export default ImageTab;
-
-ImageTab.propTypes = {
-	setDesignType: PropTypes.func,
-};

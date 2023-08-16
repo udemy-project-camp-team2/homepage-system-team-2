@@ -1,5 +1,13 @@
-import PropTypes from 'prop-types';
 import styled from 'styled-components';
+
+interface HomeCarouselContainerProps {
+	currentIndex: number;
+	images: {
+		id: number;
+		src: string;
+		alt: string;
+	}[];
+}
 
 const CarouselContainer = styled.div`
 	width: 100%;
@@ -16,7 +24,10 @@ const CarouselImg = styled.img`
 	object-fit: cover;
 `;
 
-const HomeCarouselContainer = ({ currentIndex, images }) => {
+const HomeCarouselContainer = ({
+	currentIndex,
+	images,
+}: HomeCarouselContainerProps) => {
 	return (
 		<CarouselContainer
 			style={{
@@ -31,8 +42,3 @@ const HomeCarouselContainer = ({ currentIndex, images }) => {
 };
 
 export default HomeCarouselContainer;
-
-HomeCarouselContainer.propTypes = {
-	currentIndex: PropTypes.number,
-	images: PropTypes.array,
-};

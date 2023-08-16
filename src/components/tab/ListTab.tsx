@@ -1,8 +1,13 @@
-import PropTypes from 'prop-types';
-import { Fragment } from 'react';
-import { useSelector } from 'react-redux';
+import { Fragment, Dispatch, SetStateAction } from 'react';
 import styled from 'styled-components';
+import { useSelector } from '../../store/hooks';
 import { listLists } from '../../libs/list-lists';
+
+interface ListTabProps {
+	setDesignType: Dispatch<
+		SetStateAction<{ id: string; type: string; length: number }>
+	>;
+}
 
 const ListTabStyled = styled.div`
 	display: grid;
@@ -23,7 +28,7 @@ const ListContainer = styled.div`
 	}
 `;
 
-const ListTab = ({ setDesignType }) => {
+const ListTab = ({ setDesignType }: ListTabProps) => {
 	const selectedId = useSelector((state) => state.selectedId.selectedId);
 	return (
 		<Fragment>
@@ -48,7 +53,3 @@ const ListTab = ({ setDesignType }) => {
 };
 
 export default ListTab;
-
-ListTab.propTypes = {
-	setDesignType: PropTypes.func,
-};

@@ -1,5 +1,9 @@
-import PropTypes from 'prop-types';
 import { styled } from 'styled-components';
+
+interface PMSearchProps {
+	value: string;
+	onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+}
 
 const PageManagementSearchInput = styled.input`
 	padding: 0.8rem;
@@ -17,7 +21,7 @@ const PageManagementSearchInput = styled.input`
 	}
 `;
 
-const PMSearch = ({ value, onChange }) => {
+const PMSearch = ({ value, onChange }: PMSearchProps) => {
 	return (
 		<PageManagementSearchInput
 			type="text"
@@ -31,8 +35,3 @@ const PMSearch = ({ value, onChange }) => {
 };
 
 export default PMSearch;
-
-PMSearch.propTypes = {
-	value: PropTypes.string,
-	onChange: PropTypes.func,
-};

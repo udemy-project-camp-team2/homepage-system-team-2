@@ -1,8 +1,8 @@
-import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router';
-import Logo from '../common/Logo';
 import { styled } from 'styled-components';
+import { useDispatch, useSelector } from '../../store/hooks';
 import { logout } from '../../store/slices/userSlice';
+import Logo from '../common/Logo';
 
 const HeaderStyled = styled.header`
 	display: flex;

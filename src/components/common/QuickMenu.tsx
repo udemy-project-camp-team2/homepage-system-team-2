@@ -1,13 +1,16 @@
-import PropTypes from 'prop-types';
-import { useDispatch } from 'react-redux';
+import { memo } from 'react';
 import styled from 'styled-components';
+import { useDispatch } from '../../store/hooks';
 import {
 	removeContainer,
 	updateLayoutType,
 	updateOrderOfContainers,
 } from '../../store/slices/containerSlice';
 import Button from './Button';
-import { memo } from 'react';
+
+interface QuickMenuProps {
+	containerId: string;
+}
 
 const StyledQuickMenu = styled.div`
 	position: absolute;
@@ -15,7 +18,7 @@ const StyledQuickMenu = styled.div`
 	right: 0;
 `;
 
-const QuickMenu = ({ containerId }) => {
+const QuickMenu = ({ containerId }: QuickMenuProps) => {
 	const dispatch = useDispatch();
 	return (
 		<StyledQuickMenu>
@@ -37,7 +40,7 @@ const QuickMenu = ({ containerId }) => {
 			<Button
 				type="button"
 				name="container_up"
-				onClick={(e) =>
+				onClick={(e: any) =>
 					dispatch(
 						updateOrderOfContainers({ id: containerId, name: e.target.name })
 					)
@@ -48,7 +51,7 @@ const QuickMenu = ({ containerId }) => {
 			<Button
 				type="button"
 				name="container_down"
-				onClick={(e) =>
+				onClick={(e: any) =>
 					dispatch(
 						updateOrderOfContainers({ id: containerId, name: e.target.name })
 					)
@@ -61,7 +64,3 @@ const QuickMenu = ({ containerId }) => {
 };
 
 export default memo(QuickMenu);
-
-QuickMenu.propTypes = {
-	containerId: PropTypes.string,
-};

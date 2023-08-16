@@ -1,6 +1,13 @@
-import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Block from '../../block/Block';
+
+interface FourRowLayoutProps {
+	container: {
+		id: string;
+		type: string;
+		blocksIds: string[];
+	};
+}
 
 const FourRow = styled.div`
 	width: 100%;
@@ -9,9 +16,9 @@ const FourRow = styled.div`
 	gap: 1rem;
 `;
 
-const FourRowLayout = ({ onClick, container }) => {
+const FourRowLayout = ({ container }: FourRowLayoutProps) => {
 	return (
-		<FourRow onClick={onClick}>
+		<FourRow>
 			{container.blocksIds.map((item) => (
 				<Block id={item} key={item} />
 			))}
@@ -20,8 +27,3 @@ const FourRowLayout = ({ onClick, container }) => {
 };
 
 export default FourRowLayout;
-
-FourRowLayout.propTypes = {
-	onClick: PropTypes.func,
-	container: PropTypes.object,
-};
