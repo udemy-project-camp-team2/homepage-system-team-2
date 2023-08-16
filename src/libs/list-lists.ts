@@ -1,4 +1,12 @@
-export const listLists = [
+interface ListListsType {
+	id: number;
+	type: string;
+	length: number;
+	circle: boolean;
+	src: string;
+}
+
+export const listLists: ListListsType[] = [
 	{
 		id: 1,
 		type: 'circle_list',

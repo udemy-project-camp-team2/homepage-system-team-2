@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
-import { useSelector } from 'react-redux';
 import { styled } from 'styled-components';
+import { useSelector } from '../store/hooks';
 import MenuManagement from '../components/menu/MenuManagement';
 import PageManagement from '../components/page-management/PageManagement';
 import { useTab } from '../hooks/useTab';
@@ -26,7 +26,12 @@ const TabButtonsWrapper = styled.div`
 	margin-bottom: 30px;
 `;
 
-const TabButton = styled.button`
+const TabButton = styled.button<{
+	$fontColor: boolean;
+	$bgColor: boolean;
+	$isFirst: boolean;
+	$isLast: boolean;
+}>`
 	padding: 1rem 0;
 	flex: 1;
 	color: ${(props) =>

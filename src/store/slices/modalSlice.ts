@@ -12,7 +12,7 @@ const modalSlice = createSlice({
 	name: 'modal',
 	initialState,
 	reducers: {
-		toggleModal(state, action: PayloadAction<{ name: string; list: {} }>) {
+		toggleModal(state, action: PayloadAction<{ name: string; list?: {} }>) {
 			return (state = {
 				...state,
 				list: { ...action.payload.list },

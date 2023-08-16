@@ -1,4 +1,11 @@
-export const layoutLists = [
+interface LayoutListsType {
+	id: number;
+	type: string;
+	length: number;
+	src: string;
+}
+
+export const layoutLists: LayoutListsType[] = [
 	{
 		id: 1,
 		type: 'one_row_layout',

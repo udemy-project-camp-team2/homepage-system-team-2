@@ -1,6 +1,6 @@
 import { useCallback, useEffect } from 'react';
 import { useParams } from 'react-router';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from '../store/hooks';
 import { addContainer } from '../store/slices/containerSlice';
 import Container from '../components/container/Container';
 import Button from '../components/common/Button';
@@ -26,10 +26,10 @@ const EditPage = () => {
 	}, []);
 
 	useEffect(() => {
-		localStorage.setItem(id, JSON.stringify(containers));
+		localStorage.setItem(id as string, JSON.stringify(containers));
 	}, [containers]);
 
-	useTitle(id);
+	useTitle(id as string);
 
 	return (
 		<section>

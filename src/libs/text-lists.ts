@@ -1,4 +1,11 @@
-export const textLists = [
+interface TextListsType {
+	id: number;
+	type: string;
+	length: number;
+	src: string;
+}
+
+export const textLists: TextListsType[] = [
 	{
 		id: 1,
 		type: 'plain_text',

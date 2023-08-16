@@ -1,4 +1,11 @@
-export const lineLists = [
+interface LineListsType {
+	id: number;
+	type: string;
+	length: number;
+	src: string;
+}
+
+export const lineLists: LineListsType[] = [
 	{
 		id: 1,
 		type: 'simple-line',
