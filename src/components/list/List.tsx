@@ -16,15 +16,15 @@ interface AddedStylesType {
 	color?: string;
 }
 
-const ListContainer = styled.div(() => ({
-	margin: '0 auto',
-	height: '100%',
-	display: 'flex',
-	justifyContent: 'center',
-	alignItems: 'center',
-	placeself: 'center',
-	backgroundColor: '#fff',
-}));
+const ListContainer = styled.div`
+	margin: 0 auto;
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	place-self: center;
+	background-color: #fff;
+`;
 
 const ListArticle = styled.div`
 	padding: 25px;

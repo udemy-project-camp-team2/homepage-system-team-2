@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react';
+import { MouseEvent, useCallback, useEffect, useState } from 'react';
 
 interface UseCarouselType {
 	id: number;
@@ -34,8 +34,8 @@ export const useCarousel = (images: UseCarouselType[]) => {
 	}, [currentIndex]);
 
 	const carouselHandler = useCallback(
-		(e: any) => {
-			const { name } = e.target;
+		(e: MouseEvent<HTMLButtonElement>) => {
+			const { name } = e.target as HTMLButtonElement;
 
 			if (name === 'prev') {
 				// 왼쪽

@@ -6,6 +6,11 @@ import PageManagement from '../components/page-management/PageManagement';
 import { useTab } from '../hooks/useTab';
 import { useTitle } from '../hooks/useTitle';
 
+export interface ContentsType {
+	label: string;
+	content: () => JSX.Element;
+}
+
 const ManagementLayout = styled.div`
 	display: flex;
 	width: 100%;
@@ -47,7 +52,7 @@ const TabButton = styled.button<{
 		props.$isFirst ? '10px 0 0 10px' : props.$isLast ? '0 10px 10px 0' : '0'};
 `;
 
-const contents = [
+const contents: ContentsType[] = [
 	{
 		label: '메뉴 관리',
 		content: MenuManagement,

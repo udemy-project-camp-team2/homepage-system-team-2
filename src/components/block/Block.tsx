@@ -41,7 +41,6 @@ const Block = ({ id, style }: BlockProps) => {
 			style={style}
 			onClick={(e) => {
 				e.stopPropagation();
-				console.log(id);
 			}}
 		>
 			{design ? (
